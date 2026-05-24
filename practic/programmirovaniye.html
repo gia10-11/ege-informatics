@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 27 типа: Обработка данных (20 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .problem_container {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .prob_num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .prob_nums {
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 5px;
+        }
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+            color: #000;
+        }
+        .solution_text {
+            line-height: 1.5;
+            color: #000;
+        }
+        .solution_text p {
+            margin-bottom: 8px;
+            color: #000;
+        }
+        .calc-table {
+            background-color: #f0f0f0;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        .calc-table pre {
+            margin: 0;
+            color: #000;
+            white-space: pre-wrap;
+        }
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+        .answer-table {
+            background-color: #eef;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .answer-table th, .answer-table td {
+            border: 1px solid #999;
+            padding: 6px 10px;
+            text-align: center;
+        }
+        .answer-table th {
+            background-color: #dde;
+        }
+        .file_link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 5px 12px;
+            background-color: #e8f4fd;
+            border-left: 3px solid #4a6baf;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .file_link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <center><h1> Задание 27 типа (ЕГЭ информатика): Обработка данных</h1></center
+</div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 (№27424) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">1</div>
+        <div class="prob_nums">Тип 27 № 27424 </div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Имеется набор данных, состоящий из пар положительных целых чисел. Необходимо выбрать из каждой пары ровно одно число так, чтобы сумма всех выбранных чисел не делилась на 3 и при этом была максимально возможной. Гарантируется, что искомую сумму получить можно. Программа должна напечатать одно число — максимально возможную сумму, соответствующую условиям задачи.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество пар N (1 ≤ N ≤ 100 000). Каждая из следующих N строк содержит два натуральных числа, не превышающих 10 000.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>6<br>1 3<br>5 12<br>6 9<br>5 4<br>3 3<br>1 1<br>Для указанных входных данных значением искомой суммы должно быть число 32.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_1.txt" onclick="alert('Файл 27-A_1.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_1.txt" onclick="alert('Файл 27-B_1.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button></div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Последовательно считывая данные из файла, будем прибавлять к сумме максимальное число в паре. Также заметим, что в случае, если получившаяся в результате суммирования максимальных чисел во всех парах число будет кратно трём, достаточно будет вычесть из этой суммы минимальную разницу между какими-либо двумя числами. Для этого при считывании пар помимо максимального числа в каждой паре будем искать минимальную разницу среди пар, не кратную трём.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Для каждой пары выбираем максимальное число
+2. Находим минимальную разницу между числами в паре, не кратную 3
+3. Если сумма максимальных чисел делится на 3, вычитаем минимальную разницу</pre></div>
+            <p><strong>Ответ для файла A:</strong> 127127</p>
+            <p><strong>Ответ для файла B:</strong> 399762080</p>
+            <div class="code_block"><pre>f = open('27-A_1.txt')
+n = int(f.readline())
+summa = 0
+min_dif = 10**9
+for _ in range(n):
+    x, y = map(int, f.readline().split())
+    summa += max(x, y)
+    if abs(x - y) % 3 != 0:
+        min_dif = min(min_dif, abs(x - y))
+if summa % 3 != 0:
+    print(summa)
+else:
+    print(summa - min_dif)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 (№27891) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">2</div>
+        <div class="prob_nums">Тип 27 № 27891</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Последовательность натуральных чисел характеризуется числом X — наибольшим числом, кратным 14 и являющимся произведением двух элементов последовательности с различными номерами. Гарантируется, что хотя бы одно такое произведение в последовательности есть. Найдите это число X для каждого файла.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N (1 ≤ N ≤ 100 000). В каждой из следующих N строк записано одно натуральное число, не превышающее 1000.</p>
+        <p class="left_margin"><strong>Пример:</strong> 5 чисел: 40, 1000, 7, 28, 55 → ответ: 28000</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_2.txt" onclick="alert('Файл 27-A_2.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_2.txt" onclick="alert('Файл 27-B_2.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button></div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Произведение двух чисел делится на 14, если: один из сомножителей делится на 14 (второй может быть любым); либо ни один из сомножителей не делится на 14, но один делится на 7, а другой — на 2. Программа хранит: M7 — самое большое число, кратное 7, но не кратное 2; M2 — самое большое число, кратное 2, но не кратное 7; M14 — самое большое число, кратное 14; MAX — самое большое число среди всех элементов, отличное от M14.</p>
+            <p><strong>Ответ для файла A:</strong> 447552</p>
+            <p><strong>Ответ для файла B:</strong> 994000</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_2.txt')][1:]
+m2 = [x for x in a if x % 2 == 0 and x % 7 != 0]
+m7 = [x for x in a if x % 7 == 0 and x % 2 != 0]
+m14 = [x for x in a if x % 14 == 0]
+if m14:
+    a.remove(max(m14))
+ans1 = max(m2) * max(m7) if m2 and m7 else 0
+ans2 = max(m14) * max(a) if m14 else 0
+print(max(ans1, ans2))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 (№27989) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">3</div>
+        <div class="prob_nums">Тип 27 № 27989</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> На вход программы поступает последовательность из N целых положительных чисел. Рассматриваются все пары различных элементов последовательности (элементы пары не обязаны стоять рядом, порядок элементов в паре не важен). Необходимо определить количество пар, для которых произведение элементов делится на 26.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N (1 ≤ N ≤ 60 000). В каждой из следующих N строк записано одно целое положительное число, не превышающее 10 000.</p>
+        <p class="left_margin"><strong>Пример:</strong> 4 числа: 2, 6, 13, 39 → ответ: 4</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_3.txt" onclick="alert('Файл 27-A_3.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_3.txt" onclick="alert('Файл 27-B_3.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button></div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Произведение двух чисел делится на 26, если выполняется одно из условий: оба сомножителя делятся на 26; один из сомножителей делится на 26, а другой не делится; ни один не делится на 26, но один делится на 2, а другой — на 13.</p>
+            <p><strong>Ответ для файла A:</strong> 19</p>
+            <p><strong>Ответ для файла B:</strong> 199360639</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_3.txt')][1:]
+m2 = len([x for x in a if x % 2 == 0 and x % 13 != 0])
+m13 = len([x for x in a if x % 13 == 0 and x % 2 != 0])
+m26 = len([x for x in a if x % 26 == 0])
+m = len(a)
+res = m26*(m26-1)//2 + m26*(m-m26) + m2*m13
+print(res)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 (№27991) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">4</div>
+        <div class="prob_nums">Тип 27 № 27991</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность N целых положительных чисел. Рассматриваются все пары элементов последовательности, разность которых чётна, и в этих парах, по крайней мере, одно из чисел пары делится на 17. Порядок элементов в паре не важен. Среди всех таких пар нужно найти и вывести пару с максимальной суммой элементов.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N (2 ≤ N ≤ 10 000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_4.txt" onclick="alert('Файл 27-A_4.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_4.txt" onclick="alert('Файл 27-B_4.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button></div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Нужно найти пару с максимальной суммой, где числа имеют одинаковую чётность и хотя бы одно кратно 17.</p>
+            <p><strong>Ответ для файла A:</strong> 8759 3077</p>
+            <p><strong>Ответ для файла B:</strong> 10000 9996</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_4.txt')][1:]
+even = [x for x in a if x % 2 == 0]
+odd = [x for x in a if x % 2 == 1]
+even17 = [x for x in even if x % 17 == 0]
+odd17 = [x for x in odd if x % 17 == 0]
+max_sum = 0
+best_pair = (0,0)
+for x in even17:
+    for y in even:
+        if x != y and x+y > max_sum:
+            max_sum = x+y
+            best_pair = sorted([x,y], reverse=True)
+for x in odd17:
+    for y in odd:
+        if x != y and x+y > max_sum:
+            max_sum = x+y
+            best_pair = sorted([x,y], reverse=True)
+print(best_pair[0], best_pair[1])</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 (№28129) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">5</div>
+        <div class="prob_nums">Тип 27 № 28129</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> На вход программы поступает последовательность из N натуральных чисел. Рассматриваются все пары различных элементов последовательности, у которых различные остатки от деления на d = 160 и хотя бы одно из чисел делится на p = 7. Среди таких пар необходимо найти и вывести пару с максимальной суммой элементов.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N (1 ≤ N ≤ 1000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_5.txt" onclick="alert('Файл 27-A_5.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_5.txt" onclick="alert('Файл 27-B_5.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button></div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Для каждого остатка от деления на 160 храним максимальное число с этим остатком, отдельно для кратных 7 и не кратных 7.</p>
+            <p><strong>Ответ для файла A:</strong> 728 977</p>
+            <p><strong>Ответ для файла B:</strong> 9982 9992</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_5.txt')][1:]
+a.sort(reverse=True)
+max_sum = 0
+best_pair = (0,0)
+for i in range(len(a)-1):
+    for j in range(i+1, len(a)):
+        if a[i] % 160 != a[j] % 160 and (a[i] % 7 == 0 or a[j] % 7 == 0):
+            if a[i] + a[j] > max_sum:
+                max_sum = a[i] + a[j]
+                best_pair = (a[i], a[j])
+print(best_pair[0], best_pair[1])</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 (№28130) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">6</div>
+        <div class="prob_nums">Тип 27 № 28130</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность N целых положительных чисел. Необходимо определить количество пар элементов этой последовательности, сумма которых делится на m = 80 и при этом хотя бы один элемент из пары больше b = 50.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N (2 ≤ N ≤ 10 000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_6.txt" onclick="alert('Файл 27-A_6.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_6.txt" onclick="alert('Файл 27-B_6.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button></div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Создаём два массива по m элементов и храним в них количество элементов последовательности, имеющих соответствующий остаток от деления на m: в массиве a0 — элементы, не превышающие b, в массиве a1 — превышающие.</p>
+            <p><strong>Ответ для файла A:</strong> 3</p>
+            <p><strong>Ответ для файла B:</strong> 625350</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_6.txt')][1:]
+cnts = [[0]*2 for _ in range(80)]
+k = 0
+for x in a:
+    r = x % 80
+    d = (80 - r) % 80
+    k += sum(cnts[d]) if x > 50 else cnts[d][0]
+    cnts[r][0 if x > 50 else 1] += 1
+print(k)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 (№28131) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">7</div>
+        <div class="prob_nums">Тип 27 № 28131</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> На вход программы поступает последовательность из n целых положительных чисел. Рассматриваются все пары элементов последовательности ai и aj, такие, что i < j и ai > aj (первый элемент пары больше второго). Среди пар, удовлетворяющих этому условию, необходимо найти и напечатать пару с максимальной суммой элементов, которая делится на m = 120.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел n (2 ≤ n ≤ 12 000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_7.txt" onclick="alert('Файл 27-A_7.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_7.txt" onclick="alert('Файл 27-B_7.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button></div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Сумма ai и aj делится на m, если сумма остатков этих чисел от деления на m равна 0 или m. Для каждого из остатков среди уже просмотренных элементов будем хранить максимальное число.</p>
+            <p><strong>Ответ для файла A:</strong> 8096 6544</p>
+            <p><strong>Ответ для файла B:</strong> 9993 9927</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_7.txt')][1:]
+d = {}
+params = (0,0)
+for x in a:
+    res = x % 120
+    dop = 0 if res == 0 else 120 - res
+    if dop in d and d[dop] > x and d[dop] + x > sum(params):
+        params = (d[dop], x)
+    d[res] = max(d.get(res,0), x)
+print(params[0], params[1])</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 (№29675) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">8</div>
+        <div class="prob_nums">Тип 27 № 29675</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Набор данных состоит из пар натуральных чисел. Необходимо выбрать из каждой пары ровно одно число так, чтобы сумма всех выбранных чисел делилась на 3 и при этом была максимально возможной.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит число N — общее количество пар в наборе. Каждая из следующих N строк содержит два натуральных числа, не превышающих 10 000.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_8.txt" onclick="alert('Файл 27-A_8.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_8.txt" onclick="alert('Файл 27-B_8.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button></div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Последовательно считывая данные из файла, будем прибавлять к сумме максимальное число в паре. Также будем находить две минимальные разности для случаев, когда нужно будет заменить выбранные числа.</p>
+            <p><strong>Ответ для файла A:</strong> 127026</p>
+            <p><strong>Ответ для файла B:</strong> 399759471</p>
+            <div class="code_block"><pre>a = [list(map(int,s.split())) for s in open('27-B_8.txt')][1:]
+s = sum(max(x) for x in a)
+difs = [[],[],[]]
+for x in a:
+    d = abs(x[1]-x[0])
+    difs[d%3].append(d)
+for i in range(1,3):
+    difs[i].sort()
+m = []
+s3 = s % 3
+if s3 != 0:
+    if difs[s3]:
+        m.append(difs[s3][0])
+    if len(difs[3-s3]) >= 2:
+        m.append(sum(difs[3-s3][:2]))
+    print(s - min(m))
+else:
+    print(s)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 (№33199) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">9</div>
+        <div class="prob_nums">Тип 27 № 33199</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Набор данных состоит из троек натуральных чисел. Необходимо распределить все числа на три группы, при этом в каждую группу должно попасть ровно одно число из каждой исходной тройки. Сумма всех чисел в первой группе должна быть чётной, во второй — нечётной. Определите максимально возможную сумму всех чисел в третьей группе.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит число N — общее количество троек. Каждая из следующих N строк содержит три натуральных числа.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_9.txt" onclick="alert('Файл 27-A_9.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_9.txt" onclick="alert('Файл 27-B_9.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button></div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Последовательно считывая данные из файла, будем прибавлять к первой сумме максимальное число в тройке, к третьей сумме — минимальное число, а ко второй — оставшееся число. Также находим минимальную нечётную разницу между числами.</p>
+            <p><strong>Ответ для файла A:</strong> 541</p>
+            <p><strong>Ответ для файла B:</strong> 300229428</p>
+            <div class="code_block"><pre>a = [sorted(map(int,s.split())) for s in open('27-B_9.txt')][1:]
+s = sum(x[2] for x in a)
+difs = []
+for x in a:
+    if (x[2]-x[0]) % 2 == 1:
+        difs.append(x[2]-x[0])
+    if (x[2]-x[1]) % 2 == 1:
+        difs.append(x[2]-x[1])
+difs.sort()
+if sum(x[2] for x in a) % 2 != sum(x[0] for x in a) % 2:
+    print(s)
+else:
+    print(s - min(difs))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 (№33529) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">10</div>
+        <div class="prob_nums">Тип 27 № 33529</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Набор данных состоит из нечётного количества пар натуральных чисел. Необходимо выбрать из каждой пары ровно одно число так, чтобы чётность суммы выбранных чисел совпадала с чётностью большинства выбранных чисел и при этом сумма выбранных чисел была как можно больше. Определите максимальную сумму.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит число N — общее количество пар в наборе. Каждая из следующих N строк содержит два натуральных числа.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_10.txt" onclick="alert('Файл 27-A_10.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_10.txt" onclick="alert('Файл 27-B_10.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button></div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Последовательно считываем пары, прибавляем максимальное число. Отслеживаем количество чётных и нечётных выбранных чисел. При необходимости корректируем сумму.</p>
+            <p><strong>Ответ для файла A:</strong> 121184</p>
+            <p><strong>Ответ для файла B:</strong> 36898658</p>
+            <div class="code_block"><pre>a = [sorted(map(int,s.split())) for s in open('27-B_10.txt')][1:]
+s = sum(x[1] for x in a)
+count0 = sum(1 for x in a if x[1] % 2 == 0)
+count1 = len(a) - count0
+if (s % 2 == 0 and count0 > count1) or (s % 2 == 1 and count1 > count0):
+    print(s)
+else:
+    diffs = []
+    for x in a:
+        if (x[1] - x[0]) % 2 == 1:
+            diffs.append(x[1] - x[0])
+    diffs.sort()
+    print(s - min(diffs))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 (№35485) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">11</div>
+        <div class="prob_nums">Тип 27 № 35485</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> В текстовом файле записан набор натуральных чисел, не превышающих 10⁸. Из набора нужно выбрать три числа, сумма которых делится на 3. Какую наибольшую сумму можно при этом получить?</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит целое число N — общее количество чисел в наборе. Каждая из следующих N строк содержит одно число.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_11.txt" onclick="alert('Файл 27-A_11.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_11.txt" onclick="alert('Файл 27-B_11.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button></div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Сумма трёх чисел делится на 3 в четырёх случаях: все три дают остаток 0; все три — остаток 1; все три — остаток 2; одно даёт 0, второе — 1, третье — 2. Находим три наибольших числа для каждого остатка.</p>
+            <p><strong>Ответ для файла A:</strong> 2697</p>
+            <p><strong>Ответ для файла B:</strong> 299986167</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_11.txt')][1:]
+b = [[],[],[]]
+for x in a:
+    b[x%3].append(x)
+for i in range(3):
+    b[i].sort(reverse=True)
+s0 = sum(b[0][:3]) if len(b[0]) >= 3 else 0
+s1 = sum(b[1][:3]) if len(b[1]) >= 3 else 0
+s2 = sum(b[2][:3]) if len(b[2]) >= 3 else 0
+s012 = b[0][0] + b[1][0] + b[2][0] if b[0] and b[1] and b[2] else 0
+print(max(s0, s1, s2, s012))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 (№36001) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">12</div>
+        <div class="prob_nums">Тип 27 № 36001</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> В текстовом файле записан набор пар натуральных чисел. Необходимо выбрать из набора некоторые пары так, чтобы первое число в каждой выбранной паре было нечётным, сумма бо́льших чисел во всех выбранных парах была нечётной, а сумма меньших — чётной. Какую наибольшую сумму чисел во всех выбранных парах можно при этом получить?</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит целое число N — общее количество пар в наборе. Каждая из следующих N строк содержит пару чисел.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_12.txt" onclick="alert('Файл 27-A_12.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_12.txt" onclick="alert('Файл 27-B_12.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button></div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Для каждой пары, где первое число нечётное, берём большее число в sum1, меньшее — в sum0. Находим минимальные суммы для корректировки чётности.</p>
+            <p><strong>Ответ для файла A:</strong> 44067</p>
+            <p><strong>Ответ для файла B:</strong> 301653067</p>
+            <div class="code_block"><pre>a = [sorted(map(int,s.split())) for s in open('27-B_12.txt')][1:]
+a = [x for x in a if x[0] % 2 == 1]
+sum0 = sum(x[0] for x in a)
+sum1 = sum(x[1] for x in a)
+diffs = []
+for x in a:
+    if x[1] % 2 != x[0] % 2:
+        diffs.append(x[1] + x[0])
+diffs.sort()
+if sum0 % 2 == 0 and sum1 % 2 == 1:
+    print(sum0 + sum1)
+else:
+    print(sum0 + sum1 - min(diffs))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 (№36040) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">13</div>
+        <div class="prob_nums">Тип 27 № 36040</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Имеется набор данных, состоящий из троек положительных целых чисел. Необходимо выбрать из каждой тройки ровно одно число так, чтобы сумма всех выбранных чисел не делилась на k = 109 и при этом была максимально возможной.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество троек N. Каждая из следующих N строк содержит три натуральных числа.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_13.txt" onclick="alert('Файл 27-A_13.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_13.txt" onclick="alert('Файл 27-B_13.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button></div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <p><strong>Ответ для файла A:</strong> 784594</p>
+            <p><strong>Ответ для файла B:</strong> 8819088760</p>
+            <div class="code_block"><pre>a = [sorted(map(int,s.split())) for s in open('27-B_13.txt')][1:]
+s = sum(x[2] for x in a)
+difs = [x[2]-x[0] for x in a if (x[2]-x[0]) % 109 != 0] + [x[2]-x[1] for x in a if (x[2]-x[1]) % 109 != 0]
+print(s if s % 109 != 0 else s - min(difs))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 (№37162) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">14</div>
+        <div class="prob_nums">Тип 27 № 37162</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> На вход программы поступает последовательность из целых положительных чисел. Необходимо выбрать такую подпоследовательность подряд идущих чисел, чтобы их сумма была максимальной и делилась на 89, а также определить её длину. Если таких подпоследовательностей несколько, выбрать ту, у которой длина меньше.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N. В каждой из следующих N строк записано одно целое положительное число.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_14.txt" onclick="alert('Файл 27-A_14.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_14.txt" onclick="alert('Файл 27-B_14.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button></div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Используем метод частичных сумм. Для каждого остатка от деления на 89 храним минимальную сумму и её позицию.</p>
+            <p><strong>Ответ для файла A:</strong> 159</p>
+            <p><strong>Ответ для файла B:</strong> 67059</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_14.txt')][1:]
+mins = [10**18]*89
+minl = [0]*89
+p = 0
+maxsum = 0
+minlen = 0
+for i in range(len(a)):
+    p += a[i]
+    r = p % 89
+    if r == 0:
+        maxsum = p
+        minlen = i + 1
+    else:
+        ms = p - mins[r]
+        l = i + 1 - minl[r]
+        if ms > maxsum:
+            maxsum = ms
+            minlen = l
+        elif ms == maxsum and l < minlen:
+            minlen = l
+    if p < mins[r]:
+        mins[r] = p
+        minl[r] = i + 1
+print(minlen)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 (№38604) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">15</div>
+        <div class="prob_nums">Тип 27 № 38604</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность из N натуральных чисел. Рассматриваются все её непрерывные подпоследовательности, такие что сумма элементов каждой из них кратна k = 43. Найдите среди них подпоследовательность с максимальной суммой, определите её длину. Если таких подпоследовательностей найдено несколько, укажите количество элементов самой короткой из них.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Даны два входных файла (файл A и файл B), каждый из которых содержит в первой строке количество чисел N.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_15.txt" onclick="alert('Файл 27-A_15.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_15.txt" onclick="alert('Файл 27-B_15.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button></div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <p><strong>Ответ для файла A:</strong> 185</p>
+            <p><strong>Ответ для файла B:</strong> 329329</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_15.txt')][1:]
+mins = [10**18]*43
+minl = [0]*43
+p = 0
+maxsum = 0
+minlen = 0
+for i in range(len(a)):
+    p += a[i]
+    r = p % 43
+    if r == 0:
+        maxsum = p
+        minlen = i + 1
+    else:
+        ms = p - mins[r]
+        l = i + 1 - minl[r]
+        if ms > maxsum:
+            maxsum = ms
+            minlen = l
+        elif ms == maxsum and l < minlen:
+            minlen = l
+    if p < mins[r]:
+        mins[r] = p
+        minl[r] = i + 1
+print(minlen)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 16 (№38961) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">16</div>
+        <div class="prob_nums">Тип 27 № 38961</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность натуральных чисел. Необходимо найти максимально возможную сумму её непрерывной подпоследовательности, в которой количество чётных элементов кратно k = 10.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит целое число N — общее количество чисел в наборе. Каждая из следующих N строк содержит одно число.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_16.txt" onclick="alert('Файл 27-A_16.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_16.txt" onclick="alert('Файл 27-B_16.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение</button></div>
+    <div id="solutionBlock16" class="solution">
+        <div class="solution_text">
+            <p><strong>Ответ для файла A:</strong> 4779554</p>
+            <p><strong>Ответ для файла B:</strong> 979258630</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_16.txt')][1:]
+lefts = [0]*10
+rights = [0]*10
+cnt = 0
+s = 0
+for i in range(len(a)):
+    s += a[i]
+    if a[i] % 2 == 0:
+        cnt += 1
+    d = cnt % 10
+    if lefts[d] == 0:
+        lefts[d] = s
+    rights[d] = s
+if cnt % 10 == 0:
+    print(s)
+else:
+    maxsum = 0
+    for i in range(1, cnt % 10 + 1):
+        maxsum = max(maxsum, rights[i] - lefts[i])
+    print(max(maxsum, rights[0]))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 17 (№45261) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">17</div>
+        <div class="prob_nums">Тип 27 № 45261</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> На каждом 3-м километре кольцевой автодороги с двусторонним движением установлены контейнеры для мусора. Длина кольцевой автодороги равна 3N километров. Нулевой километр и 3N-й километр находятся в одной точке. Известно количество мусора, которое накапливается ежедневно в каждом из контейнеров. Из каждого пункта мусор вывозит отдельный мусоровоз. Стоимость доставки мусора вычисляется как произведение количества мусора на расстояние от пункта до центра переработки. Центр переработки открыли в одном из пунктов таким образом, чтобы общая стоимость доставки была минимальной. Определите минимальные расходы.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке — число N — количество пунктов сбора мусора. В каждой из следующих N строк — количество мусора.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_17.txt" onclick="alert('Файл 27_A-17.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_17.txt" onclick="alert('Файл 27-B_17.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение</button></div>
+    <div id="solutionBlock17" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Утраиваем каждый элемент, так как контейнеры на каждом 3-м километре. Для первого пункта считаем стоимость доставки. Затем передвигаем центр и пересчитываем стоимость.</p>
+            <p><strong>Ответ для файла A:</strong> 471228</p>
+            <p><strong>Ответ для файла B:</strong> 49113954961677</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_17.txt')][1:]
+n = len(a)
+a = [x*3 for x in a]
+sum_cost = 0
+right_sum = 0
+left_sum = 0
+for i in range(1, n):
+    sum_cost += a[i] * i
+    right_sum += a[i]
+costs = [sum_cost]
+for i in range(1, n):
+    left_sum += a[i-1]
+    new_cost = costs[-1] - right_sum + left_sum
+    costs.append(new_cost)
+    right_sum -= a[i]
+print(min(costs))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 18 (№46985) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">18</div>
+        <div class="prob_nums">Тип 27 № 46985</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность натуральных чисел. Необходимо определить количество её непрерывных подпоследовательностей, сумма элементов которых кратна 999.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит целое число N — общее количество чисел в наборе. Каждая из следующих N строк содержит одно число.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_18.txt" onclick="alert('Файл 27-A_18.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_18.txt" onclick="alert('Файл 27-B_18.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button></div>
+    <div id="solutionBlock18" class="solution">
+        <div class="solution_text">
+            <p><strong>Ответ для файла A:</strong> 403</p>
+            <p><strong>Ответ для файла B:</strong> 1801801220</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('27-B_18.txt')][1:]
+cnt = [1] + [0]*998
+p = 0
+for x in a:
+    p = (p + x) % 999
+    cnt[p] += 1
+res = sum(c[i]*(c[i]-1)//2 for i in range(999))
+print(res)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 19 (№47231) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">19</div>
+        <div class="prob_nums">Тип 27 № 47231</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> У медицинской компании есть N пунктов приёма биоматериалов на анализ. Все пункты расположены вдоль автомагистрали и имеют номера, соответствующие расстоянию от нулевой отметки до конкретного пункта. Известно количество пробирок, которое ежедневно принимают в каждом из пунктов. Пробирки перевозят в специальных транспортных контейнерах вместимостью не более 36 штук. Стоимость перевозки биоматериалов равна произведению расстояния от пункта до лаборатории на количество контейнеров с пробирками. Лабораторию расположили в одном из пунктов так, что общая стоимость доставки минимальна. Определите минимальную общую стоимость доставки.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке — N — количество пунктов. В каждой из следующих N строк — номер пункта и количество пробирок.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_19.txt" onclick="alert('Файл 27-A_19.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_19.txt" onclick="alert('Файл 27-B_19.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button></div>
+    <div id="solutionBlock19" class="solution">
+        <div class="solution_text">
+            <p><strong>Ответ для файла A:</strong> 51063</p>
+            <p><strong>Ответ для файла B:</strong> 5634689219329</p>
+            <div class="code_block"><pre>from math import ceil
+f = open('27-B_19.txt')
+n = int(f.readline())
+elems = []
+for _ in range(n):
+    a, b = map(int, f.readline().split())
+    elems.append([a, ceil(b/36)])
+cost = [0]*n
+right_sum = 0
+for i in range(1, n):
+    cost[0] += (elems[i][0] - elems[0][0]) * elems[i][1]
+    right_sum += elems[i][1]
+left_sum = 0
+for i in range(1, n):
+    left_sum += elems[i-1][1]
+    cost[i] = cost[i-1] - right_sum*(elems[i][0]-elems[i-1][0]) + left_sum*(elems[i][0]-elems[i-1][0])
+    right_sum -= elems[i][1]
+print(min(cost))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 20 (№48448) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">20</div>
+        <div class="prob_nums">Тип 27 № 48448</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Дана последовательность натуральных чисел. Назовём парой любые два числа из последовательности. Необходимо определить количество пар, в которых сумма чисел в паре делится без остатка на 3, а их произведение — на 1024.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> Первая строка входного файла содержит целое число N — общее количество чисел в наборе. Каждая из следующих N строк содержит одно число, не превышающее 40 000.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t27/27-A_20.txt" onclick="alert('Файл 27-A_20.txt')">📁 Скачать файл A</a> | <a href="/ege-informatics/practic/files/t27/27-B_20.txt" onclick="alert('Файл 27-B_20.txt')">📁 Скачать файл B</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button></div>
+    <div id="solutionBlock20" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> 1024 = 2¹⁰. Нужно, чтобы суммарная степень двойки в двух числах была ≥ 10, а сумма остатков от деления на 3 давала 0 или 3.</p>
+            <p><strong>Ответ для файла A:</strong> 529</p>
+            <p><strong>Ответ для файла B:</strong> 2005090253</p>
+            <div class="code_block"><pre>def pwr(n, base):
+    return 0 if n%base else 1 + pwr(n//base, base)
+a = [int(s) for s in open('27-B_20.txt')][1:]
+t = [[0]*11 for _ in range(3)]
+k = 0
+for x in a:
+    r = x % 3
+    p = min(pwr(x,2),10)
+    for i in range(10-p+1):
+        k += t[(3-r)%3][i]
+    t[r][p] += 1
+print(k)</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

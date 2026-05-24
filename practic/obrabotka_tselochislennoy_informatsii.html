@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 26 типа: Обработка данных (20 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .problem_container {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .prob_num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .prob_nums {
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 5px;
+        }
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+            color: #000;
+        }
+        .solution_text {
+            line-height: 1.5;
+            color: #000;
+        }
+        .solution_text p {
+            margin-bottom: 8px;
+            color: #000;
+        }
+        .calc-table {
+            background-color: #f0f0f0;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        .calc-table pre {
+            margin: 0;
+            color: #000;
+            white-space: pre-wrap;
+        }
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+        .answer-table {
+            background-color: #eef;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .answer-table th, .answer-table td {
+            border: 1px solid #999;
+            padding: 6px 10px;
+            text-align: center;
+        }
+        .answer-table th {
+            background-color: #dde;
+        }
+        .file_link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 5px 12px;
+            background-color: #e8f4fd;
+            border-left: 3px solid #4a6baf;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <center><h1>Задание 26 типа (ЕГЭ информатика): Обработка данных</h1></center
+</div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 (№27423) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">1</div>
+        <div class="prob_nums">Тип 26 № 27423 </div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке входного файла находятся два числа: S — размер свободного места на диске (натуральное число, не превышающее 10 000) и N — количество пользователей (натуральное число, не превышающее 1000). В следующих N строках находятся значения объёмов файлов каждого пользователя (натуральные числа, не превышающие 100).</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>100 4<br>80<br>30<br>50<br>40</p>
+        <p class="left_margin">При таких исходных данных можно сохранить файлы максимум двух пользователей. Возможные объёмы этих двух файлов — 30 и 40, 30 и 50 или 40 и 50. Наибольший объём файла из перечисленных пар — 50, поэтому ответ для приведённого примера: <strong>2 50</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/26_demo.txt" onclick="alert('Файл 26_demo.txt')">📁 Скачать файл: 26_demo.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button></div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Сначала считываем данные из файла. После этого сортируем массив в порядке возрастания. Таким образом, последовательно складывая элементы массива с начала и сравнивая сумму с размером свободного места на диске, получим максимальное количество пользователей, чьи файлы могут поместиться на диске. Далее, вычитая из найденной суммы наибольший файл в текущей последовательности, будем пробовать прибавлять файлы с большим весом. Если такой файл будет найден, то заменяем значение наибольшего файла, который возможно поместить на диск.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Сортируем файлы по возрастанию
+2. Берём наименьшие файлы, пока они помещаются
+3. Находим остаток места
+4. Ищем максимальный файл, который можно добавить вместо последнего взятого</pre></div>
+            <p><strong>Ответ:</strong> 568 50</p>
+            <div class="code_block"><pre># Решение на Python
+f = open('26_demo.txt')
+data = f.readlines()
+s = int(data[0].split()[0])
+del data[0]
+for i in range(len(data)):
+    data[i] = int(data[i])
+data.sort()
+summa = 0
+for count in range(len(data)):
+    if summa + data[count] > s:
+        break
+    summa += data[count]
+print(count)
+zapas = s - summa
+for i in range(len(data)):
+    if data[i] - data[count - 1] <= zapas:
+        itog = data[i]
+print(itog)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 (№27880) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">2</div>
+        <div class="prob_nums">Тип 26 № 27880</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке входного файла находятся два числа: S — размер свободного места на диске (натуральное число, не превышающее 10 000) и N — количество пользователей (натуральное число, не превышающее 4000). В следующих N строках находятся значения объёмов файлов каждого пользователя.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27880.txt" onclick="alert('Файл 27880.txt')">📁 Скачать файл: 27880.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button></div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично заданию 1. Сортируем файлы, берём наименьшие, пока хватает места, затем пытаемся заменить последний взятый файл на максимально возможный из оставшихся.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Считываем файлы в список
+2. Сортируем список по возрастанию
+3. Последовательно добавляем файлы, пока сумма ≤ S
+4. Находим максимальный файл, который можно добавить вместо последнего</pre></div>
+            <p><strong>Ответ:</strong> 611 27</p>
+            <div class="code_block"><pre>f = open('27880.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] <= s:
+        summa += v[i]
+        cnt += 1
+biggest_file = v[cnt - 1] + s - summa
+while biggest_file not in v:
+    biggest_file -= 1
+print(cnt, biggest_file)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 (№27881) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">3</div>
+        <div class="prob_nums">Тип 26 № 27881</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 5000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27881.txt" onclick="alert('Файл 27881.txt')">📁 Скачать файл: 27881.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button></div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично предыдущим задачам. Сортируем файлы по возрастанию, набираем максимальное количество, затем ищем максимальный файл, который можно добавить вместо последнего взятого.</p>
+            <p><strong>Ответ:</strong> 397 17</p>
+            <div class="code_block"><pre>f = open('27881.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+zapas = s - summa
+for i in range(len(v)):
+    if v[i] - v[cnt-1] <= zapas:
+        itog = v[i]
+print(cnt, itog)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 (№27882) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">4</div>
+        <div class="prob_nums">Тип 26 № 27882</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 6000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27882.txt" onclick="alert('Файл 27882.txt')">📁 Скачать файл: 27882.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button></div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем ищем максимальный файл для замены.</p>
+            <p><strong>Ответ:</strong> 369 9</p>
+            <div class="code_block"><pre>f = open('27882.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+zapas = s - summa
+for i in range(len(v)):
+    if v[i] - v[cnt-1] <= zapas:
+        itog = v[i]
+print(cnt, itog)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 (№27883) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">5</div>
+        <div class="prob_nums">Тип 26 № 27883</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 3000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27883.txt" onclick="alert('Файл 27883.txt')">📁 Скачать файл: 27883.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button></div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем ищем максимальный файл для замены.</p>
+            <p><strong>Ответ:</strong> 149 7</p>
+            <div class="code_block"><pre>f = open('27883.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+zapas = s - summa
+for i in range(len(v)):
+    if v[i] - v[cnt-1] <= zapas:
+        itog = v[i]
+print(cnt, itog)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 (№27884) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">6</div>
+        <div class="prob_nums">Тип 26 № 27884</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 4000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27884.txt" onclick="alert('Файл 27884.txt')">📁 Скачать файл: 27884.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button></div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 813 35</p>
+            <div class="code_block"><pre>f = open('27884.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 (№27885) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">7</div>
+        <div class="prob_nums">Тип 26 № 27885</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 3000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27885.txt" onclick="alert('Файл 27885.txt')">📁 Скачать файл: 27885.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button></div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 650 27</p>
+            <div class="code_block"><pre>f = open('27885.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 (№27886) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">8</div>
+        <div class="prob_nums">Тип 26 № 27886</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 2000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27886.txt" onclick="alert('Файл 27886.txt')">📁 Скачать файл: 27886.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button></div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 458 39</p>
+            <div class="code_block"><pre>f = open('27886.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 (№27887) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">9</div>
+        <div class="prob_nums">Тип 26 № 27887</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 2000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27887.txt" onclick="alert('Файл 27887.txt')">📁 Скачать файл: 27887.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button></div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 459 45</p>
+            <div class="code_block"><pre>f = open('27887.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 (№27888) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">10</div>
+        <div class="prob_nums">Тип 26 № 27888</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 2000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/27888.txt" onclick="alert('Файл 27888.txt')">📁 Скачать файл: 27888.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button></div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 601 34</p>
+            <div class="code_block"><pre>f = open('27888.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 (№28132) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">11</div>
+        <div class="prob_nums">Тип 26 № 28132</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 2000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/28132.txt" onclick="alert('Файл 28132.txt')">📁 Скачать файл: 28132.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button></div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 595 32</p>
+            <div class="code_block"><pre>f = open('28132.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 (№28138) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">12</div>
+        <div class="prob_nums">Тип 26 № 28138</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 2000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/28138.txt" onclick="alert('Файл 28138.txt')">📁 Скачать файл: 28138.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button></div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 509 31</p>
+            <div class="code_block"><pre>f = open('28138.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 (№28139) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">13</div>
+        <div class="prob_nums">Тип 26 № 28139</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 3000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/28139.txt" onclick="alert('Файл 28139.txt')">📁 Скачать файл: 28139.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button></div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 200 10</p>
+            <div class="code_block"><pre>f = open('28139.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 (№28140) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">14</div>
+        <div class="prob_nums">Тип 26 № 28140</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 4000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/28140.txt" onclick="alert('Файл 28140.txt')">📁 Скачать файл: 28140.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button></div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 666 21</p>
+            <div class="code_block"><pre>f = open('28140.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 (№28141) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">15</div>
+        <div class="prob_nums">Тип 26 № 28141</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Системный администратор раз в неделю создаёт архив пользовательских файлов. Однако объём диска, куда он помещает архив, может быть меньше, чем суммарный объём архивируемых файлов. Известно, какой объём занимает файл каждого пользователя.</p>
+        <p class="left_margin">По заданной информации об объёме файлов пользователей и свободном объёме на архивном диске определите <strong>максимальное число пользователей</strong>, чьи файлы можно сохранить в архиве, а также <strong>максимальный размер имеющегося файла</strong>, который может быть сохранён в архиве, при условии, что сохранены файлы максимально возможного числа пользователей.</p>
+        <p class="left_margin"><strong>Входные данные:</strong> В первой строке: S (≤ 10000) и N (≤ 5000).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/28141.txt" onclick="alert('Файл 28141.txt')">📁 Скачать файл: 28141.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button></div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично. Сортируем файлы, набираем максимальное количество, затем пробуем заменять файлы на более тяжёлые.</p>
+            <p><strong>Ответ:</strong> 729 23</p>
+            <div class="code_block"><pre>f = open('28141.txt')
+s, n = map(int, f.readline().split())
+v = sorted(map(int, f))
+summa, cnt = 0, 0
+for i in range(len(v)):
+    if summa + v[i] > s:
+        break
+    summa += v[i]
+    cnt = i + 1
+t = v[cnt-1]
+for i in range(cnt, len(v)):
+    if summa - t + v[i] <= s:
+        summa = summa - t + v[i]
+        t = v[i]
+print(cnt, t)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 16 (№29674) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">16</div>
+        <div class="prob_nums">Тип 26 № 29674</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Продавец предоставляет покупателю, делающему большую закупку, скидку по следующим правилам:</p>
+        <p class="left_margin">— на каждый второй товар стоимостью больше 50 рублей предоставляется скидка 25%;<br>
+        — общая стоимость покупки со скидкой округляется вверх до целого числа рублей;<br>
+        — порядок товаров в списке определяет продавец и делает это так, чтобы общая сумма скидки была наименьшей.</p>
+        <p class="left_margin">По известной стоимости каждого товара в покупке необходимо определить <strong>общую стоимость покупки с учётом скидки</strong> и <strong>стоимость самого дорогого товара</strong>, на который будет предоставлена скидка.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>6<br>125<br>50<br>490<br>215<br>144<br>320<br>В данном случае товар стоимостью 50 не участвует в определении скидки, остальные товары продавцу выгодно расположить в таком порядке цен: 490, 125, 215, 144, 320. Тогда скидка предоставляется на товары стоимостью 125 и 144. Стоимость этих двух товаров со скидкой составит 201,75 рублей, после округления — 202 рубля. Общая стоимость покупки составит: 50 + 490 + 215 + 320 + 202 = 1277 рублей. Самый дорогой товар, на который будет получена скидка, стоит 144 рубля. В ответе нужно записать числа <strong>1277 и 144</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/inf_22_10_20_26.txt" onclick="alert('Файл inf_22_10_20_26.txt')">📁 Скачать файл: inf_22_10_20_26.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение</button></div>
+    <div id="solutionBlock16" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Заметим, что числа, меньшие 51, можно сразу суммировать, поскольку на них скидка не распространяется. Поэтому, построчно считывая числа из файла, числа, меньшие 51, будем сразу накапливать в переменной sum, а остальные числа будем записывать в массив. Далее, отсортировав массив по возрастанию, будем прибавлять к переменной sum стоимость товара с учётом скидки, если данный элемент массива имеет индекс, меньший, чем количество чисел, поделённое пополам, и без учёта скидки в остальных случаях.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Сортируем все товары дороже 50 рублей
+2. На каждый второй (самый дешёвый) товар даём скидку 25%
+3. Округляем общую сумму вверх</pre></div>
+            <p><strong>Ответ:</strong> 469784 511</p>
+            <div class="code_block"><pre>import math
+f = open('inf_22_10_20_26.txt')
+a = []
+m = int(f.readline())
+s = 0
+for i in f:
+    x = int(i)
+    if x <= 50:
+        s += x
+    else:
+        a.append(x)
+a.sort()
+for i in range(len(a)):
+    if i < len(a) // 2:
+        s += a[i] * 0.75
+        maxi = a[i]
+    else:
+        s += a[i]
+print(math.ceil(s), maxi)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 17 (№33198) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">17</div>
+        <div class="prob_nums">Тип 26 № 33198</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Для перевозки партии грузов различной массы выделен грузовик, но его грузоподъёмность ограничена, поэтому перевезти сразу все грузы не удастся. Грузы массой от 200 до 210 кг грузят в первую очередь, гарантируется, что все такие грузы поместятся. На оставшееся после этого место стараются взять как можно больше грузов. Если это можно сделать несколькими способами, выбирают тот способ, при котором самый большой из выбранных грузов имеет наибольшую массу. Если и при этом условии возможно несколько вариантов, выбирается тот, при котором наибольшую массу имеет второй по величине груз, и так далее. Известны количество грузов, масса каждого из них и грузоподъёмность грузовика. Необходимо определить <strong>количество и общую массу грузов</strong>, которые будут вывезены при погрузке по вышеописанным правилам.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>6 605<br>140<br>205<br>120<br>160<br>100<br>340<br>В данном случае сначала нужно взять груз массой 205 кг. После этого можно вывезти ещё максимум 3 груза. Выбираем способ: 140 + 160 + 100. Всего получается 4 груза общей массой 605 кг. В ответе надо записать числа <strong>4 и 605</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/26.txt" onclick="alert('Файл 26.txt')">📁 Скачать файл: 26.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение</button></div>
+    <div id="solutionBlock17" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Сначала берём все грузы из диапазона 200-210 кг. Затем сортируем остальные грузы по возрастанию и берём наименьшие, пока есть место. После этого пытаемся заменить последние взятые грузы на более тяжёлые для максимизации весов.</p>
+            <p><strong>Ответ:</strong> 123 10000</p>
+            <div class="code_block"><pre>f = open('26.txt')
+n, m = map(int, f.readline().split())
+g0 = [int(s) for s in f]
+g = [x for x in g0 if not (200 <= x <= 210)]
+mass = sum(g0) - sum(g)
+k = len(g0) - len(g)
+g.sort()
+kuzov = []
+while mass + sum(kuzov) + g[0] <= m:
+    kuzov.append(g.pop(0))
+for i in range(len(kuzov)-1, -1, -1):
+    limit = m - mass - sum(kuzov) + kuzov[i]
+    gruz = [x for x in g if x <= limit]
+    if not gruz:
+        break
+    gr = max(gruz)
+    g.append(kuzov[i])
+    kuzov[i] = gr
+    g.remove(gr)
+print(k + len(kuzov), mass + sum(kuzov))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 18 (№33528) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">18</div>
+        <div class="prob_nums">Тип 26 № 33528</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Предприятие производит оптовую закупку некоторых изделий A и B, на которую выделена определённая сумма денег. У поставщика есть в наличии партии этих изделий различных модификаций по различной цене. На выделенные деньги необходимо приобрести как можно больше изделий A независимо от модификации. Если у поставщика закончатся изделия A, то на оставшиеся деньги необходимо приобрести как можно больше изделий B. Известны выделенная для закупки сумма, а также количество и цена различных модификаций данных изделий у поставщика. Необходимо определить, <strong>сколько будет закуплено изделий B и какая сумма останется неиспользованной</strong>.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>4 1000<br>30 8 A<br>50 12 B<br>40 14 A<br>30 60 B<br>В данном случае сначала нужно купить изделия A: 8 изделий по 30 рублей и 14 изделий по 40 рублей. На это будет потрачено 800 рублей. На оставшиеся 200 рублей можно купить 6 изделий B по 30 рублей. Таким образом, всего будет куплено 6 изделий B и останется 20 рублей. В ответе надо записать числа <strong>6 и 20</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/26 (1).txt" onclick="alert('Файл 26 (1).txt')">📁 Скачать файл: 26.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button></div>
+    <div id="solutionBlock18" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Создадим два списка для партий изделий A и B. Считаем данные из файла в эти списки. Далее сортируем эти списки по возрастанию цены. Сначала найдём, сколько изделий A можно закупить на выделенную сумму, последовательно прибавляя цену изделия в текущей партии. После найдём, сколько изделий B можно закупить на оставшуюся сумму.</p>
+            <p><strong>Ответ:</strong> 5895 227</p>
+            <div class="code_block"><pre>f = open('26 (1).txt')
+_, money = map(int, f.readline().split())
+items = []
+for line in f:
+    t = line.split()
+    items.append([t[2], int(t[0]), int(t[1])])
+items.sort()
+zapB = 0
+for tip, price, count in items:
+    buy = min(count, money // price)
+    if tip == 'B':
+        zapB += buy
+    money -= buy * price
+print(zapB, money)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 19 (№35484) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">19</div>
+        <div class="prob_nums">Тип 26 № 35484</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> В текстовом файле записан набор натуральных чисел, не превышающих 10⁹. Гарантируется, что все числа различны. Необходимо определить, <strong>сколько в наборе таких пар чётных чисел, что их среднее арифметическое тоже присутствует в файле</strong>, и <strong>чему равно наибольшее из средних арифметических таких пар</strong>.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>6<br>3<br>8<br>14<br>11<br>2<br>17<br>В данном случае есть две подходящие пары: 8 и 14 (среднее арифметическое 11), 14 и 2 (среднее арифметическое 8). В ответе надо записать числа <strong>2 и 11</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/26 (2).txt" onclick="alert('Файл 26 (2).txt')">📁 Скачать файл: 26 (2).txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button></div>
+    <div id="solutionBlock19" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Считываем числа из файла в массив, после чего сортируем его. Для поиска среднего значения двух чётных чисел из массива будем использовать бинарный поиск или множество для быстрой проверки наличия элемента.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Выбираем все чётные числа
+2. Для каждой пары чётных чисел вычисляем среднее арифметическое
+3. Проверяем, есть ли это среднее в исходном наборе</pre></div>
+            <p><strong>Ответ:</strong> 15 976339247</p>
+            <div class="code_block"><pre>a = [int(s) for s in open('26 (2).txt')][1:]
+sa = set(a)
+evens = [x for x in a if x % 2 == 0]
+r = [(evens[i] + evens[j]) // 2 for i in range(len(evens)-1) for j in range(i+1, len(evens)) if ((evens[i] + evens[j]) // 2) in sa]
+print(len(r), max(r))</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 20 (№36000) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">20</div>
+        <div class="prob_nums">Тип 26 № 36000</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> В текстовом файле записан набор натуральных чисел, не превышающих 10⁹. Гарантируется, что все числа различны. Необходимо определить, <strong>сколько в наборе таких пар чисел, что числа в паре имеют разную чётность, а их сумма тоже присутствует в файле</strong>, и <strong>чему равна наибольшая из сумм таких пар</strong>.</p>
+        <p class="left_margin"><strong>Пример входного файла:</strong><br>6<br>3<br>8<br>14<br>11<br>22<br>17<br>В данном случае есть две подходящие пары: 3 и 8 (сумма 11), 3 и 14 (сумма 17). В ответе надо записать числа <strong>2 и 17</strong>.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t26/inf_26_04_21_26.txt" onclick="alert('Файл inf_26_04_21_26.txt')">📁 Скачать файл: inf_26_04_21_26.txt</a></div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button></div>
+    <div id="solutionBlock20" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Считываем числа из файла в массив. Для быстрой проверки наличия суммы используем множество. Разделяем числа на чётные и нечётные. Для каждой пары (чётное, нечётное) вычисляем сумму и проверяем её наличие в исходном множестве.</p>
+            <div class="calc-table"><pre>Алгоритм:
+1. Разделяем числа на чётные и нечётные
+2. Для каждой пары (чётное, нечётное) вычисляем сумму
+3. Проверяем, есть ли эта сумма в исходном наборе</pre></div>
+            <p><strong>Ответ:</strong> 15 954387771</p>
+            <div class="code_block"><pre>a = set([int(s) for s in open('inf_26_04_21_26.txt')])
+even = [x for x in a if x % 2 == 0]
+odd = [x for x in a if x % 2 == 1]
+sums = [x + y for x in even for y in odd if x + y in a]
+print(len(sums), max(sums))</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Симулятор ЕГЭ | ЕГЭ Информатика{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1><i class="fas fa-desktop"></i> Симулятор ЕГЭ</h1>
+    <p class="subtitle">Полноценный пробный экзамен в условиях КЕГЭ</p>
+    
+    <div class="simulator-header">
+        <div class="timer-container">
+            <h2>Таймер экзамена</h2>
+            <div class="timer" id="ege-timer">03:55:00</div>
+            <div class="timer-controls">
+                <button class="btn start-btn">Старт</button>
+                <button class="btn pause-btn">Пауза</button>
+                <button class="btn reset-btn">Сброс</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="exam-instructions">
+        <h3>Инструкция:</h3>
+        <ul>
+            <li>Нажмите "Старт" для запуска таймера</li>
+            <li>Экзамен длится 3 часа 55 минут (235 минут)</li>
+            <li>Решайте задания по порядку</li>
+            <li>Для заданий 8-27 используйте редактор кода</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

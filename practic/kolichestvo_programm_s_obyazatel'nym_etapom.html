@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 23 типа: Исполнитель — преобразование чисел (15 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .prob_nums a:hover {
+            text-decoration: underline;
+        }
+
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        .command-list {
+            background-color: #f9f9f9;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .command-item {
+            margin: 5px 0;
+        }
+        .formula {
+            font-family: monospace;
+            background-color: #eef;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Задание 23 типа (ЕГЭ информатика): Исполнитель — преобразование чисел</h2>
+</div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">1</div>
+        <div class="prob_nums">Тип 23 № 11358</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель А16 преобразует число, записанное на экране.</p>
+        <p class="left_margin">У исполнителя есть три команды:</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые исходное число 3 преобразуют в число 12 и при этом траектория вычислений содержит число 10?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button>
+    </div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Количество программ = f(3→10) × f(10→12).</p>
+            <p>f(3→10) = 30, f(10→12) = 2. Ответ: <strong>60</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x*2, y)
+print(f(3,10) * f(10,12))  # 60</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">2</div>
+        <div class="prob_nums">Тип 23 № 13498</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Май17 преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 17 и при этом траектория содержит число 9?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button>
+    </div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→9) = 13, f(9→17) = 13. Ответ: <strong>169</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+3, y)
+print(f(1,9) * f(9,17))  # 169</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">3</div>
+        <div class="prob_nums">Тип 23 № 13552</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Осень16 преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Прибавить 4</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 15 и при этом траектория содержит число 8?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button>
+    </div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→8) = 31, f(8→15) = 31. Ответ: <strong>961</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x+4, y)
+print(f(1,8) * f(8,15))  # 961</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">4</div>
+        <div class="prob_nums">Тип 23 № 13606</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель А17 преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+            <div class="command-item"><strong>3. Умножить на 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 28 и при этом траектория содержит число 14?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button>
+    </div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→14) = 19, f(14→28) = 2. Ответ: <strong>38</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y)
+    res += f(x*2, y)
+    res += f(x*3, y)
+    return res
+print(f(2,14) * f(14,28))  # 38</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">5</div>
+        <div class="prob_nums">Тип 23 № 13749</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель М17 преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Умножить на 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 12 и при этом траектория содержит числа 8 и 10?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button>
+    </div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→8)=15, f(8→10)=2, f(10→12)=2. Ответ: <strong>60</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x*3, y)
+print(f(2,8) * f(8,10) * f(10,12))  # 60</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">6</div>
+        <div class="prob_nums">Тип 23 № 13866</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Увеличитель преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Прибавить 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 14 и при этом траектория содержит число 8?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button>
+    </div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→8)=9, f(8→14)=15. Ответ: <strong>135</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x+3, y)
+print(f(2,8) * f(8,14))  # 135</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">7</div>
+        <div class="prob_nums">Тип 23 № 14090</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Калькулятор преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 20 и при этом траектория содержит число 10?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button>
+    </div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→10)=10, f(10→20)=9. Ответ: <strong>90</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y)
+    if x*2 <= y:
+        res += f(x*2, y)
+    return res
+print(f(1,10) * f(10,20))  # 90</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">8</div>
+        <div class="prob_nums">Тип 23 № 14234</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Троечник преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+            <div class="command-item"><strong>3. Умножить на 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 18 и при этом траектория содержит число 9?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button>
+    </div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→9)=8, f(9→18)=10. Ответ: <strong>80</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y)
+    res += f(x*2, y)
+    res += f(x*3, y)
+    return res
+print(f(1,9) * f(9,18))  # 80</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">9</div>
+        <div class="prob_nums">Тип 23 № 14380</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Сумматор преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Прибавить 5</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 15 и при этом траектория содержит число 8?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button>
+    </div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→8)=22, f(8→15)=16. Ответ: <strong>352</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x+5, y)
+print(f(1,8) * f(8,15))  # 352</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">10</div>
+        <div class="prob_nums">Тип 23 № 14527</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Удвоитель преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 3 преобразуют в число 25 и при этом траектория содержит число 12?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button>
+    </div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(3→12)=6, f(12→25)=7. Ответ: <strong>42</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y)
+    if x*2 <= y:
+        res += f(x*2, y)
+    return res
+print(f(3,12) * f(12,25))  # 42</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">11</div>
+        <div class="prob_nums">Тип 23 № 14702</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Четвертак преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 4</strong></div>
+            <div class="command-item"><strong>3. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 20 и при этом траектория содержит число 10?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button>
+    </div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→10)=9, f(10→20)=7. Ответ: <strong>63</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+4, y) + f(x*2, y)
+print(f(2,10) * f(10,20))  # 63</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">12</div>
+        <div class="prob_nums">Тип 23 № 14859</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Тройка преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 3</strong></div>
+            <div class="command-item"><strong>3. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 1 преобразуют в число 16 и при этом траектория содержит число 8?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button>
+    </div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(1→8)=14, f(8→16)=13. Ответ: <strong>182</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+3, y) + f(x*2, y)
+print(f(1,8) * f(8,16))  # 182</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">13</div>
+        <div class="prob_nums">Тип 23 № 15033</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Степень преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+            <div class="command-item"><strong>3. Умножить на 3</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 24 и при этом траектория содержит число 12?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button>
+    </div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→12)=11, f(12→24)=6. Ответ: <strong>66</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y) + f(x*2, y) + f(x*3, y)
+    return res
+print(f(2,12) * f(12,24))  # 66</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">14</div>
+        <div class="prob_nums">Тип 23 № 15287</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Плюсик преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Прибавить 2</strong></div>
+            <div class="command-item"><strong>3. Прибавить 6</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 2 преобразуют в число 18 и при этом траектория содержит число 9?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button>
+    </div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(2→9)=17, f(9→18)=41. Ответ: <strong>697</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    return f(x+1, y) + f(x+2, y) + f(x+6, y)
+print(f(2,9) * f(9,18))  # 697</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">15</div>
+        <div class="prob_nums">Тип 23 № 15541</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Исполнитель Умножатор преобразует число.</p>
+        <div class="command-list">
+            <div class="command-item"><strong>1. Прибавить 1</strong></div>
+            <div class="command-item"><strong>2. Умножить на 2</strong></div>
+        </div>
+        <p class="left_margin">Сколько существует программ, которые число 3 преобразуют в число 30 и при этом траектория содержит число 15?</p>
+    </div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button>
+    </div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> f(3→15)=9, f(15→30)=5. Ответ: <strong>45</strong>.</p>
+            <div class="code_block"><pre>def f(x, y):
+    if x > y: return 0
+    if x == y: return 1
+    res = f(x+1, y)
+    if x*2 <= y:
+        res += f(x*2, y)
+    return res
+print(f(3,15) * f(15,30))  # 45</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

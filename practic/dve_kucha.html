@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Информатика - Задания типа 19 (Две кучи)</title>
+    <style>
+        /* ★ ОСНОВНЫЕ СТИЛИ ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* ★ ЗАГОЛОВОК ЗАДАНИЯ ★ */
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        /* ★ ТЕКСТ ЗАДАНИЯ ★ */
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .left_margin {
+            margin-left: 0;
+        }
+
+        /* ★ БЛОК ОТВЕТА ★ */
+        .answer_block {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-left: 4px solid #4a6baf;
+            border-radius: 3px;
+        }
+
+        .answer_block strong {
+            font-weight: bold;
+        }
+
+        /* ★ РЕШЕНИЕ ★ */
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        /* ★ КНОПКИ УПРАВЛЕНИЯ ★ */
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        /* ★ ИСТОЧНИК ★ */
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        /* ★ АДАПТИВНОСТЬ ★ */
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="margin-bottom: 20px;">Задания типа 19 (Две кучи)</h1>
+    <p style="margin-bottom: 20px; color: #555;">Условие: Ваня выиграл своим первым ходом после неудачного первого хода Пети. Найдите минимальное (или максимальное, или количество) S.</p>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 1 (27416) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27416">
+        <div class="prob_header">
+            <span class="prob_num">1</span>
+            <span class="prob_nums">Тип 19 № 27416</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч (по своему выбору) один камень или увеличить количество камней в куче в два раза. Игра завершается в тот момент, когда суммарное количество камней в кучах становится не менее 77. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было семь камней, во второй куче — S камней; 1 ≤ S ≤ 69. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S, когда такая ситуация возможна.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27416)">Показать решение</button>
+        </div>
+        <div id="solution27416" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 18. При S = 18 Петя может получить позицию (7, 36) или (8, 18), после чего Ваня выигрывает первым ходом (удвоением 36 → 72 или 8 → 16). При S < 18 Ваня не может гарантированно выиграть первым ходом.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 77: return 1
+    elif h == 3 and x + y < 77: return 0
+    elif x + y >= 77 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+for x in range(1, 70):
+    if f(7, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 2 (27747) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27747">
+        <div class="prob_header">
+            <span class="prob_num">2</span>
+            <span class="prob_nums">Тип 19 № 27747</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в куче в четыре раза. Игра завершается, когда суммарное количество камней становится не менее 82. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 4 камня, во второй — S камней; 1 ≤ S ≤ 77. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27747)">Показать решение</button>
+        </div>
+        <div id="solution27747" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 5. Петя может получить позицию (4, 20) или (5, 5), после чего Ваня выигрывает первым ходом (4+1? или удвоением). При S < 5 Ваня не может гарантированно выиграть.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 82: return 1
+    elif h == 3 and x + y < 82: return 0
+    elif x + y >= 82 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*4, y, h+1) or f(x, y*4, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*4, y, h+1) or f(x, y*4, h+1)
+for x in range(1, 78):
+    if f(4, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 3 (27759) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27759">
+        <div class="prob_header">
+            <span class="prob_num">3</span>
+            <span class="prob_nums">Тип 19 № 27759</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень и два в другую, либо увеличить количество камней в любой куче в два раза. Игра завершается, когда суммарное количество камней становится более 80. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 8 камней, во второй — S камней; 1 ≤ S ≤ 68. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27759)">Показать решение</button>
+        </div>
+        <div id="solution27759" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 9. При S = 9 Петя может получить позицию (16, 9), после чего Ваня удваивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y > 80: return 1
+    elif h == 3 and x + y <= 80: return 0
+    elif x + y > 80 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y+2, h+1) or f(x+2, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+        else:
+            return f(x+1, y+2, h+1) or f(x+2, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+for x in range(1, 69):
+    if f(8, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 4 (27765) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27765">
+        <div class="prob_header">
+            <span class="prob_num">4</span>
+            <span class="prob_nums">Тип 19 № 27765</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень, увеличить первую кучу в 2 раза или увеличить вторую кучу в 3 раза. Игра завершается, когда суммарное количество камней становится не менее 69. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 10 камней, во второй — S камней; 1 ≤ S ≤ 58. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27765)">Показать решение</button>
+        </div>
+        <div id="solution27765" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 7. Петя может получить позицию (10, 21), после чего Ваня утраивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 69: return 1
+    elif h == 3 and x + y < 69: return 0
+    elif x + y >= 69 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*3, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*3, h+1)
+for x in range(1, 59):
+    if f(10, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 5 (27771) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27771">
+        <div class="prob_header">
+            <span class="prob_num">5</span>
+            <span class="prob_nums">Тип 19 № 27771</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может убрать из одной из куч один камень или уменьшить количество камней в куче в два раза (если нечётно, остаётся на 1 меньше половины). Игра завершается, когда суммарное количество камней становится не более 20. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 10 камней, во второй — S камней; S > 10. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите максимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27771)">Показать решение</button>
+        </div>
+        <div id="solution27771" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Максимальное значение S = 43. Петя может получить позицию (10, 21), после чего Ваня уменьшает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y <= 20: return 1
+    elif h == 3 and x + y > 20: return 0
+    elif x + y <= 20 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x-1, y, h+1) or f(x, y-1, h+1) or f(x//2, y, h+1) or f(x, y//2, h+1)
+        else:
+            return f(x-1, y, h+1) or f(x, y-1, h+1) or f(x//2, y, h+1) or f(x, y//2, h+1)
+for x in range(100, 10, -1):
+    if f(10, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 6 (27780) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27780">
+        <div class="prob_header">
+            <span class="prob_num">6</span>
+            <span class="prob_nums">Тип 19 № 27780</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в куче в два раза. Игра завершается, когда суммарное количество камней становится не менее 74. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 12 камней, во второй — S камней; 1 ≤ S ≤ 61. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27780)">Показать решение</button>
+        </div>
+        <div id="solution27780" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 16. Петя может получить позицию (12, 32), после чего Ваня удваивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 74: return 1
+    elif h == 3 and x + y < 74: return 0
+    elif x + y >= 74 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+for x in range(1, 62):
+    if f(12, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 7 (27797) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem27797">
+        <div class="prob_header">
+            <span class="prob_num">7</span>
+            <span class="prob_nums">Тип 19 № 27797</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в куче в три раза. Игра завершается, когда суммарное количество камней становится не менее 68. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 6 камней, во второй — S камней; 1 ≤ S ≤ 61. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(27797)">Показать решение</button>
+        </div>
+        <div id="solution27797" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 7. Петя может получить позицию (6, 21), после чего Ваня утраивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 68: return 1
+    elif h == 3 and x + y < 68: return 0
+    elif x + y >= 68 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+for x in range(1, 62):
+    if f(6, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 8 (29667) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem29667">
+        <div class="prob_header">
+            <span class="prob_num">8</span>
+            <span class="prob_nums">Тип 19 № 29667</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в куче в три раза. Игра завершается, когда суммарное количество камней становится не менее 49. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 5 камней, во второй — S камней; 1 ≤ S ≤ 43. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(29667)">Показать решение</button>
+        </div>
+        <div id="solution29667" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 4. Петя может получить позицию (5, 15), после чего Ваня утраивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 49: return 1
+    elif h == 3 and x + y < 49: return 0
+    elif x + y >= 49 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+for x in range(1, 44):
+    if f(5, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 9 (33521) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem33521">
+        <div class="prob_header">
+            <span class="prob_num">9</span>
+            <span class="prob_nums">Тип 19 № 33521</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или добавить столько камней, сколько их в данный момент в другой куче. Игра завершается, когда суммарное количество камней становится не менее 75. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 7 камней, во второй — S камней; 1 ≤ S ≤ 67. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(33521)">Показать решение</button>
+        </div>
+        <div id="solution33521" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 21. При S = 21 Петя может получить позицию (28, 21) или (7, 28), после чего Ваня добавляет и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 75: return 1
+    elif h == 3 and x + y < 75: return 0
+    elif x + y >= 75 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x+y, y, h+1) or f(x, y+x, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x+y, y, h+1) or f(x, y+x, h+1)
+for x in range(1, 68):
+    if f(7, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- ЗАДАНИЕ 10 (35477) -->
+    <!-- ===================================================== -->
+    <div class="problem_container" id="problem35477">
+        <div class="prob_header">
+            <span class="prob_num">10</span>
+            <span class="prob_nums">Тип 19 № 35477</span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin">Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в одну из куч один камень или увеличить количество камней в куче в два раза. Игра завершается, когда суммарное количество камней становится не менее 77. Победителем считается игрок, сделавший последний ход.</p>
+            <p class="left_margin">В начальный момент в первой куче было 8 камней, во второй — S камней; 1 ≤ S ≤ 68. Известно, что Ваня выиграл своим первым ходом после неудачного первого хода Пети. Укажите минимальное значение S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(35477)">Показать решение</button>
+        </div>
+        <div id="solution35477" class="solution">
+            <div class="solution_text">
+                <p><b>Решение:</b> Минимальное значение S = 18. Петя может получить позицию (8, 36), после чего Ваня удваивает и выигрывает.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 3 and x + y >= 77: return 1
+    elif h == 3 and x + y < 77: return 0
+    elif x + y >= 77 and h < 3: return 0
+    else:
+        if h % 2 == 0:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+        else:
+            return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+for x in range(1, 69):
+    if f(8, x, 1) == 1:
+        print(x)
+        break</pre></div>
+            </div>
+        </div>
+    </div>
+<script>
+    // ★ ПОКАЗ/СКРЫТИЕ РЕШЕНИЯ ДЛЯ КАЖДОЙ ЗАДАЧИ ★
+    function toggleSolution(problemNumber) {
+        const solution = document.getElementById('solution' + problemNumber);
+        const btn = event.target;
+        
+        if (solution.style.display === 'none' || solution.style.display === '') {
+            solution.style.display = 'block';
+            btn.textContent = 'Скрыть решение';
+        } else {
+            solution.style.display = 'none';
+            btn.textContent = 'Показать решение';
+        }
+    }
+</script>
+</body>
+</html>

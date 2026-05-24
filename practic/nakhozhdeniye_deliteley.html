@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 25 типа: Делители чисел (20 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .problem_container {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .prob_num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .prob_nums {
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 5px;
+        }
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+            color: #000;
+        }
+        .solution_text {
+            line-height: 1.5;
+            color: #000;
+        }
+        .solution_text p {
+            margin-bottom: 8px;
+            color: #000;
+        }
+        .calc-table {
+            background-color: #f0f0f0;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        .calc-table pre {
+            margin: 0;
+            color: #000;
+            white-space: pre-wrap;
+        }
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+        .answer-table {
+            background-color: #eef;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .answer-table th, .answer-table td {
+            border: 1px solid #999;
+            padding: 6px 10px;
+            text-align: center;
+        }
+        .answer-table th {
+            background-color: #dde;
+        }
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2> Задание 25 типа (ЕГЭ информатика): Поиск чисел по заданным свойствам делителей</h2>
+   </div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">1</div><div class="prob_nums">Тип 25 № 27422 </div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Напишите программу, которая ищет среди целых чисел, принадлежащих числовому отрезку [174457; 174505], числа, имеющие ровно два различных натуральных делителя, не считая единицы и самого числа. Для каждого найденного числа запишите эти два делителя в два соседних столбца на экране с новой строки в порядке возрастания произведения этих двух делителей. Делители в строке также должны следовать в порядке возрастания.</p>
+        <p class="left_margin">Например, в диапазоне [5; 9] ровно два различных натуральных делителя имеют числа 6 и 8, поэтому для этого диапазона вывод на экране должен содержать следующие значения:<br>2 3<br>2 4</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button></div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Перебираем числа из диапазона. Для каждого числа ищем все его делители (кроме 1 и самого числа). Если делителей ровно 2, выводим их.</p>
+            <div class="calc-table"><pre>Результат работы программы:
+3 58153
+7 24923
+59 2957
+13 13421
+149 1171
+5 34897
+211 827
+2 87251</pre></div>
+            <p><strong>Ответ:</strong></p>
+            <table class="answer-table">
+                <tr><th>Число</th><th>Делитель 1</th><th>Делитель 2</th></tr>
+                <tr><td>174459</td><td>3</td><td>58153</td></tr>
+                <tr><td>174461</td><td>7</td><td>24923</td></tr>
+                <tr><td>174463</td><td>59</td><td>2957</td></tr>
+                <tr><td>174467</td><td>13</td><td>13421</td></tr>
+                <tr><td>174469</td><td>149</td><td>1171</td></tr>
+                <tr><td>174485</td><td>5</td><td>34897</td></tr>
+                <tr><td>174497</td><td>211</td><td>827</td></tr>
+                <tr><td>174502</td><td>2</td><td>87251</td></tr>
+            </table>
+            <div class="code_block"><pre>def find_divisors(n):
+    divs = []
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            divs.append(i)
+            if i != n // i:
+                divs.append(n // i)
+    return sorted(divs)
+
+for num in range(174457, 174506):
+    divs = find_divisors(num)
+    if len(divs) == 2:
+        print(divs[0], divs[1])</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">2</div><div class="prob_nums">Тип 25 № 27851</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Напишите программу, которая ищет среди целых чисел, принадлежащих числовому отрезку [210235; 210300], числа, имеющие ровно четыре различных натуральных делителя, не считая единицы и самого числа. Для каждого найденного числа запишите эти четыре делителя в четыре соседних столбца на экране с новой строки. Делители в строке должны следовать в порядке возрастания.</p>
+        <p class="left_margin">Например, в диапазоне [10; 16] ровно четыре различных натуральных делителя имеет число 12, поэтому для этого диапазона вывод на экране должен содержать: 2 3 4 6</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button></div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Перебираем числа, находим все делители (кроме 1 и самого числа). Если их ровно 4, выводим в порядке возрастания.</p>
+            <div class="calc-table"><pre>Результат:
+2 4 52561 105122
+2 4 52567 105134
+2 4 52571 105142</pre></div>
+            <p><strong>Ответ:</strong></p>
+            <table class="answer-table">
+                <tr><th>Число</th><th>Делитель 1</th><th>Делитель 2</th><th>Делитель 3</th><th>Делитель 4</th></tr>
+                <tr><td>210244</td><td>2</td><td>4</td><td>52561</td><td>105122</td></tr>
+                <tr><td>210268</td><td>2</td><td>4</td><td>52567</td><td>105134</td></tr>
+                <tr><td>210284</td><td>2</td><td>4</td><td>52571</td><td>105142</td></tr>
+            </table>
+            <div class="code_block"><pre>for num in range(210235, 210301):
+    divs = []
+    for d in range(2, int(num**0.5) + 1):
+        if num % d == 0:
+            divs.append(d)
+            if d != num // d:
+                divs.append(num // d)
+    divs.sort()
+    if len(divs) == 4:
+        print(*divs)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">3</div><div class="prob_nums">Тип 25 № 27854</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [110203; 110245] числа, имеющие ровно четыре различных чётных натуральных делителя. Для каждого найденного числа запишите эти четыре делителя в порядке возрастания.</p>
+        <p class="left_margin">Например, в диапазоне [2; 16] ровно четыре чётных делителя имеют числа 12 и 16: (2,4,6,12) и (2,4,8,16).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button></div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Находим все делители числа, оставляем только чётные. Если их ровно 4 — выводим.</p>
+            <div class="calc-table"><pre>2 4 55102 110204
+2 14 15746 110222
+2 6 36742 110226
+2 22 10022 110242</pre></div>
+            <p><strong>Ответ:</strong> 2 4 55102 110204, 2 14 15746 110222, 2 6 36742 110226, 2 22 10022 110242</p>
+            <div class="code_block"><pre>for num in range(110203, 110246):
+    even_divs = []
+    for d in range(2, num):
+        if num % d == 0 and d % 2 == 0:
+            even_divs.append(d)
+    even_divs.sort()
+    if len(even_divs) == 4:
+        print(*even_divs)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">4</div><div class="prob_nums">Тип 25 № 27857</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [84052; 84130] число, имеющее максимальное количество различных натуральных делителей. Если таких чисел несколько, найдите минимальное из них. Выведите количество делителей этого числа и само число.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button></div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Для каждого числа считаем количество делителей. Запоминаем число с максимальным количеством.</p>
+            <div class="calc-table"><pre>Число 84084 имеет 72 делителя</pre></div>
+            <p><strong>Ответ: 72 84084</strong></p>
+            <div class="code_block"><pre>max_divs = 0
+best_num = 0
+for num in range(84052, 84131):
+    count = 0
+    for d in range(1, int(num**0.5) + 1):
+        if num % d == 0:
+            count += 1
+            if d != num // d:
+                count += 1
+    if count > max_divs:
+        max_divs = count
+        best_num = num
+print(max_divs, best_num)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">5</div><div class="prob_nums">Тип 25 № 28120</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [201455; 201470] числа, имеющие ровно 4 различных натуральных делителя (включая 1 и само число). Выведите все делители каждого такого числа в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button></div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Ищем числа, у которых ровно 4 делителя (включая 1 и само число).</p>
+            <div class="calc-table"><pre>1 3 67153 201459
+1 13 15497 201461
+1 29 6947 201463
+1 2 100733 201466</pre></div>
+            <p><strong>Ответ:</strong> 1 3 67153 201459, 1 13 15497 201461, 1 29 6947 201463, 1 2 100733 201466</p>
+            <div class="code_block"><pre>for num in range(201455, 201471):
+    divs = []
+    for d in range(1, num + 1):
+        if num % d == 0:
+            divs.append(d)
+    if len(divs) == 4:
+        print(*divs)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">6</div><div class="prob_nums">Тип 25 № 28121</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [2422000; 2422080] простые числа. Выведите все найденные простые числа в порядке возрастания, слева от каждого числа выведите его номер по порядку (начиная с 1).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button></div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Проверяем каждое число на простоту.</p>
+            <div class="calc-table"><pre>1 2422027
+2 2422033
+3 2422037
+4 2422073</pre></div>
+            <p><strong>Ответ: 1 2422027, 2 2422033, 3 2422037, 4 2422073</strong></p>
+            <div class="code_block"><pre>def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True
+
+cnt = 0
+for num in range(2422000, 2422081):
+    if is_prime(num):
+        cnt += 1
+        print(cnt, num)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">7</div><div class="prob_nums">Тип 25 № 28122</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [489421; 489440] числа, имеющие ровно четыре различных натуральных делителя (включая 1 и само число). Выведите все делители в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button></div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>1 19 25759 489421
+1 2 244711 489422
+1 13 37649 489437</pre></div>
+            <p><strong>Ответ:</strong> 1 19 25759 489421, 1 2 244711 489422, 1 13 37649 489437</p>
+            <div class="code_block"><pre>for num in range(489421, 489441):
+    divs = [d for d in range(1, num+1) if num % d == 0]
+    if len(divs) == 4:
+        print(*divs)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">8</div><div class="prob_nums">Тип 25 № 28123</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [125256; 125330] числа, имеющие ровно шесть различных чётных натуральных делителей. Выведите эти шесть делителей в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button></div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>2 6 18 13918 41754 125262
+2 4 8 31322 62644 125288
+2 6 18 13922 41766 125298</pre></div>
+            <p><strong>Ответ:</strong> 2 6 18 13918 41754 125262, 2 4 8 31322 62644 125288, 2 6 18 13922 41766 125298</p>
+            <div class="code_block"><pre>for num in range(125256, 125331):
+    even_divs = [d for d in range(2, num+1, 2) if num % d == 0]
+    if len(even_divs) == 6:
+        print(*even_divs)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">9</div><div class="prob_nums">Тип 25 № 28124</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите среди целых чисел отрезка [568023; 569230] число, имеющее максимальное количество различных натуральных делителей. Если таких чисел несколько, найдите минимальное. Выведите количество делителей и само число.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button></div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>Число 568260 имеет 144 делителя</pre></div>
+            <p><strong>Ответ: 144 568260</strong></p>
+            <div class="code_block"><pre>max_cnt, best = 0, 0
+for num in range(568023, 569231):
+    cnt = 0
+    for d in range(1, int(num**0.5)+1):
+        if num % d == 0:
+            cnt += 1
+            if d != num // d: cnt += 1
+    if cnt > max_cnt:
+        max_cnt, best = cnt, num
+print(max_cnt, best)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">10</div><div class="prob_nums">Тип 25 № 29673</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Назовём нетривиальным делителем натурального числа его делитель, не равный 1 и самому числу. Найдите все натуральные числа из отрезка [123456789; 223456789], имеющие ровно три нетривиальных делителя. Для каждого найденного числа выведите его наибольший нетривиальный делитель.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button></div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Числа с тремя нетривиальными делителями — это p⁴ (p — простое). Делители: 1, p, p², p³, p⁴.</p>
+            <div class="calc-table"><pre>131079601 1225043
+141158161 1295029
+163047361 1442897</pre></div>
+            <p><strong>Ответ: 1225043, 1295029, 1442897</strong></p>
+            <div class="code_block"><pre>def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True
+
+for p in range(int(123456789**0.25), int(223456789**0.25)+1):
+    if is_prime(p):
+        num = p**4
+        print(num, p**3)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">11</div><div class="prob_nums">Тип 25 № 33197</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите все натуральные числа из отрезка [1000000; 2000000], у которых среди разностей пар делителей (a×b = N, разность |a-b|) есть не менее трёх значений, не превышающих 100. Выведите найденные числа в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button></div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>1113840
+1179360
+1208844
+1499400</pre></div>
+            <p><strong>Ответ: 1113840, 1179360, 1208844, 1499400</strong></p>
+            <div class="code_block"><pre>for num in range(1000000, 2000001):
+    diffs = []
+    for d in range(2, int(num**0.5)+1):
+        if num % d == 0:
+            diff = abs(num//d - d)
+            if diff <= 100:
+                diffs.append(diff)
+    if len(diffs) >= 3:
+        print(num)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">12</div><div class="prob_nums">Тип 25 № 33527</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите все натуральные числа из отрезка [101000000; 102000000], у которых ровно три различных чётных делителя. Выведите найденные числа в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button></div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Числа вида 2·p², где p — простое.</p>
+            <div class="calc-table"><pre>101075762
+101417282
+101588258
+101645282</pre></div>
+            <p><strong>Ответ: 101075762, 101417282, 101588258, 101645282</strong></p>
+            <div class="code_block"><pre>def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0: return False
+    return True
+
+for p in range(3, 20000, 2):
+    num = 2 * p * p
+    if 101000000 <= num <= 102000000 and is_prime(p):
+        print(num)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">13</div><div class="prob_nums">Тип 25 № 35999</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите все натуральные числа N из отрезка [200000000; 400000000], которые можно представить в виде N = 2^m · 3^n, где m — чётное, n — нечётное. Выведите найденные числа в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button></div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>201326592
+229582512
+254803968
+322486272</pre></div>
+            <p><strong>Ответ: 201326592, 229582512, 254803968, 322486272</strong></p>
+            <div class="code_block"><pre>results = []
+for m in range(0, 31, 2):
+    for n in range(1, 20, 2):
+        num = 2**m * 3**n
+        if 200000000 <= num <= 400000000:
+            results.append(num)
+results.sort()
+for r in results:
+    print(r)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">14</div><div class="prob_nums">Тип 25 № 36038</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M — сумма минимального и максимального натуральных делителей числа, не считая 1 и самого числа. Найдите первые 5 чисел, больших 452021, для которых M при делении на 7 даёт остаток 3. Выведите числа и соответствующие M.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button></div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>452025 150678
+452029 23810
+452034 226019
+452048 226026
+452062 226033</pre></div>
+            <p><strong>Ответ: 452025 150678, 452029 23810, 452034 226019, 452048 226026, 452062 226033</strong></p>
+            <div class="code_block"><pre>cnt = 0
+num = 452022
+while cnt < 5:
+    divs = []
+    for d in range(2, int(num**0.5)+1):
+        if num % d == 0:
+            divs.append(d)
+            if d != num//d:
+                divs.append(num//d)
+    if divs:
+        M = min(divs) + max(divs)
+        if M % 7 == 3:
+            print(num, M)
+            cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">15</div><div class="prob_nums">Тип 25 № 37130</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите первые 5 чисел, больших 600000, среди делителей которых есть хотя бы одно число, оканчивающееся на 7, не равное 7 и самому числу. Выведите число и наименьший такой делитель.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button></div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>600001 437
+600002 47
+600003 1227
+600005 217
+600012 16667</pre></div>
+            <p><strong>Ответ: 600001 437, 600002 47, 600003 1227, 600005 217, 600012 16667</strong></p>
+            <div class="code_block"><pre>cnt = 0
+num = 600001
+while cnt < 5:
+    for d in range(2, num//2 + 1):
+        if num % d == 0 and d % 10 == 7 and d != 7:
+            print(num, d)
+            cnt += 1
+            break
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 16 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">16</div><div class="prob_nums">Тип 25 № 38603</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M — сумма минимального и максимального натуральных делителей числа, не считая 1 и самого числа. Найдите первые 5 чисел, больших 700000, для которых M оканчивается на 8. Выведите числа и соответствующие M.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение</button></div>
+    <div id="solutionBlock16" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>700005 233338
+700007 100008
+700012 350008
+700015 140008
+700031 24168</pre></div>
+            <p><strong>Ответ: 700005 233338, 700007 100008, 700012 350008, 700015 140008, 700031 24168</strong></p>
+            <div class="code_block"><pre>cnt = 0
+num = 700001
+while cnt < 5:
+    divs = []
+    for d in range(2, int(num**0.5)+1):
+        if num % d == 0:
+            divs.append(d)
+            if d != num//d:
+                divs.append(num//d)
+    if divs:
+        M = min(divs) + max(divs)
+        if M % 10 == 8:
+            print(num, M)
+            cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 17 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">17</div><div class="prob_nums">Тип 25 № 38959</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M(N) — произведение 5 наименьших различных натуральных делителей числа N (не считая 1). Найдите 5 наименьших чисел, больших 200000000, для которых 0 < M(N) < N. Выведите значения M(N).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение</button></div>
+    <div id="solutionBlock17" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>1728
+21632
+1260
+1152
+4127787</pre></div>
+            <p><strong>Ответ: 1728, 21632, 1260, 1152, 4127787</strong></p>
+            <div class="code_block"><pre>def get_5_smallest_divisors(n):
+    divs = []
+    for d in range(2, n):
+        if n % d == 0:
+            divs.append(d)
+            if len(divs) == 5:
+                break
+    if len(divs) == 5:
+        prod = 1
+        for x in divs:
+            prod *= x
+        return prod
+    return 0
+
+cnt, num = 0, 200000001
+while cnt < 5:
+    prod = get_5_smallest_divisors(num)
+    if 0 < prod < num:
+        print(prod)
+        cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 18 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">18</div><div class="prob_nums">Тип 25 № 40741</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M(N) — сумма двух наибольших различных натуральных делителей числа N (не считая самого N). Найдите 5 наименьших чисел, больших 10000000, для которых 0 < M(N) < 10000. Выведите значения M(N).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button></div>
+    <div id="solutionBlock18" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>6876
+6374
+6924
+8024
+8358</pre></div>
+            <p><strong>Ответ: 6876, 6374, 6924, 8024, 8358</strong></p>
+            <div class="code_block"><pre>def two_largest_divisors(n):
+    divs = []
+    for d in range(2, n):
+        if n % d == 0:
+            divs.append(d)
+    if len(divs) >= 2:
+        divs.sort()
+        return divs[-1] + divs[-2]
+    return 0
+
+cnt, num = 0, 10000001
+while cnt < 5:
+    M = two_largest_divisors(num)
+    if 0 < M < 10000:
+        print(M)
+        cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 19 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">19</div><div class="prob_nums">Тип 25 № 46983</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M(N) — пятый по величине делитель натурального числа N (без учёта 1 и самого N). Найдите 5 наименьших чисел, больших 460000000, для которых M(N) > 0. Выведите значения M(N).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button></div>
+    <div id="solutionBlock19" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>41818182
+261959
+5
+271
+57500001</pre></div>
+            <p><strong>Ответ: 41818182, 261959, 5, 271, 57500001</strong></p>
+            <div class="code_block"><pre>def fifth_largest_divisor(n):
+    divs = []
+    for d in range(2, n):
+        if n % d == 0:
+            divs.append(d)
+    if len(divs) >= 5:
+        divs.sort(reverse=True)
+        return divs[4]
+    return 0
+
+cnt, num = 0, 460000001
+while cnt < 5:
+    M = fifth_largest_divisor(num)
+    if M > 0:
+        print(M)
+        cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 20 ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">20</div><div class="prob_nums">Тип 25 № 69933</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Пусть M — сумма минимального и максимального натуральных делителей числа, не считая 1 и самого числа. Найдите первые 5 чисел, больших 700000, для которых M оканчивается на 4. Выведите числа и соответствующие M.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button></div>
+    <div id="solutionBlock20" class="solution">
+        <div class="solution_text">
+            <div class="calc-table"><pre>700004 350004
+700009 41194
+700023 233344
+700024 350014
+700044 350024</pre></div>
+            <p><strong>Ответ: 700004 350004, 700009 41194, 700023 233344, 700024 350014, 700044 350024</strong></p>
+            <div class="code_block"><pre>cnt = 0
+num = 700001
+while cnt < 5:
+    divs = []
+    for d in range(2, int(num**0.5)+1):
+        if num % d == 0:
+            divs.append(d)
+            if d != num//d:
+                divs.append(num//d)
+    if divs:
+        M = min(divs) + max(divs)
+        if M % 10 == 4:
+            print(num, M)
+            cnt += 1
+    num += 1</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

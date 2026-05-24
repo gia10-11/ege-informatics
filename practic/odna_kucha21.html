@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задания 21 типа: выигрышная стратегия (первым или вторым ходом) | ЕГЭ Информатика</title>
+    <style>
+        /* ★ ОСНОВНЫЕ СТИЛИ ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* ★ ЗАГОЛОВОК ЗАДАНИЯ ★ */
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .prob_nums a:hover {
+            text-decoration: underline;
+        }
+
+        /* ★ ТЕКСТ ЗАДАНИЯ ★ */
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        /* ★ БЛОК ОТВЕТА ★ */
+        .answer_block {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-left: 4px solid #4a6baf;
+            border-radius: 3px;
+        }
+
+        .answer_block strong {
+            font-weight: bold;
+        }
+
+        /* ★ РЕШЕНИЕ ★ */
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        /* ★ КНОПКИ УПРАВЛЕНИЯ ★ */
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        /* ★ ИСТОЧНИК ★ */
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Задания 21 типа (ЕГЭ информатика): выигрышная стратегия (первым или вторым ходом)</h2>
+    <p style="margin-bottom: 20px; font-size: 14px;"><strong>Условия задач:</strong> Одна куча камней. Ходы: добавить a или b камней, либо умножить на k. Игра завершается при достижении порога. Нужно найти начальное S, при котором <strong>у Вани есть выигрышная стратегия, позволяющая ему выиграть первым или вторым ходом, но нет стратегии выиграть гарантированно первым ходом</strong>.</p>
+    
+    <!-- ======================= ЗАДАНИЕ 1 (№27804) ======================= -->
+    <div class="problem_container" id="problem1">
+        <div class="prob_header">
+            <div class="prob_num">1</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27804</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может <strong>добавить в кучу один или четыре камня</strong> либо <strong>увеличить количество камней в куче в пять раз</strong>. Игра завершается, когда количество камней в куче становится не менее <strong>68</strong>. Победителем считается игрок, сделавший последний ход. В начальный момент в куче было S камней (1 ≤ S ≤ 67).<br>
+            Найдите <strong>минимальное S</strong>, при котором одновременно выполняются два условия:<br>
+            — у Вани есть выигрышная стратегия, позволяющая ему выиграть первым или вторым ходом при любой игре Пети;<br>
+            — у Вани нет стратегии, которая позволила бы ему гарантированно выиграть первым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button>
+        </div>
+        <div id="solutionBlock1" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong> Петя может первым ходом получить 9, 12 или 40 камней (S+1, S+4, S*5). Если S=8, то после хода Пети возможны: 9, 12, 40. При 40 Ваня выигрывает первым ходом, умножив на 5 (200≥68). При 9 и 12 Ваня добавляет 4 или 1 камень, получая 13. Далее при любом ходе Пети Ваня умножает на 5 и выигрывает вторым ходом. При S<8 Ваня не может гарантированно выиграть первым ходом, а при S>8 Ваня может выиграть первым ходом. Ответ: 8.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 68: return 1
+    if h == 5 and x < 68: return 0
+    if x >= 68 and h < 5: return 0
+    if h % 2 == 0:  # ход Вани
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*5, h+1)
+    else:  # ход Пети (все варианты должны вести к победе Вани)
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*5, h+1)
+
+for s in range(1, 68):
+    if not f(s, 1) and f(s, 3):  # нет победы за 1 ход, но есть за 1 или 2 хода
+        print(s)
+        break
+# Вывод: 8</pre></div>
+            </div>
+        </div>
+        <div class="source_info"><span>Источник: Демонстрационная версия ЕГЭ−2021</span></div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 2 (№27810) ======================= -->
+    <div class="problem_container" id="problem2">
+        <div class="prob_header">
+            <div class="prob_num">2</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27810</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Игра: за один ход можно добавить в кучу <strong>1 или 3 камня</strong> либо <strong>увеличить количество камней в куче в два раза</strong>. Порог победы — <strong>42</strong> камня. Начальное S: 1 ≤ S ≤ 41. Найдите минимальное S, при котором Ваня выигрывает первым или вторым ходом, но не может выиграть гарантированно первым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button>
+        </div>
+        <div id="solutionBlock2" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=16 Петя может получить: 17, 19, 32. При 32 Ваня удваивает (64≥42) и выигрывает первым ходом. При 17 и 19 Ваня добавляет 3 или 1 камень, получая 20. Затем при любом ходе Пети Ваня удваивает и выигрывает вторым ходом. При S<16 Ваня не может гарантированно выиграть за два хода, при S>16 может выиграть первым ходом. Ответ: 16.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 42: return 1
+    if h == 5 and x < 42: return 0
+    if x >= 42 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+3, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+3, h+1) and f(x*2, h+1)
+
+for s in range(1, 42):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 16</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 3 (№27813) ======================= -->
+    <div class="problem_container" id="problem3">
+        <div class="prob_header">
+            <div class="prob_num">3</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27813</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 4 камня, либо удвоить кучу. Порог <strong>48</strong>. Начальное S: 1 ≤ S ≤ 47. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button>
+        </div>
+        <div id="solutionBlock3" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=18 Петя получает: 19, 22, 36. При 36 Ваня удваивает (72≥48) и выигрывает первым ходом. При 19 и 22 Ваня добавляет 4 или 1 камень, получая 23. Затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 18.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 48: return 1
+    if h == 5 and x < 48: return 0
+    if x >= 48 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*2, h+1)
+
+for s in range(1, 48):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 18</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 4 (№27819) ======================= -->
+    <div class="problem_container" id="problem4">
+        <div class="prob_header">
+            <div class="prob_num">4</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27819</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 4 камня, либо умножить на 5. Порог <strong>69</strong>. Начальное S: 1 ≤ S ≤ 68. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button>
+        </div>
+        <div id="solutionBlock4" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=8 Петя получает: 9, 12, 40. При 40 Ваня умножает на 5 (200≥69) и выигрывает. При 9 и 12 Ваня получает 13 (добавлением), затем при любом ходе Пети Ваня умножает на 5 и выигрывает. Ответ: 8.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 69: return 1
+    if h == 5 and x < 69: return 0
+    if x >= 69 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*5, h+1)
+    else:
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*5, h+1)
+
+for s in range(1, 69):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 8</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 5 (№27822) ======================= -->
+    <div class="problem_container" id="problem5">
+        <div class="prob_header">
+            <div class="prob_num">5</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27822</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 2 камня, либо удвоить кучу. Порог <strong>42</strong> (больше 41). Начальное S: 1 ≤ S ≤ 41. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button>
+        </div>
+        <div id="solutionBlock5" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=17 Петя получает: 18, 19, 34. При 34 Ваня удваивает (68≥42) и выигрывает. При 18 и 19 Ваня добавляет 2 или 1 камень, получая 20, затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 17.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 42: return 1
+    if h == 5 and x < 42: return 0
+    if x >= 42 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+2, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+2, h+1) and f(x*2, h+1)
+
+for s in range(1, 42):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 17</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 6 (№27828) ======================= -->
+    <div class="problem_container" id="problem6">
+        <div class="prob_header">
+            <div class="prob_num">6</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27828</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 2 камня, либо умножить на 3. Порог <strong>65</strong>. Начальное S: 1 ≤ S ≤ 64. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button>
+        </div>
+        <div id="solutionBlock6" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=18 Петя получает: 19, 20, 54. При 54 Ваня утраивает (162≥65) и выигрывает. При 19 и 20 Ваня добавляет 2 или 1 камень, получая 21, затем при любом ходе Пети Ваня утраивает и выигрывает. Ответ: 18.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 65: return 1
+    if h == 5 and x < 65: return 0
+    if x >= 65 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+2, h+1) or f(x*3, h+1)
+    else:
+        return f(x+1, h+1) and f(x+2, h+1) and f(x*3, h+1)
+
+for s in range(1, 65):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 18</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 7 (№27837) ======================= -->
+    <div class="problem_container" id="problem7">
+        <div class="prob_header">
+            <div class="prob_num">7</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27837</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 2 камня, либо умножить на 3. Порог <strong>55</strong> (больше 54). Начальное S: 1 ≤ S ≤ 54. Найдите минимальное S.</p>
+        </div>
+ 
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button>
+        </div>
+        <div id="solutionBlock7" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=15 Петя получает: 16, 17, 45. При 45 Ваня утраивает (135≥55) и выигрывает. При 16 и 17 Ваня добавляет 2 или 1 камень, получая 18, затем при любом ходе Пети Ваня утраивает и выигрывает. Ответ: 15.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 55: return 1
+    if h == 5 and x < 55: return 0
+    if x >= 55 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+2, h+1) or f(x*3, h+1)
+    else:
+        return f(x+1, h+1) and f(x+2, h+1) and f(x*3, h+1)
+
+for s in range(1, 55):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 15</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 8 (№27846) ======================= -->
+    <div class="problem_container" id="problem8">
+        <div class="prob_header">
+            <div class="prob_num">8</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27846</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 3 камня, либо удвоить кучу. Порог <strong>50</strong> (больше 49). Начальное S: 1 ≤ S ≤ 49. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button>
+        </div>
+        <div id="solutionBlock8" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=20 Петя получает: 21, 23, 40. При 40 Ваня удваивает (80≥50) и выигрывает. При 21 и 23 Ваня добавляет 3 или 1 камень, получая 24, затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 20.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 50: return 1
+    if h == 5 and x < 50: return 0
+    if x >= 50 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+3, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+3, h+1) and f(x*2, h+1)
+
+for s in range(1, 50):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 20</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 9 (№27847) ======================= -->
+    <div class="problem_container" id="problem9">
+        <div class="prob_header">
+            <div class="prob_num">9</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27847</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 3 камня, либо удвоить кучу. Порог <strong>54</strong> (больше 53). Начальное S: 1 ≤ S ≤ 53. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button>
+        </div>
+        <div id="solutionBlock9" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=22 Петя получает: 23, 25, 44. При 44 Ваня удваивает (88≥54) и выигрывает. При 23 и 25 Ваня добавляет 3 или 1 камень, получая 26, затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 22.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 54: return 1
+    if h == 5 and x < 54: return 0
+    if x >= 54 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+3, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+3, h+1) and f(x*2, h+1)
+
+for s in range(1, 54):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 22</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 10 (№27958) ======================= -->
+    <div class="problem_container" id="problem10">
+        <div class="prob_header">
+            <div class="prob_num">10</div>
+            <div class="prob_nums">Тип 21 № <a href="#">27958</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 2 камня, либо удвоить кучу. Порог <strong>56</strong> (больше 55). Начальное S: 1 ≤ S ≤ 55. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button>
+        </div>
+        <div id="solutionBlock10" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=24 Петя получает: 25, 26, 48. При 48 Ваня удваивает (96≥56) и выигрывает. При 25 и 26 Ваня добавляет 2 или 1 камень, получая 27, затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 24.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 56: return 1
+    if h == 5 and x < 56: return 0
+    if x >= 56 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+2, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+2, h+1) and f(x*2, h+1)
+
+for s in range(1, 56):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 24</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 11 (№28040) ======================= -->
+    <div class="problem_container" id="problem11">
+        <div class="prob_header">
+            <div class="prob_num">11</div>
+            <div class="prob_nums">Тип 21 № <a href="#">28040</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 4 камня, либо умножить на 3. Порог <strong>41</strong>. Начальное S: 1 ≤ S ≤ 40. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button>
+        </div>
+        <div id="solutionBlock11" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=8 Петя получает: 9, 12, 24. При 24 Ваня утраивает (72≥41) и выигрывает. При 9 и 12 Ваня добавляет 4 или 1 камень, получая 13, затем при любом ходе Пети Ваня утраивает и выигрывает. Ответ: 8.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 41: return 1
+    if h == 5 and x < 41: return 0
+    if x >= 41 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*3, h+1)
+    else:
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*3, h+1)
+
+for s in range(1, 41):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 8</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 12 (№28085) ======================= -->
+    <div class="problem_container" id="problem12">
+        <div class="prob_header">
+            <div class="prob_num">12</div>
+            <div class="prob_nums">Тип 21 № <a href="#">28085</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 камень либо удвоить кучу. Порог <strong>26</strong>. Начальное S: 1 ≤ S ≤ 25. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button>
+        </div>
+        <div id="solutionBlock12" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=10 Петя получает: 11, 20. При 20 Ваня удваивает (40≥26) и выигрывает. При 11 Ваня добавляет 1 камень (12), затем при любом ходе Пети Ваня удваивает и выигрывает. Ответ: 10.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 26: return 1
+    if h == 5 and x < 26: return 0
+    if x >= 26 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x*2, h+1)
+
+for s in range(1, 26):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 10</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 13 (№28101) ======================= -->
+    <div class="problem_container" id="problem13">
+        <div class="prob_header">
+            <div class="prob_num">13</div>
+            <div class="prob_nums">Тип 21 № <a href="#">28101</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 камень либо умножить на 3. Порог <strong>38</strong>. Начальное S: 1 ≤ S ≤ 37. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button>
+        </div>
+        <div id="solutionBlock13" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=10 Петя получает: 11, 30. При 30 Ваня утраивает (90≥38) и выигрывает. При 11 Ваня добавляет 1 камень (12), затем при любом ходе Пети Ваня утраивает и выигрывает. Ответ: 10.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 38: return 1
+    if h == 5 and x < 38: return 0
+    if x >= 38 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x*3, h+1)
+    else:
+        return f(x+1, h+1) and f(x*3, h+1)
+
+for s in range(1, 38):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 10</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 14 (№28110) ======================= -->
+    <div class="problem_container" id="problem14">
+        <div class="prob_header">
+            <div class="prob_num">14</div>
+            <div class="prob_nums">Тип 21 № <a href="#">28110</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 или 4 камня, либо умножить на 5. Порог <strong>69</strong>. Начальное S: 1 ≤ S ≤ 68. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button>
+        </div>
+        <div id="solutionBlock14" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=8 Петя получает: 9, 12, 40. При 40 Ваня умножает на 5 (200≥69) и выигрывает. При 9 и 12 Ваня получает 13 (добавлением), затем при любом ходе Пети Ваня умножает на 5 и выигрывает. Ответ: 8.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 69: return 1
+    if h == 5 and x < 69: return 0
+    if x >= 69 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*5, h+1)
+    else:
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*5, h+1)
+
+for s in range(1, 69):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 8</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 15 (№28116) ======================= -->
+    <div class="problem_container" id="problem15">
+        <div class="prob_header">
+            <div class="prob_num">15</div>
+            <div class="prob_nums">Тип 21 № <a href="#">28116</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 камень, либо умножить на 3 и затем вычесть 1 (действие Б: 3x-1). Порог <strong>33</strong> (больше 32). Начальное S: 1 ≤ S ≤ 32. Найдите минимальное S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button>
+        </div>
+        <div id="solutionBlock15" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=9 Петя получает: 10, 26. При 26 Ваня применяет действие Б (3*26-1=77≥33) и выигрывает. При 10 Ваня добавляет 1 (11), затем при любом ходе Пети Ваня применяет действие Б и выигрывает. Ответ: 9.</p>
+                <div class="code_block"><pre>def f(x, h):
+    if (h == 3 or h == 5) and x >= 33: return 1
+    if h == 5 and x < 33: return 0
+    if x >= 33 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, h+1) or f(3*x - 1, h+1)
+    else:
+        return f(x+1, h+1) and f(3*x - 1, h+1)
+
+for s in range(1, 33):
+    if not f(s, 1) and f(s, 3):
+        print(s)
+        break
+# Вывод: 9</pre></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSolution(probNum) {
+        const sol = document.getElementById(`solutionBlock${probNum}`);
+        const btn = event.target;
+        if (sol.style.display === 'none' || sol.style.display === '') {
+            sol.style.display = 'block';
+            btn.textContent = 'Скрыть решение';
+        } else {
+            sol.style.display = 'none';
+            btn.textContent = 'Показать решение';
+        }
+    }
+    // Инициализация: скрыть все решения
+    for(let i=1;i<=15;i++) {
+        const solDiv = document.getElementById(`solutionBlock${i}`);
+        if(solDiv) solDiv.style.display = 'none';
+    }
+</script>
+</body>
+</html>

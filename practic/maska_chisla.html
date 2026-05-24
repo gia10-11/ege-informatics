@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 25 типа: Маски чисел (20 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .problem_container {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .prob_num {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .prob_nums {
+            font-weight: bold;
+            font-size: 17px;
+        }
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+        }
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+            color: #000;
+        }
+        .solution_text {
+            line-height: 1.5;
+            color: #000;
+        }
+        .solution_text p {
+            margin-bottom: 8px;
+            color: #000;
+        }
+        .calc-table {
+            background-color: #f0f0f0;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        .calc-table pre {
+            margin: 0;
+            color: #000;
+            white-space: pre-wrap;
+        }
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+        .answer-table {
+            background-color: #eef;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .answer-table th, .answer-table td {
+            border: 1px solid #999;
+            padding: 6px 10px;
+            text-align: center;
+        }
+        .answer-table th {
+            background-color: #dde;
+        }
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Задание 25 типа (ЕГЭ информатика): Поиск чисел по маске</h2>
+</div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 (№45259) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">1</div><div class="prob_nums">Тип 25 № 45259</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Среди натуральных чисел, не превышающих 10<sup>9</sup>, найдите все числа, соответствующие маске 12345?7?8, делящиеся на 23 без остатка.</p>
+        <p>В ответе запишите найденные числа в порядке возрастания, справа от каждого числа — результат деления на 23.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button></div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 12345?7?8 означает, что число имеет вид 12345 x 7 y 8, где x и y — цифры (0-9). Перебираем все возможные x и y, проверяем делимость на 23.</p>
+            <div class="calc-table"><pre>Перебор:
+123450708 ÷ 23 = 5367426
+123451718 ÷ 23 = 5367466
+123453788 ÷ 23 = 5367556
+123454708 ÷ 23 = 5367596
+123456778 ÷ 23 = 5367686
+123459768 ÷ 23 = 5367816</pre></div>
+            <p><strong>Ответ:</strong></p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷23)</th></tr>
+            <tr><td>123450798</td><td>5367426</td></tr>
+            <tr><td>123451718</td><td>5367466</td></tr>
+            <tr><td>123453788</td><td>5367556</td></tr>
+            <tr><td>123454708</td><td>5367596</td></tr>
+            <tr><td>123456778</td><td>5367686</td></tr>
+            <tr><td>123459768</td><td>5367816</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 23):
+    if fnmatch(str(x), '12345?7?8'):
+        print(x, x//23)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 (№48446) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">2</div><div class="prob_nums">Тип 25 № 48446</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>10</sup>, соответствующие маске 1?493*41 и делящиеся на 2023. В ответе запишите числа в порядке возрастания.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button></div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 1?493*41: первая цифра 1, затем одна цифра, затем 493, затем любое количество цифр (включая ноль), затем 41.</p>
+            <div class="calc-table"><pre>1349341
+1249338041
+1549348941
+1849359841</pre></div>
+            <p><strong>Ответ: 1349341, 1249338041, 1549348941, 1849359841</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 2023):
+    if fnmatch(str(x), '1?493*41'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 (№51994) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">3</div><div class="prob_nums">Тип 25 № 51994</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске 12*63?5? и делящиеся на 3123.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button></div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 12*63?5? — начинается с 12, затем любое количество цифр, затем 63, затем одна цифра, затем 5, затем одна цифра.</p>
+            <div class="calc-table"><pre>12363957
+120663351
+120963159
+124763850
+125063658</pre></div>
+            <p><strong>Ответ: 12363957, 120663351, 120963159, 124763850, 125063658</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 3123):
+    if fnmatch(str(x), '12*63?5?'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 (№55821) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">4</div><div class="prob_nums">Тип 25 № 55821</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Среди натуральных чисел, не превышающих 10<sup>8</sup>, найдите числа, соответствующие маске 12??36*1, делящиеся на 273. В ответе запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button></div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 12??36*1: 12, затем две любые цифры, затем 36, затем любое количество цифр, затем 1.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷273)</th></tr>
+            <tr><td>1271361</td><td>4657</td></tr>
+            <tr><td>12633621</td><td>46277</td></tr>
+            <tr><td>12663651</td><td>46387</td></tr>
+            <tr><td>12693681</td><td>46497</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**8, 273):
+    if fnmatch(str(x), '12??36*1'):
+        print(x, x//273)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 (№56525) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">5</div><div class="prob_nums">Тип 25 № 56525</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>10</sup>, соответствующие маске 1?7246*1 и делящиеся на 4173.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button></div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 1?7246*1: 1, затем одна цифра, затем 7246, затем любое количество цифр, затем 1.</p>
+            <div class="calc-table"><pre>1072461
+1272460371
+1772469231</pre></div>
+            <p><strong>Ответ: 1072461, 1272460371, 1772469231</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 4173):
+    if fnmatch(str(x), '1?7246*1'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 (№57432) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">6</div><div class="prob_nums">Тип 25 № 57432</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Среди натуральных чисел, не превышающих 10<sup>8</sup>, найдите числа, соответствующие маске 12??1*56, делящиеся на 317. В ответе запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button></div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 12??1*56: 12, затем две цифры, затем 1, затем любое количество цифр, затем 56.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷317)</th></tr>
+            <tr><td>1226156</td><td>3868</td></tr>
+            <tr><td>12321156</td><td>38868</td></tr>
+            <tr><td>12511356</td><td>39468</td></tr>
+            <tr><td>12701556</td><td>40068</td></tr>
+            <tr><td>12891756</td><td>40668</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**8, 317):
+    if fnmatch(str(x), '12??1*56'):
+        print(x, x//317)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 (№58492) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">7</div><div class="prob_nums">Тип 25 № 58492</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>10</sup>, соответствующие маске 1?7602*0 и делящиеся на 4891.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button></div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 1?7602*0: 1, затем одна цифра, затем 7602, затем любое количество цифр, затем 0.</p>
+            <div class="calc-table"><pre>1076020
+10760200
+107602000
+1076020000
+1576026930</pre></div>
+            <p><strong>Ответ: 1076020, 10760200, 107602000, 1076020000, 1576026930</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 4891):
+    if fnmatch(str(x), '1?7602*0'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 (№59703) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">8</div><div class="prob_nums">Тип 25 № 59703</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Среди натуральных чисел, не превышающих 10<sup>8</sup>, найдите числа, соответствующие маске 3?1*57, делящиеся на 2023. Запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button></div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 3?1*57: 3, затем одна цифра, затем 1, затем любое количество цифр, затем 57.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷2023)</th></tr>
+            <tr><td>321657</td><td>159</td></tr>
+            <tr><td>34105757</td><td>16859</td></tr>
+            <tr><td>35117257</td><td>17359</td></tr>
+            <tr><td>36128757</td><td>17859</td></tr>
+            <tr><td>37140257</td><td>18359</td></tr>
+            <tr><td>38151757</td><td>18859</td></tr>
+            <tr><td>39163257</td><td>19359</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**8, 2023):
+    if fnmatch(str(x), '3?1*57'):
+        print(x, x//2023)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 (№59773) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">9</div><div class="prob_nums">Тип 25 № 59773</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>8</sup>, соответствующие маске 3?1*57, делящиеся на 1991. Запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button></div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Та же маска, другой делитель — 1991.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷1991)</th></tr>
+            <tr><td>30117857</td><td>15127</td></tr>
+            <tr><td>31113357</td><td>15627</td></tr>
+            <tr><td>32108857</td><td>16127</td></tr>
+            <tr><td>33104357</td><td>16627</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**8, 1991):
+    if fnmatch(str(x), '3?1*57'):
+        print(x, x//1991)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 (№59818) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">10</div><div class="prob_nums">Тип 25 № 59818</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске *31*65?, делящиеся на 31 и 2031 (т.е. на НОК), и количество делителей является степенью двойки.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button></div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Число должно делиться на 31·2031 = 62961. Маска: любое количество цифр, затем 31, затем любое количество цифр, затем 65, затем одна цифра.</p>
+            <div class="calc-table"><pre>53831655 26505
+333126651 164021
+512313657 252247
+647931651 319021
+831966654 409634</pre></div>
+            <p><strong>Ответ: 53831655, 333126651, 512313657, 647931651, 831966654</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+def count_divisors(n):
+    c = 0
+    for i in range(1, int(n**0.5)+1):
+        if n%i==0: c+=2 if i*i!=n else 1
+    return c
+for x in range(0, 10**9, 62961):
+    if fnmatch(str(x), '*31*65?'):
+        if count_divisors(x) & (count_divisors(x)-1) == 0: # степень двойки
+            print(x, x//2031)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 (№59850) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">11</div><div class="prob_nums">Тип 25 № 59850</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>8</sup>, соответствующие маске 1?4*6?8, делящиеся на 2622. Запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button></div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 1?4*6?8: 1, затем одна цифра, затем 4, затем любое количество цифр, затем 6, затем одна цифра, затем 8.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷2622)</th></tr>
+            <tr><td>154698</td><td>59</td></tr>
+            <tr><td>11468628</td><td>4374</td></tr>
+            <tr><td>12425658</td><td>4739</td></tr>
+            <tr><td>15401628</td><td>5874</td></tr>
+            <tr><td>16476648</td><td>6284</td></tr>
+            <tr><td>17433678</td><td>6649</td></tr>
+            <tr><td>19452618</td><td>7419</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**8, 2622):
+    if fnmatch(str(x), '1?4*6?8'):
+        print(x, x//2622)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 (№61371) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">12</div><div class="prob_nums">Тип 25 № 61371</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>10</sup>, соответствующие маске 3?6906*4, делящиеся на 2024.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button></div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 3?6906*4: 3, затем одна цифра, затем 6906, затем любое количество цифр, затем 4.</p>
+            <div class="calc-table"><pre>3969064
+336906944
+3069064064
+3169069904
+3269065624
+3369061344
+3469067184
+3569062904
+3669068744
+3769064464
+3869060184
+3969066024</pre></div>
+            <p><strong>Ответ: (12 чисел, см. выше)</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 2024):
+    if fnmatch(str(x), '3?6906*4'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 (№63041) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">13</div><div class="prob_nums">Тип 25 № 63041</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>10</sup>, соответствующие маске 1*4302?1, делящиеся на 3147.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button></div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 1*4302?1: 1, затем любое количество цифр, затем 4302, затем одна цифра, затем 1.</p>
+            <div class="calc-table"><pre>100430211
+176430261
+1374430221
+1450430271
+1973430201</pre></div>
+            <p><strong>Ответ: 100430211, 176430261, 1374430221, 1450430271, 1973430201</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 3147):
+    if fnmatch(str(x), '1*4302?1'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 (№68258) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">14</div><div class="prob_nums">Тип 25 № 68258</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске 4*64*9?7, делящиеся на 9117.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button></div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 4*64*9?7: 4, затем любое количество цифр, затем 64, затем любое количество цифр, затем 9, затем одна цифра, затем 7.</p>
+            <div class="calc-table"><pre>464967
+41764977
+406444977
+436439907
+464337927
+464884947</pre></div>
+            <p><strong>Ответ: 464967, 41764977, 406444977, 436439907, 464337927, 464884947</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 9117):
+    if fnmatch(str(x), '4*64*9?7'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 (№68526) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">15</div><div class="prob_nums">Тип 25 № 68526</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Среди натуральных чисел, не превышающих 10<sup>10</sup>, найдите числа, соответствующие маске 3?12?14*5, делящиеся на 1917. Запишите числа и результат деления.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button></div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 3?12?14*5: 3, затем одна цифра, затем 12, затем одна цифра, затем 14, затем любое количество цифр, затем 5.</p>
+            <table class="answer-table"><tr><th>Число</th><th>Частное (÷1917)</th></tr>
+            <tr><td>351261495</td><td>183235</td></tr>
+            <tr><td>3212614035</td><td>1675855</td></tr>
+            <tr><td>3412614645</td><td>1780185</td></tr>
+            <tr><td>3712414275</td><td>1936575</td></tr>
+            <tr><td>3912414885</td><td>2040905</td></tr>
+            </table>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**10, 1917):
+    if fnmatch(str(x), '3?12?14*5'):
+        print(x, x//1917)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 16 (№73851) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">16</div><div class="prob_nums">Тип 25 № 73851</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа в интервале [10<sup>8</sup>; 2·10<sup>8</sup>], соответствующие маске ?*42*81 и имеющие ровно три натуральных делителя (квадрат простого числа).</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение</button></div>
+    <div id="solutionBlock16" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Числа с тремя делителями — это квадраты простых чисел. Ищем p² в диапазоне.</p>
+            <div class="calc-table"><pre>114297481
+141824281
+142587481
+149842081</pre></div>
+            <p><strong>Ответ: 114297481, 141824281, 142587481, 149842081</strong></p>
+            <div class="code_block"><pre>def is_prime(n):
+    for i in range(2, int(n**0.5)+1):
+        if n%i==0: return False
+    return True
+for p in range(10000, 20000):
+    x = p*p
+    if 10**8 <= x <= 2*10**8:
+        s = str(x)
+        if '*42*81' in s and s[0] != '0':
+            print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 17 (№73880) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">17</div><div class="prob_nums">Тип 25 № 73880</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа в интервале [10<sup>8</sup>; 2·10<sup>8</sup>], соответствующие маске ?*34*49 и имеющие ровно три натуральных делителя.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение</button></div>
+    <div id="solutionBlock17" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично, квадраты простых чисел, соответствующие маске ?*34*49.</p>
+            <div class="calc-table"><pre>109348849
+134397649
+152349649
+193404649</pre></div>
+            <p><strong>Ответ: 109348849, 134397649, 152349649, 193404649</strong></p>
+            <div class="code_block"><pre>for p in range(10000, 20000):
+    x = p*p
+    if 10**8 <= x <= 2*10**8:
+        s = str(x)
+        if '*34*49' in s and s[0] != '0':
+            print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 18 (№75262) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">18</div><div class="prob_nums">Тип 25 № 75262</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске 4?5*07*3, делящиеся на 9341.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button></div>
+    <div id="solutionBlock18" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 4?5*07*3: 4, затем одна цифра, затем 5, затем любое количество цифр, затем 07, затем любое количество цифр, затем 3.</p>
+            <div class="calc-table"><pre>495073
+48507813
+405707653
+495007613
+495568073</pre></div>
+            <p><strong>Ответ: 495073, 48507813, 405707653, 495007613, 495568073</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 9341):
+    if fnmatch(str(x), '4?5*07*3'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 19 (№75289) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">19</div><div class="prob_nums">Тип 25 № 75289</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске 6?1*89*3, делящиеся на 9341.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button></div>
+    <div id="solutionBlock19" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 6?1*89*3: 6, затем одна цифра, затем 1, затем любое количество цифр, затем 89, затем любое количество цифр, затем 3.</p>
+            <div class="calc-table"><pre>681893
+67189813
+611489883
+651189133
+691915893</pre></div>
+            <p><strong>Ответ: 681893, 67189813, 611489883, 651189133, 691915893</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 9341):
+    if fnmatch(str(x), '6?1*89*3'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 20 (№76693) ========== -->
+<div class="problem_container">
+    <div class="prob_header"><div class="prob_num">20</div><div class="prob_nums">Тип 25 № 76693</div></div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Найдите натуральные числа, не превышающие 10<sup>9</sup>, соответствующие маске 4?28*8*3, делящиеся на 9111.</p>
+    </div>
+    <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button></div>
+    <div id="solutionBlock20" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Маска 4?28*8*3: 4, затем одна цифра, затем 28, затем любое количество цифр, затем 8, затем любое количество цифр, затем 3.</p>
+            <div class="calc-table"><pre>482883
+422868843
+472888233</pre></div>
+            <p><strong>Ответ: 482883, 422868843, 472888233</strong></p>
+            <div class="code_block"><pre>from fnmatch import fnmatch
+for x in range(0, 10**9, 9111):
+    if fnmatch(str(x), '4?28*8*3'):
+        print(x)</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

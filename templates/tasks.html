@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ЕГЭ Информатика - Выбор варианта</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 28px;
+            padding: 40px 35px;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: #1e3c72;
+            border-left: 5px solid #f39c12;
+            padding-left: 20px;
+        }
+        .sub {
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+        .variants-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .variant-card {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+        .variant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-color: #f39c12;
+        }
+        .variant-num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1e466e;
+            margin-bottom: 15px;
+        }
+        .variant-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .variant-desc {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .soon-badge {
+            text-align: center;
+            margin: 40px 0 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef9e6, #fff8e0);
+            border-radius: 20px;
+            border-left: 5px solid #f39c12;
+            font-size: 1.1rem;
+            color: #b85c00;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        @media (max-width: 900px) {
+            .variants-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .variant-card {
+                max-width: 280px;
+                width: 100%;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ЕГЭ–2026 Информатика</h1>
+    <div class="sub">Выберите вариант для тренировки</div>
+
+    <div class="variants-row">
+        <!-- Вариант 1 -->
+        <div class="variant-card" onclick="window.location.href='/ege-informatics/option/opt1.html'">
+            <div class="variant-num">01</div>
+            <div class="variant-title">Вариант №1</div>
+        </div>
+
+        <!-- Вариант 2 -->
+        <div class="variant-card" onclick="window.location.href='/ege-informatics/option/opt2.html'">
+            <div class="variant-num">02</div>
+            <div class="variant-title">Вариант №2</div>
+        </div>
+
+        <!-- Вариант 3 -->
+        <div class="variant-card" onclick="window.location.href='/ege-informatics/option/opt3.html'">
+            <div class="variant-num">03</div>
+            <div class="variant-title">Вариант №3</div>
+        </div>
+
+        <!-- Вариант 4 -->
+        <div class="variant-card" onclick="window.location.href='/ege-informatics/option/opt4.html'">
+            <div class="variant-num">04</div>
+            <div class="variant-title">Вариант №4</div>
+        </div>
+    </div>
+
+    <div class="soon-badge">
+        ⏳ Скоро появятся новые варианты! Следите за обновлениями.
+    </div>
+
+    <footer>
+        © Тренировочные задания ЕГЭ. Для перехода нажмите на нужный вариант.
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контактная информация - ЕГЭ Информатика 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+        
+        .info-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .info-section {
+            margin-bottom: 30px;
+        }
+        
+        .info-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .info-section h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .info-label {
+            width: 200px;
+            font-weight: bold;
+            opacity: 0.8;
+        }
+        
+        .info-value {
+            flex: 1;
+            color: #ffd700;
+            font-weight: 500;
+        }
+        
+        .donate-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        
+        .donate-section .info-row {
+            margin-bottom: 12px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .highlight {
+            color: #ffd700;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .info-card {
+                padding: 20px;
+            }
+            
+            .info-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .info-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/templates/index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+        
+        <header>
+            <h1><i class="fas fa-address-card"></i> <span class="highlight">Контактная информация</span></h1>
+            <p class="subtitle">Данные разработчика и реквизиты для поддержки проекта</p>
+        </header>
+        
+        <div class="info-card">
+            <!-- Личная информация -->
+            <div class="info-section">
+                <h2><i class="fas fa-user-graduate"></i> Разработчик</h2>
+                <div class="info-row">
+                    <div class="info-label">Фамилия:</div>
+                    <div class="info-value">Соболев</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Имя:</div>
+                    <div class="info-value">Илья</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Класс / Ступень:</div>
+                    <div class="info-value">10 Б класс</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Школа / Учреждение:</div>
+                    <div class="info-value">МБОУ "Лицей №124"</div>
+                </div>
+            </div>
+            
+            <!-- Информация о кураторе -->
+            <div class="info-section">
+                <h2><i class="fas fa-chalkboard-user"></i> Куратор проекта</h2>
+                <div class="info-row">
+                    <div class="info-label">ФИО куратора:</div>
+                    <div class="info-value">Синичук Анжелика Арамовна</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Должность:</div>
+                    <div class="info-value">Учитель информатики</div>
+                </div>
+            </div>
+            
+            <!-- Реквизиты для поддержки проекта -->
+            <div class="info-section">
+                <h2><i class="fas fa-hand-holding-heart"></i> Поддержать проект</h2>
+                <div class="donate-section">
+                    <div class="info-row">
+                        <div class="info-label">Банк:</div>
+                        <div class="info-value">Сбер Банк</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Номер карты (RU):</div>
+                        <div class="info-value">2202 2088 4153 7765</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">СБП по номеру телефона:</div>
+                        <div class="info-value">+7 (927) 781-12-34</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Email для связи:</div>
+                        <div class="info-value">silya0309@gmail.com</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.85rem; opacity: 0.7; text-align: center;">
+                    <i class="fas fa-coffee"></i> Все средства идут на поддержку и развитие платформы, оплату хостинга и обновление заданий.
+                </p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📚 Для 10-11 классов | 🎯 Подготовка к ЕГЭ 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Информатика: 15 заданий типа 21 — Выигрышная стратегия (две кучи)</title>
+    <style>
+        /* ★ ОСНОВНЫЕ СТИЛИ ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* ★ ЗАГОЛОВОК ЗАДАНИЯ ★ */
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .prob_nums a:hover {
+            text-decoration: underline;
+        }
+
+        /* ★ ТЕКСТ ЗАДАНИЯ ★ */
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        /* ★ БЛОК ОТВЕТА ★ */
+        .answer_block {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-left: 4px solid #4a6baf;
+            border-radius: 3px;
+        }
+
+        .answer_block strong {
+            font-weight: bold;
+        }
+
+        /* ★ РЕШЕНИЕ ★ */
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        /* ★ КНОПКИ УПРАВЛЕНИЯ ★ */
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        /* ★ ИСТОЧНИК ★ */
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="margin-bottom:20px; font-size:24px;">📘 Задания типа 21 — Выигрышная стратегия (две кучи)</h1>
+    <p style="margin-bottom:25px; font-size:14px; color:#555;">15 задач с полными условиями, подробными решениями и кодом на Python.</p>
+
+    <!-- ЗАДАНИЕ 1 (27418) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">1</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27418</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может <b>добавить в одну из куч (по своему выбору) один камень</b> или <b>увеличить количество камней в куче в два раза</b>. Игра завершается в тот момент, когда суммарное количество камней в кучах становится не менее 77. Победителем считается игрок, сделавший последний ход. В начальный момент в первой куче было семь камней, во второй куче — S камней; 1 ≤ S ≤ 69. Найдите минимальное значение S, при котором одновременно выполняются два условия: у Вани есть выигрышная стратегия, позволяющая ему выиграть первым или вторым ходом при любой игре Пети; у Вани нет стратегии, которая позволит ему гарантированно выиграть первым ходом.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button></div>
+        <div id="solution1" class="solution"><div class="solution_text"><p><strong>Подробное решение:</strong> При S = 30 Петя своим первым ходом может получить одну из четырёх позиций: (7,31), (8,30), (14,30), (7,60). В позициях (7,60) и (14,30) Ваня выигрывает первым ходом (удваивает вторую кучу). Из позиций (8,30) и (7,31) Ваня может получить позицию (8,31) или (14,31). В этом случае после второго хода Пети может возникнуть одна из позиций: (9,31),(8,32),(16,31),(8,62) — во всех случаях Ваня удваивает вторую кучу и выигрывает своим вторым ходом. Таким образом, минимальное S = 30.</p><div class="code_block"><pre>def f(x, y, h):
+    if (h == 3 or h == 5) and x + y >= 77: return 1
+    if h == 5 and x + y < 77: return 0
+    if x + y >= 77 and h < 5: return 0
+    if h % 2 == 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+for s in range(1, 70):
+    if f(s, 7, 1):
+        print("S =", s)   # 30
+        break</pre></div></div></div>
+        <div class="source_info">Источник: Демонстрационная версия ЕГЭ−2021</div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 (27750) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">2</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27750</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> За один ход можно добавить 1 камень в любую кучу либо увеличить количество камней в куче в 4 раза. Сумма ≥ 82. Начальная позиция (4,S), 1≤S≤77. Найдите минимальное S с требуемой стратегией Вани.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button></div>
+        <div id="solution2" class="solution"><div class="solution_text"><p><strong>Подробное решение:</strong> При S=18 Петя может получить (5,18),(16,18),(4,19),(4,72). В позициях (16,18) и (4,72) Ваня выигрывает первым ходом, увеличив соответствующую кучу в 4 раза. Из (5,18) и (4,19) Ваня переводит игру в позицию (5,19). После любого хода Пети (6,19),(20,19),(5,20),(5,76) Ваня утраивает или учетверяет — выигрывает вторым ходом. Меньшие S не дают гарантии.</p><div class="code_block"><pre>def g(x,y,h):
+    if (h==3 or h==5) and x+y>=82: return 1
+    if h==5 and x+y<82: return 0
+    if x+y>=82 and h<5: return 0
+    if h%2==0:
+        return g(x+1,y,h+1) or g(x,y+1,h+1) or g(x*4,y,h+1) or g(x,y*4,h+1)
+    else:
+        return g(x+1,y,h+1) and g(x,y+1,h+1) and g(x*4,y,h+1) and g(x,y*4,h+1)
+print(min(s for s in range(1,78) if g(s,4,1)))  # 18</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3 (27761) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">3</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27761</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> За один ход: добавить 1 камень в одну кучу и 2 камня в другую (порядок любой) либо удвоить любую кучу. Сумма ≥ 41. Начальная позиция (8,S), 1≤S≤32. Найдите минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button></div>
+        <div id="solution3" class="solution"><div class="solution_text"><p><strong>Подробное решение:</strong> При S=10 возможные ходы Пети: (9,12),(10,11),(16,10),(8,20). (16,10) и (8,20) — Ваня выигрывает первым ходом, удвоив меньшую кучу. Из (9,12) и (10,11) Ваня делает позицию (11,13). После хода Пети (12,13),(13,12),(22,13),(11,26) Ваня выигрывает вторым ходом (удвоением).</p><div class="code_block"><pre>def h_game(x,y,t):
+    if (t==3 or t==5) and x+y>=41: return 1
+    if t==5 and x+y<41: return 0
+    if x+y>=41 and t<5: return 0
+    moves = [(x+1,y+2),(x+2,y+1),(x*2,y),(x,y*2)]
+    if t%2==0: return any(h_game(a,b,t+1) for a,b in moves)
+    else: return all(h_game(a,b,t+1) for a,b in moves)
+print(min(s for s in range(1,33) if h_game(8,s,1)))  # 10</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 4 (27767) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">4</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27767</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 камень в любую кучу, удвоить первую кучу, утроить вторую. Сумма ≥ 69. Начальная (10,S), S≤58. Найти минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button></div>
+        <div id="solution4" class="solution"><div class="solution_text"><p><strong>Подробное решение:</strong> При S=18: ходы Пети (11,18),(20,18),(10,19),(10,54). (20,18) и (10,54) — выигрыш Вани первым ходом (удвоение/утроение). Из (11,18) и (10,19) Ваня делает (11,19). После ходов Пети (12,19),(22,19),(11,20),(11,57) Ваня выигрывает вторым ходом.</p><div class="code_block"><pre>def f4(x,y,h):
+    if (h==3 or h==5) and x+y>=69: return 1
+    if h==5 and x+y<69: return 0
+    if x+y>=69 and h<5: return 0
+    moves = [(x+1,y),(x,y+1),(x*2,y),(x,y*3)]
+    if h%2==0: return any(f4(a,b,h+1) for a,b in moves)
+    else: return all(f4(a,b,h+1) for a,b in moves)
+print(min(s for s in range(1,59) if f4(10,s,1)))  # 18</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 5 (27773) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">5</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27773</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> Ходы: убрать 1 камень из любой кучи, либо уменьшить кучу в два раза (с округлением вниз). Игра заканчивается, когда сумма ≤ 20. Начальная (10,S), S>10. Найдите максимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button></div>
+        <div id="solution5" class="solution"><div class="solution_text"><p><strong>Подробное решение:</strong> При S=25 все возможные ходы Пети ведут к позициям, из которых Ваня выигрывает на 1-м или 2-м ходу. Например, (9,25),(5,25),(10,24),(10,12). В (5,25) и (10,12) Ваня выигрывает сразу делением. Из (9,25) и (10,24) Ваня получает (9,24) и выигрывает вторым ходом. При S>25 у Пети есть ход, после которого Ваня не может гарантировать победу.</p><div class="code_block"><pre>def dec(x,y,h):
+    if x+y<=20: return h%2==0
+    if h==4: return 0
+    moves = [(x-1,y),(x,y-1),(x//2,y),(x,y//2)]
+    if h%2==0: return all(dec(a,b,h+1) for a,b in moves)
+    else: return any(dec(a,b,h+1) for a,b in moves)
+for s in range(100,10,-1):
+    if dec(10,s,0): print("max S =", s); break  # 25</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 6 (27782) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">6</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27782</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×2, сумма ≥74, начальная (12,S), S≤61. Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button></div>
+        <div id="solution6" class="solution"><div class="solution_text"><p><strong>Решение:</strong> При S=29: (13,29),(24,29),(12,30),(12,58). (24,29) и (12,58) — Ваня выигрывает первым ходом. Из (13,29) и (12,30) Ваня делает (13,30), затем побеждает вторым ходом.</p><div class="code_block"><pre>def f6(x,y,h):
+    if (h==3 or h==5) and x+y>=74: return 1
+    if h==5 and x+y<74: return 0
+    if x+y>=74 and h<5: return 0
+    if h%2==0: return f6(x+1,y,h+1) or f6(x,y+1,h+1) or f6(x*2,y,h+1) or f6(x,y*2,h+1)
+    else: return f6(x+1,y,h+1) and f6(x,y+1,h+1) and f6(x*2,y,h+1) and f6(x,y*2,h+1)
+print(min(s for s in range(1,62) if f6(12,s,1)))  # 29</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 7 (27799) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">7</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">27799</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×3, сумма ≥68, начальная (6,S). Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button></div>
+        <div id="solution7" class="solution"><div class="solution_text"><p>При S=19: (7,19),(18,19),(6,20),(6,57). (18,19) и (6,57) — победа Вани первым ходом; из остальных — второй ход.</p><div class="code_block"><pre>def f7(x,y,h):
+    if (h==3 or h==5) and x+y>=68: return 1
+    if h==5 and x+y<68: return 0
+    if x+y>=68 and h<5: return 0
+    if h%2==0: return f7(x+1,y,h+1) or f7(x,y+1,h+1) or f7(x*3,y,h+1) or f7(x,y*3,h+1)
+    else: return f7(x+1,y,h+1) and f7(x,y+1,h+1) and f7(x*3,y,h+1) and f7(x,y*3,h+1)
+print(min(s for s in range(1,59) if f7(6,s,1)))  # 19</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 8 (29669) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">8</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">29669</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×3, сумма ≥49, начальная (5,S). Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button></div>
+        <div id="solution8" class="solution"><div class="solution_text"><p>При S=13: (5,14),(5,39),(6,13),(15,13). (5,39),(15,13) — выигрыш Вани сразу; (5,14),(6,13) → Ваня делает (6,14) и выигрывает вторым ходом.</p><div class="code_block"><pre>def f8(x,y,h):
+    if (h==3 or h==5) and x+y>=49: return 1
+    if h==5 and x+y<49: return 0
+    if x+y>=49 and h<5: return 0
+    if h%2==0: return f8(x+1,y,h+1) or f8(x,y+1,h+1) or f8(x*3,y,h+1) or f8(x,y*3,h+1)
+    else: return f8(x+1,y,h+1) and f8(x,y+1,h+1) and f8(x*3,y,h+1) and f8(x,y*3,h+1)
+print(min(s for s in range(1,44) if f8(5,s,1)))  # 13</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 9 (33523) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">9</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">33523</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> Ходы: +1 или добавить столько камней, сколько в другой куче. Сумма ≥75, начальная (7,S). Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button></div>
+        <div id="solution9" class="solution"><div class="solution_text"><p>При S=32: (8,32),(39,32),(7,33),(7,39). (39,32),(7,39) — победа Вани первым ходом; из (8,32),(7,33) Ваня получает (8,33) и выигрывает вторым ходом.</p><div class="code_block"><pre>def f9(x,y,h):
+    if (h==3 or h==5) and x+y>=75: return 1
+    if h==5 and x+y<75: return 0
+    if x+y>=75 and h<5: return 0
+    moves = [(x+1,y),(x,y+1),(x+y,y),(x,x+y)]
+    if h%2==0: return any(f9(a,b,h+1) for a,b in moves)
+    else: return all(f9(a,b,h+1) for a,b in moves)
+print(min(s for s in range(1,68) if f9(7,s,1)))  # 32</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 10 (35479) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">10</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">35479</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×2, сумма ≥77, начальная (8,S). Найдите максимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button></div>
+        <div id="solution10" class="solution"><div class="solution_text"><p>Максимальное S=34: при S=34 Ваня выигрывает первым или вторым ходом, при S≥35 Петя выигрывает первым ходом (например, удвоение).</p><div class="code_block"><pre>def f10(x,y,h):
+    if (h==3 or h==5) and x+y>=77: return 1
+    if h==5 and x+y<77: return 0
+    if x+y>=77 and h<5: return 0
+    if h%2==0: return f10(x+1,y,h+1) or f10(x,y+1,h+1) or f10(x*2,y,h+1) or f10(x,y*2,h+1)
+    else: return f10(x+1,y,h+1) and f10(x,y+1,h+1) and f10(x*2,y,h+1) and f10(x,y*2,h+1)
+res = [s for s in range(1,69) if f10(8,s,1)]
+print("Максимальное S =", max(res))  # 34</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 11 (35995) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">11</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">35995</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×3, сумма ≥79, начальная (6,S). Максимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button></div>
+        <div id="solution11" class="solution"><div class="solution_text"><p>При S=24: (7,24),(18,24),(6,25),(6,72). (18,24),(6,72) — немедленная победа Вани; из остальных — второй ход. S=24 максимально.</p><div class="code_block"><pre>def f11(x,y,h):
+    if (h==3 or h==5) and x+y>=79: return 1
+    if h==5 and x+y<79: return 0
+    if x+y>=79 and h<5: return 0
+    if h%2==0: return f11(x+1,y,h+1) or f11(x,y+1,h+1) or f11(x*3,y,h+1) or f11(x,y*3,h+1)
+    else: return f11(x+1,y,h+1) and f11(x,y+1,h+1) and f11(x*3,y,h+1) and f11(x,y*3,h+1)
+vals = [s for s in range(1,73) if f11(6,s,1)]
+print("Максимальное S =", max(vals))  # 24</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 12 (45255) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">12</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">45255</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×2, сумма ≥231, начальная (17,S). Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button></div>
+        <div id="solution12" class="solution"><div class="solution_text"><p>При S=97: (18,97),(34,97),(17,98),(17,194). (17,194) и (34,97) — победа Вани первым ходом; (18,97) и (17,98) → Ваня получает (18,98) и выигрывает вторым ходом.</p><div class="code_block"><pre>def f12(x,y,h):
+    if (h==3 or h==5) and x+y>=231: return 1
+    if h==5 and x+y<231: return 0
+    if x+y>=231 and h<5: return 0
+    if h%2==0: return f12(x+1,y,h+1) or f12(x,y+1,h+1) or f12(x*2,y,h+1) or f12(x,y*2,h+1)
+    else: return f12(x+1,y,h+1) and f12(x,y+1,h+1) and f12(x*2,y,h+1) and f12(x,y*2,h+1)
+print(min(s for s in range(1,214) if f12(17,s,1)))  # 97</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 13 (51990) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">13</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">51990</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> Ходят только в меньшую кучу: добавить 1, добавить 2 либо удвоить. Сумма >80. Начальная (12,S). Максимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button></div>
+        <div id="solution13" class="solution"><div class="solution_text"><p>При S=50: ходы (13,50),(14,50),(24,50). (24,50) — немедленный выигрыш Вани; из (13,50) и (14,50) Ваня делает (15,50) и выигрывает вторым ходом. S=50 максимально.</p><div class="code_block"><pre>def spec(x,y,h):
+    if x+y>80: return h%2==0
+    if h==4: return 0
+    if x<y: moves = [(x+1,y),(x+2,y),(x*2,y)]
+    elif x>y: moves = [(x,y+1),(x,y+2),(x,y*2)]
+    else: moves = [(x+1,y),(x+2,y),(x,y+1),(x,y+2)]
+    if h%2==0: return any(spec(a,b,h+1) for a,b in moves)
+    else: return all(spec(a,b,h+1) for a,b in moves)
+res = [s for s in range(1,69) if spec(12,s,0)]
+print("Максимальное S =", max(res))  # 50</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 14 (58488) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">14</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">58488</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> В большую кучу добавить 1–3 камня, либо удвоить меньшую. Победа при достижении одной из куч ≥48. Начальная (39,S). Найти S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button></div>
+        <div id="solution14" class="solution"><div class="solution_text"><p>При S=20: Петя может сделать (40,20),(41,20),(42,20) или удвоить меньшую → (39,40). Ваня отвечает так, чтобы выиграть первым или вторым ходом (например, (39,40)→(39,80)). S=20 — единственное подходящее.</p><div class="code_block"><pre>def big(x,y,h):
+    if x>=48 or y>=48: return h%2==0
+    if h==4: return 0
+    if x>y: moves = [(x+i,y) for i in range(1,4)] + [(x,y*2)]
+    elif x<y: moves = [(x,y+i) for i in range(1,4)] + [(x*2,y)]
+    else: moves = [(x+i,y) for i in range(1,4)] + [(x,y+i) for i in range(1,4)]
+    if h%2==0: return any(big(a,b,h+1) for a,b in moves)
+    else: return all(big(a,b,h+1) for a,b in moves)
+print([s for s in range(1,48) if big(39,s,0)])  # [20]</pre></div></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 15 (68522) -->
+    <div class="problem_container">
+        <div class="prob_header"><span class="prob_num">15</span><span class="prob_nums">Тип 21&nbsp;№&nbsp;<a href="#">68522</a></span></div>
+        <div class="problem_text"><p class="left_margin"><strong>Условие:</strong> +1 или ×2, сумма ≥59, начальная (5,S). Минимальное S.</p></div>
+        <div class="task_controls"><button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button></div>
+        <div id="solution15" class="solution"><div class="solution_text"><p>При S=23: ходы (6,23),(5,24),(10,23),(5,46). (5,46) — выигрыш Вани первым ходом. Из остальных Ваня переводит в (6,24) или (10,24) и выигрывает вторым ходом.</p><div class="code_block"><pre>def last(x,y,h):
+    if (h==3 or h==5) and x+y>=59: return 1
+    if h==5 and x+y<59: return 0
+    if x+y>=59 and h<5: return 0
+    if h%2==0: return last(x+1,y,h+1) or last(x,y+1,h+1) or last(x*2,y,h+1) or last(x,y*2,h+1)
+    else: return last(x+1,y,h+1) and last(x,y+1,h+1) and last(x*2,y,h+1) and last(x,y*2,h+1)
+print(min(s for s in range(1,54) if last(5,s,1)))  # 23</pre></div></div></div>
+    </div>
+</div>
+
+<script>
+    function toggleSolution(id) {
+        const solDiv = document.getElementById(`solution${id}`);
+        const btn = event.currentTarget;
+        if (solDiv.style.display === 'none' || solDiv.style.display === '') {
+            solDiv.style.display = 'block';
+            btn.textContent = 'Скрыть решение';
+        } else {
+            solDiv.style.display = 'none';
+            btn.textContent = 'Показать решение';
+        }
+    }
+    window.onload = () => {
+        for(let i=1;i<=15;i++) {
+            const el = document.getElementById(`solution${i}`);
+            if(el) el.style.display = 'none';
+        }
+    };
+</script>
+</body>
+</html>

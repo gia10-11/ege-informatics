@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- ★ ★ ★ БАЗОВЫЙ ШАБЛОН ВСЕХ СТРАНИЦ ★ ★ ★ -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ЕГЭ Информатика 2024{% endblock %}</title>
+    
+    <!-- ★ Подключаем CSS стили ★ -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <!-- ★ Иконки Font Awesome ★ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ★ Google Fonts ★ -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- ★ Дополнительные стили для конкретной страницы ★ -->
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <!-- ★ ШАПКА САЙТА С МЕНЮ ★ -->
+    <header>
+        <nav class="navbar">
+            <div class="container nav-container">
+                <!-- Логотип -->
+                <a href="{{ url_for('index') }}" class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>ЕГЭ Информатика</span>
+                </a>
+                
+                <!-- Основное меню -->
+                <ul class="nav-menu">
+                    <li><a href="{'E:\ege-informatics\templates\index.html'}" {% if request.path == '/' %}class="active"{% endif %}>
+                        <i class="fas fa-home"></i> Главная
+                    </a></li>
+                    
+                    <li><a href="{{ url_for('theory.html') }}" {% if request.path == '/theory' %}class="active"{% endif %}>
+                        <i class="fas fa-book"></i> Теория
+                    </a></li>
+                    
+                    <li><a href="{{ url_for('practice.html') }}" {% if request.path == '/practice' %}class="active"{% endif %}>
+                        <i class="fas fa-tasks"></i> Практика
+                    </a></li>
+                    
+                    <li><a href="{{ url_for('tasks.html') }}" {% if request.path == '/tasks' %}class="active"{% endif %}>
+                        <i class="fas fa-list-ol"></i> Задания
+                    </a></li>
+                    
+                    <li><a href="{{ url_for('programming.html') }}" {% if request.path == '/programming' %}class="active"{% endif %}>
+                        <i class="fas fa-code"></i> Программирование
+                    </a></li>
+                    
+                    <li><a href="{{ url_for('simulator.html') }}" {% if request.path == '/simulator' %}class="active"{% endif %}>
+                        <i class="fas fa-desktop"></i> Симулятор
+                    </a></li>
+                    
+                    <!-- Кнопка входа/выхода -->
+                    {% if session.get('user_id') %}
+                    <li><a href="{{ url_for('logout') }}" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Выйти
+                    </a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}" class="btn">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </a></li>
+                    {% endif %}
+                </ul>
+                
+                <!-- Кнопка меню для мобильных -->
+                <button class="menu-toggle btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ★ ОСНОВНОЕ СОДЕРЖАНИЕ СТРАНИЦЫ ★ -->
+    <main class="container">
+        {% block content %}
+        <!-- ★ Здесь будет контент конкретной страницы ★ -->
+        {% endblock %}
+    </main>
+
+    <!-- ★ ПОДВАЛ САЙТА ★ -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-laptop-code"></i> ЕГЭ Информатика</h3>
+                <p>Бесплатная платформа для подготовки к ЕГЭ по информатике. Все материалы соответствуют ФИПИ 2024.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Разделы</h3>
+                <a href="{{ url_for('theory') }}">Теория</a>
+                <a href="{{ url_for('practice') }}">Практика</a>
+                <a href="{{ url_for('tasks') }}">Задания 1-27</a>
+                <a href="{{ url_for('simulator') }}">Симулятор ЕГЭ</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-envelope"></i> info@ege-informatics.ru</p>
+                <p><i class="fab fa-telegram"></i> @ege_informatics_bot</p>
+                <p><i class="fas fa-phone"></i> +7 (XXX) XXX-XX-XX</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 ЕГЭ Информатика. Для 10-11 классов.</p>
+        </div>
+    </footer>
+
+    <!-- ★ ПОДКЛЮЧАЕМ JAVASCRIPT ★ -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <!-- ★ Дополнительные скрипты для конкретной страницы ★ -->
+    {% block scripts %}{% endblock %}
+    
+    <!-- ★ Инициализация иконок ★ -->
+    <script>
+        // Инициализация Font Awesome
+        if (window.FontAwesome) {
+            window.FontAwesome.config = { autoReplaceSvg: 'nest' };
+        }
+    </script>
+</body>
+</html>

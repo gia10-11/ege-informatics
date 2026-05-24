@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задание 24 типа: Обработка символьных строк (20 задач)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 28px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+            color: #000;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+            color: #000;
+        }
+
+        .solution_text strong {
+            color: #000;
+        }
+
+        .calc-table {
+            background-color: #f0f0f0;
+            color: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        .calc-table pre {
+            margin: 0;
+            color: #000;
+            white-space: pre-wrap;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        .file_link {
+            display: inline-block;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            padding: 5px 12px;
+            background-color: #e8f4fd;
+            border-left: 3px solid #4a6baf;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .file_link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .file_link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Задание 24 типа (ЕГЭ информатика): Обработка символьных строк</h2>
+</div>
+
+<script>
+function toggleSolution(id) {
+    var sol = document.getElementById('solutionBlock' + id);
+    var btn = sol.previousElementSibling.querySelector('.btn_show_solution');
+    if (sol.style.display === 'none' || sol.style.display === '') {
+        sol.style.display = 'block';
+        btn.textContent = 'Скрыть решение';
+    } else {
+        sol.style.display = 'none';
+        btn.textContent = 'Показать решение';
+    }
+}
+</script>
+
+<!-- ========== ЗАДАНИЕ 1 (№27421) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">1</div>
+        <div class="prob_nums">Тип 24 № 27421</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит не более чем из 10<sup>6</sup> символов X, Y и Z. Определите максимальное количество идущих подряд символов, среди которых каждые два соседних различны.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo.txt" download>Скачать файл: 24_demo.txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button>
+    </div>
+    <div id="solutionBlock1" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Нужно найти самую длинную подстроку, в которой нет двух одинаковых символов подряд. Проходим по строке, считаем текущую длину: если текущий символ не равен предыдущему, увеличиваем счётчик, иначе сбрасываем до 1.</p>
+            <div class="calc-table"><pre>Алгоритм:
+max_len = 0
+cur_len = 1
+for i in range(1, len(s)):
+    if s[i] != s[i-1]:
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 1</pre></div>
+            <p><strong>Ответ: 35</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo.txt') as f:
+    s = f.readline()
+max_len = cur_len = 1
+for i in range(1, len(s)):
+    if s[i] != s[i-1]:
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 1
+print(max_len)  # 35</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 2 (№27686) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">2</div>
+        <div class="prob_nums">Тип 24 № 27686</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов X, Y и Z. Определите длину самой длинной последовательности, состоящей из символов X. Хотя бы один символ X находится в последовательности.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(1).txt" download>Скачать файл: 24_demo(1).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button>
+    </div>
+    <div id="solutionBlock2" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Проходим по строке, считаем подряд идущие X. При встрече другого символа сбрасываем счётчик.</p>
+            <div class="calc-table"><pre>max_len = 0
+cur_len = 0
+for c in s:
+    if c == 'X':
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 0</pre></div>
+            <p><strong>Ответ: 19</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(1).txt') as f:
+    s = f.readline()
+max_len = cur_len = 0
+for c in s:
+    if c == 'X':
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 0
+print(max_len)  # 19</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 3 (№27689) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">3</div>
+        <div class="prob_nums">Тип 24 № 27689</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов X, Y и Z. Определите максимальную длину цепочки вида XYZXYZXYZ... (составленной из фрагментов XYZ, последний фрагмент может быть неполным).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(2).txt" download>Скачать файл: 24_demo(2).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button>
+    </div>
+    <div id="solutionBlock3" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Используем образец "XYZ". Идём по строке, отслеживая ожидаемый символ (X, затем Y, затем Z, затем снова X). Если символ совпадает с ожидаемым, увеличиваем длину, иначе сбрасываем и начинаем заново с X.</p>
+            <div class="calc-table"><pre>pattern = "XYZ"
+cur_len = 0
+max_len = 0
+pos = 0
+for c in s:
+    if c == pattern[pos % 3]:
+        cur_len += 1
+        pos += 1
+        max_len = max(max_len, cur_len)
+    else:
+        if c == 'X':
+            cur_len = 1
+            pos = 1
+        else:
+            cur_len = 0
+            pos = 0</pre></div>
+            <p><strong>Ответ: 13</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(2).txt') as f:
+    s = f.readline()
+pattern = 'XYZ'
+cur_len = max_len = pos = 0
+for c in s:
+    if c == pattern[pos % 3]:
+        cur_len += 1
+        pos += 1
+        max_len = max(max_len, cur_len)
+    elif c == 'X':
+        cur_len = 1
+        pos = 1
+    else:
+        cur_len = 0
+        pos = 0
+print(max_len)  # 13</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 4 (№27690) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">4</div>
+        <div class="prob_nums">Тип 24 № 27690</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов A, B и C. Определите максимальное количество идущих подряд символов, среди которых каждые два соседних различны.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(3).txt" download>Скачать файл: 24_demo(3).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button>
+    </div>
+    <div id="solutionBlock4" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Аналогично заданию 1. Максимальная длина цепочки без повторяющихся соседних символов.</p>
+            <div class="calc-table"><pre>max_len = 1
+cur_len = 1
+for i in range(1, len(s)):
+    if s[i] != s[i-1]:
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 1</pre></div>
+            <p><strong>Ответ: 42</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(3).txt') as f:
+    s = f.readline()
+max_len = cur_len = 1
+for i in range(1, len(s)):
+    if s[i] != s[i-1]:
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 1
+print(max_len)  # 42</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 5 (№27691) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">5</div>
+        <div class="prob_nums">Тип 24 № 27691</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов A, B и C. Определите максимальное количество идущих подряд символов A.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(4).txt" download>Скачать файл: 24_demo(4).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button>
+    </div>
+    <div id="solutionBlock5" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Подсчёт максимальной непрерывной последовательности букв 'A'.</p>
+            <p><strong>Ответ: 7</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(4).txt') as f:
+    s = f.readline()
+max_len = cur_len = 0
+for c in s:
+    if c == 'A':
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 0
+print(max_len)  # 7</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 6 (№27694) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">6</div>
+        <div class="prob_nums">Тип 24 № 27694</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов A, B и C. Определите максимальную длину цепочки вида ABABAB... (составленной из фрагментов AB, последний фрагмент может быть неполным).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(5).txt" download>Скачать файл: 24_demo(5).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button>
+    </div>
+    <div id="solutionBlock6" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Используем образец "AB". Ожидаемый символ: на чётных позициях (0,2,4...) — 'A', на нечётных — 'B'.</p>
+            <div class="calc-table"><pre>cur_len = max_len = 0
+pos = 0
+for c in s:
+    if (pos % 2 == 0 and c == 'A') or (pos % 2 == 1 and c == 'B'):
+        cur_len += 1
+        pos += 1
+        max_len = max(max_len, cur_len)
+    elif c == 'A':
+        cur_len = 1
+        pos = 1
+    else:
+        cur_len = 0
+        pos = 0</pre></div>
+            <p><strong>Ответ: 24</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(5).txt') as f:
+    s = f.readline()
+cur_len = max_len = pos = 0
+for c in s:
+    if (pos % 2 == 0 and c == 'A') or (pos % 2 == 1 and c == 'B'):
+        cur_len += 1
+        pos += 1
+        max_len = max(max_len, cur_len)
+    elif c == 'A':
+        cur_len = 1
+        pos = 1
+    else:
+        cur_len = 0
+        pos = 0
+print(max_len)  # 24</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 7 (№27695) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">7</div>
+        <div class="prob_nums">Тип 24 № 27695</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов L, D и R. Определите максимальное количество идущих подряд символов, среди которых каждые два соседних различны.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(6).txt" download>Скачать файл: 24_demo(6).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button>
+    </div>
+    <div id="solutionBlock7" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Поиск максимальной подстроки без двух одинаковых символов подряд.</p>
+            <p><strong>Ответ: 45</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(6).txt') as f:
+    s = f.readline()
+max_len = cur_len = 1
+for i in range(1, len(s)):
+    if s[i] != s[i-1]:
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 1
+print(max_len)  # 45</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 8 (№27696) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">8</div>
+        <div class="prob_nums">Тип 24 № 27696</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов L, D и R. Определите длину самой длинной последовательности, состоящей из символов L.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(7).txt" download>Скачать файл: 24_demo(7).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button>
+    </div>
+    <div id="solutionBlock8" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Поиск максимальной непрерывной последовательности букв 'L'.</p>
+            <p><strong>Ответ: 7</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(7).txt') as f:
+    s = f.readline()
+max_len = cur_len = 0
+for c in s:
+    if c == 'L':
+        cur_len += 1
+        max_len = max(max_len, cur_len)
+    else:
+        cur_len = 0
+print(max_len)  # 7</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 9 (№27699) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">9</div>
+        <div class="prob_nums">Тип 24 № 27699</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов L, D и R. Определите максимальную длину цепочки вида LDRLDRLDR... (составленной из фрагментов LDR, последний фрагмент может быть неполным).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(8).txt" download>Скачать файл: 24_demo(8).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button>
+    </div>
+    <div id="solutionBlock9" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Используем образец "LDR".</p>
+            <p><strong>Ответ: 15</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(8).txt') as f:
+    s = f.readline()
+pattern = 'LDR'
+cur_len = max_len = pos = 0
+for c in s:
+    if c == pattern[pos % 3]:
+        cur_len += 1
+        pos += 1
+        max_len = max(max_len, cur_len)
+    elif c == 'L':
+        cur_len = 1
+        pos = 1
+    else:
+        cur_len = 0
+        pos = 0
+print(max_len)  # 15</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 10 (№29672) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">10</div>
+        <div class="prob_nums">Тип 24 № 29672</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит строки различной длины. Строки содержат только заглавные буквы латинского алфавита. Определите количество строк, в которых буква E встречается чаще, чем буква A.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(9).txt" download>Скачать файл: 24_demo(9).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button>
+    </div>
+    <div id="solutionBlock10" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Читаем файл построчно. Для каждой строки считаем количество 'A' и 'E'. Если count('E') > count('A'), увеличиваем счётчик.</p>
+            <p><strong>Ответ: 467</strong></p>
+            <div class="code_block"><pre>count = 0
+with open('/ege-informatics/practic/files/t24/24_demo(9).txt') as f:
+    for line in f:
+        if line.count('E') > line.count('A'):
+            count += 1
+print(count)  # 467</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 11 (№33196) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">11</div>
+        <div class="prob_nums">Тип 24 № 33196</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит только заглавные буквы. Определите символ, который чаще всего встречается в файле сразу после буквы A.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(10).txt" download>Скачать файл: 24_demo(10).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button>
+    </div>
+    <div id="solutionBlock11" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Проходим по строке, для каждой позиции, где символ равен 'A', увеличиваем счётчик для следующего символа. Затем находим символ с максимальным счётчиком.</p>
+            <p><strong>Ответ: G</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(10).txt') as f:
+    s = f.readline()
+cnt = [0] * 26
+for i in range(len(s)-1):
+    if s[i] == 'A':
+        cnt[ord(s[i+1]) - 65] += 1
+max_cnt = max(cnt)
+for i in range(26):
+    if cnt[i] == max_cnt:
+        print(chr(i+65))  # G
+        break</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 12 (№33526) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">12</div>
+        <div class="prob_nums">Тип 24 № 33526</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит только заглавные буквы. Определите символ, который чаще всего встречается в файле между двумя одинаковыми символами.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(11).txt" download>Скачать файл: 24_demo(11).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button>
+    </div>
+    <div id="solutionBlock12" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Ищем тройки вида X Y X, где X — любой символ, Y — средний. Увеличиваем счётчик для Y.</p>
+            <p><strong>Ответ: D</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(11).txt') as f:
+    s = f.readline()
+cnt = [0] * 26
+for i in range(1, len(s)-1):
+    if s[i-1] == s[i+1]:
+        cnt[ord(s[i]) - 65] += 1
+max_cnt = max(cnt)
+for i in range(26):
+    if cnt[i] == max_cnt:
+        print(chr(i+65))  # D
+        break</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 13 (№35482) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">13</div>
+        <div class="prob_nums">Тип 24 № 35482</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит строки различной длины. Необходимо найти строку, содержащую наименьшее количество букв G (если таких строк несколько, надо взять ту, которая находится в файле раньше), и определить, какая буква встречается в этой строке чаще всего (при равном количестве — позже по алфавиту).</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(12).txt" download>Скачать файл: 24_demo(12).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button>
+    </div>
+    <div id="solutionBlock13" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Читаем строки, ищем минимальное количество 'G'. Для выбранной строки считаем частоту букв и находим наиболее частую (при равных — позже по алфавиту).</p>
+            <p><strong>Ответ: T</strong></p>
+            <div class="code_block"><pre>min_g = float('inf')
+best_line = ''
+with open('/ege-informatics/practic/files/t24/24_demo(12).txt') as f:
+    for line in f:
+        line = line.strip()
+        g_count = line.count('G')
+        if g_count < min_g:
+            min_g = g_count
+            best_line = line
+cnt = [0] * 26
+for c in best_line:
+    cnt[ord(c)-65] += 1
+max_cnt = max(cnt)
+for i in range(25, -1, -1):
+    if cnt[i] == max_cnt:
+        print(chr(i+65))  # T
+        break</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 14 (№35998) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">14</div>
+        <div class="prob_nums">Тип 24 № 35998</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит строки различной длины. В строках, содержащих менее 25 букв A, нужно определить максимальное расстояние между одинаковыми буквами в одной строке.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(13).txt" download>Скачать файл: 24_demo(13).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button>
+    </div>
+    <div id="solutionBlock14" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Для каждой строки с количеством 'A' < 25 находим для каждой буквы разность между последним и первым вхождением, берём максимум.</p>
+            <p><strong>Ответ: 1004</strong></p>
+            <div class="code_block"><pre>max_dist = 0
+with open('/ege-informatics/practic/files/t24/24_demo(13).txt') as f:
+    for line in f:
+        line = line.strip()
+        if line.count('A') < 25:
+            for ch in set(line):
+                first = line.find(ch)
+                last = line.rfind(ch)
+                max_dist = max(max_dist, last - first)
+print(max_dist)  # 1004</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 15 (№36037) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">15</div>
+        <div class="prob_nums">Тип 24 № 36037</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов X, Y и Z. Определите максимальное количество идущих подряд символов, среди которых нет подстроки XZZY.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(14).txt" download>Скачать файл: 24_demo(14).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button>
+    </div>
+    <div id="solutionBlock15" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Идём по строке, отслеживая последние 4 символа. При обнаружении "XZZY" обновляем максимум и сбрасываем счётчик на 3 (последние 3 символа могут начать новую цепочку).</p>
+            <p><strong>Ответ: 1713</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(14).txt') as f:
+    s = f.readline()
+cur_len = 3
+max_len = 0
+for i in range(3, len(s)):
+    if s[i-3:i+1] == 'XZZY':
+        max_len = max(max_len, cur_len)
+        cur_len = 3
+    else:
+        cur_len += 1
+max_len = max(max_len, cur_len)
+print(max_len)  # 1713</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 16 (№37131) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">16</div>
+        <div class="prob_nums">Тип 24 № 37131</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит только заглавные буквы. Определите наибольшую длину цепочки символов, среди которых нет символов K и L, стоящих рядом (т.е. нет подстрок "KL" и "LK").</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(15).txt" download>Скачать файл: 24_demo(15).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение</button>
+    </div>
+    <div id="solutionBlock16" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Разбиваем строку по разделителям "KL" и "LK", затем ищем самую длинную полученную подстроку.</p>
+            <p><strong>Ответ: 2796</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(15).txt') as f:
+    s = f.readline()
+s = s.replace('KL', 'K L').replace('LK', 'L K')
+parts = s.split()
+max_len = max(len(p) for p in parts)
+print(max_len)  # 2796</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 17 (№37159) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">17</div>
+        <div class="prob_nums">Тип 24 № 37159</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из строчных букв английского алфавита. Найдите максимальную длину подстроки, в которой символы a и d не стоят рядом.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(16).txt" download>Скачать файл: 24_demo(16).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение</button>
+    </div>
+    <div id="solutionBlock17" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Разбиваем строку по разделителям "ad" и "da".</p>
+            <p><strong>Ответ: 2252</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(16).txt') as f:
+    s = f.readline()
+s = s.replace('ad', 'a d').replace('da', 'd a')
+parts = s.split()
+max_len = max(len(p) for p in parts)
+print(max_len)  # 2252</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 18 (№38602) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">18</div>
+        <div class="prob_nums">Тип 24 № 38602</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл состоит из символов P, Q, R и S. Определите максимальное количество идущих подряд символов, среди которых нет идущих подряд символов P.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(17).txt" download>Скачать файл: 24_demo(17).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button>
+    </div>
+    <div id="solutionBlock18" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Ищем самую длинную подстроку, не содержащую "PP". Разбиваем по "PP".</p>
+            <p><strong>Ответ: 188</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(17).txt') as f:
+    s = f.readline()
+parts = s.split('PP')
+max_len = max(len(p) for p in parts)
+print(max_len)  # 188</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 19 (№38958) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">19</div>
+        <div class="prob_nums">Тип 24 № 38958</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит только заглавные буквы. Определите максимальное количество идущих подряд символов, среди которых не более одной буквы A.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(18).txt" download>Скачать файл: 24_demo(18).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button>
+    </div>
+    <div id="solutionBlock19" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Разбиваем строку по букве A. Наибольшая подстрока — сумма двух соседних частей плюс одна буква A между ними.</p>
+            <p><strong>Ответ: 337</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(18).txt') as f:
+    s = f.readline()
+parts = s.split('A')
+max_len = 0
+for i in range(len(parts)-1):
+    max_len = max(max_len, len(parts[i]) + len(parts[i+1]) + 1)
+print(max_len)  # 337</pre></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== ЗАДАНИЕ 20 (№40740) ========== -->
+<div class="problem_container">
+    <div class="prob_header">
+        <div class="prob_num">20</div>
+        <div class="prob_nums">Тип 24 № 40740</div>
+    </div>
+    <div class="problem_text">
+        <p class="left_margin"><strong>Условие:</strong> Текстовый файл содержит только заглавные буквы. Определите максимальное количество идущих подряд символов, среди которых нет ни одной буквы A и при этом не менее трёх букв E.</p>
+    </div>
+    <div class="file_link"><a href="/ege-informatics/practic/files/t24/24_demo(19).txt" download>Скачать файл: 24_demo(19).txt</a></div>
+    <div class="task_controls">
+        <button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button>
+    </div>
+    <div id="solutionBlock20" class="solution">
+        <div class="solution_text">
+            <p><strong>Решение:</strong> Разбиваем строку по букве A, затем в каждой полученной части проверяем количество букв E. Если >=3, учитываем длину.</p>
+            <p><strong>Ответ: 282</strong></p>
+            <div class="code_block"><pre>with open('/ege-informatics/practic/files/t24/24_demo(19).txt') as f:
+    s = f.readline()
+parts = s.split('A')
+max_len = 0
+for part in parts:
+    if part.count('E') >= 3:
+        max_len = max(max_len, len(part))
+print(max_len)  # 282</pre></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

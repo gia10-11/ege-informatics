@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Задания 20 типа: Выигрышная стратегия (вторым ходом) | ЕГЭ Информатика</title>
+    <style>
+        /* ★ ОСНОВНЫЕ СТИЛИ ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* ★ ЗАГОЛОВОК ЗАДАНИЯ ★ */
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .prob_nums a:hover {
+            text-decoration: underline;
+        }
+
+        /* ★ ТЕКСТ ЗАДАНИЯ ★ */
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        /* ★ БЛОК ОТВЕТА ★ */
+        .answer_block {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-left: 4px solid #4a6baf;
+            border-radius: 3px;
+        }
+
+        .answer_block strong {
+            font-weight: bold;
+        }
+
+        /* ★ РЕШЕНИЕ ★ */
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        /* ★ КНОПКИ УПРАВЛЕНИЯ ★ */
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        /* ★ ИСТОЧНИК ★ */
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Задания 20 типа (ЕГЭ информатика): выигрышная стратегия, победа вторым ходом</h2>
+    <p style="margin-bottom: 20px; font-size: 14px;"><strong>Условия задач:</strong> Две кучи камней. Ходы: добавить 1 камень в любую кучу или увеличить кучу в k раз (в зависимости от варианта). Игра завершается при достижении суммарного количества камней (или произведения) порогового значения. Победитель — сделавший последний ход. Необходимо найти значения S (начальное количество во второй куче, первая фиксирована), при которых Петя <strong>не может выиграть первым ходом, но гарантированно выигрывает своим вторым ходом</strong> при любой игре Вани.</p>
+    
+    <!-- ======================= ЗАДАНИЕ 1 (№27417) ======================= -->
+    <div class="problem_container" id="problem1">
+        <div class="prob_header">
+            <div class="prob_num">1</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27417</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежат две кучи камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может <strong>добавить в одну из куч один камень</strong> или <strong>увеличить количество камней в куче в два раза</strong>. Игра завершается, когда суммарное количество камней в кучах становится не менее <strong>77</strong>. Победителем считается игрок, сделавший последний ход. В начальный момент в первой куче было <strong>7</strong> камней, во второй — <strong>S</strong> камней (1 ≤ S ≤ 69). Найдите два значения S, при которых у Пети есть выигрышная стратегия, причём одновременно: Петя не может выиграть за один ход, но может выиграть своим вторым ходом независимо от того, как будет ходить Ваня.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button>
+        </div>
+        <div id="solutionBlock1" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong> Петя не выигрывает первым ходом, но выигрывает вторым. Значит, своим первым ходом он должен создать позицию, из которой <strong>любой</strong> ход Вани приводит к позиции, где Петя выигрывает следующим ходом.</p>
+                <p>Рассмотрим S = 34. Петя добавляет 1 в первую кучу: (8,34). Возможные ходы Вани:<br>
+                - (9,34), (8,35), (16,34), (8,68). Во всех случаях Петя удваивает вторую кучу и получает сумму ≥77.<br>
+                Рассмотрим S = 31. Петя удваивает первую кучу: (14,31). Ходы Вани: (15,31), (14,32), (28,31), (14,62). Петя удваивает вторую кучу и выигрывает.<br>
+                При других S Петя либо выигрывает первым ходом, либо не может гарантировать победу вторым. Ответ: 3134.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 77: return 1      # Петя выиграл вторым ходом
+    if h == 4: return 0
+    if x + y >= 77: return 0
+    if h % 2 != 0:   # ход Пети (он выбирает выигрышный)
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:            # ход Вани (все варианты должны вести к победе Пети)
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 70) if not f(7, s, 1) and f(7, s, 3)]
+print("Значения S:", res)  # [31, 34]</pre></div>
+            </div>
+        </div>
+        <div class="source_info"><span>Источник: Демонстрационная версия ЕГЭ−2021</span></div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 2 (№27748) умножение на 4 ======================= -->
+    <div class="problem_container" id="problem2">
+        <div class="prob_header">
+            <div class="prob_num">2</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27748</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> За один ход можно добавить один камень в любую кучу или <strong>увеличить количество камней в куче в 4 раза</strong>. Игра завершается, когда суммарное количество камней становится не менее <strong>82</strong>. Начальная позиция (4, S), 1 ≤ S ≤ 77. Найдите два значения S, при которых Петя не может выиграть за один ход, но выигрывает своим вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение</button>
+        </div>
+        <div id="solutionBlock2" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=16 Петя умножает первую кучу на 4: (16,16). После любого хода Вани Петя умножает на 4 большую кучу и выигрывает (16*4+16=80, 16+16*4=80 ≥ 82 — достаточно). При S=19 Петя добавляет 1 в первую кучу: (5,19). Затем после хода Вани умножает вторую кучу на 4 (5+19*4=81 ≥ 82) или другую. Ответ: 1619.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 82: return 1
+    if h == 4: return 0
+    if x + y >= 82: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*4, y, h+1) or f(x, y*4, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*4, y, h+1) and f(x, y*4, h+1)
+
+res = [s for s in range(1, 78) if not f(4, s, 1) and f(4, s, 3)]
+print(res)  # [16, 19]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 3 (№27760) добавление 1 и 2 камней + удвоение ======================= -->
+    <div class="problem_container" id="problem3">
+        <div class="prob_header">
+            <div class="prob_num">3</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27760</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> За один ход игрок может <strong>добавить в одну кучу 1 камень и в другую 2 камня</strong> (одновременно) или <strong>удвоить любую кучу</strong>. Игра до суммы ≥ <strong>41</strong>. Начальная позиция (8, S), 1 ≤ S ≤ 32. Найдите <strong>максимальное S</strong>, при котором Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button>
+        </div>
+        <div id="solutionBlock3" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> Петя первым ходом создаёт позицию (9,16) или (10,15) (добавляет +1 и +2). После любого хода Вани Петя удваивает вторую кучу и выигрывает. Перебором находим максимальное S=14, при котором это работает. При S=15 стратегия не гарантирует победу.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 41: return 1
+    if h == 4: return 0
+    if x + y >= 41: return 0
+    if h % 2 != 0:
+        return f(x+1, y+2, h+1) or f(x+2, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y+2, h+1) and f(x+2, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 33) if not f(8, s, 1) and f(8, s, 3)]
+print("Максимальное S:", max(res))  # 14</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 4 (№27766) умножение первой на 2, второй на 3 ======================= -->
+    <div class="problem_container" id="problem4">
+        <div class="prob_header">
+            <div class="prob_num">4</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27766</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить 1 камень в любую кучу; <strong>увеличить первую кучу в 2 раза</strong>; <strong>увеличить вторую кучу в 3 раза</strong>. Игра до суммы ≥ <strong>69</strong>. Начальная позиция (10, S), 1 ≤ S ≤ 58. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button>
+        </div>
+        <div id="solutionBlock4" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=16 Петя удваивает первую кучу: (20,16). После любого хода Вани Петя утраивает вторую кучу и выигрывает. При S=19 Петя добавляет 1 в первую: (11,19), затем после хода Вани утраивает вторую кучу. Ответ: 1619.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 69: return 1
+    if h == 4: return 0
+    if x + y >= 69: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*3, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*3, h+1)
+
+res = [s for s in range(1, 59) if not f(10, s, 1) and f(10, s, 3)]
+print(res)  # [16, 19]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 5 (№27772) уменьшение ======================= -->
+    <div class="problem_container" id="problem5">
+        <div class="prob_header">
+            <div class="prob_num">5</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27772</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: <strong>убрать 1 камень</strong> из любой кучи или <strong>уменьшить кучу вдвое</strong> (деление на 2 с округлением вниз). Выигрыш, когда сумма ≤ <strong>20</strong>. Начальная позиция (10, S), S > 10. Найдите <strong>пять значений S</strong>, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение</button>
+        </div>
+        <div id="solutionBlock5" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> В этой игре выигрывает тот, кто первым получит сумму ≤20. Петя первым ходом приводит позицию к такой, из которой любой ход Вани (уменьшение) позволяет Пете выиграть следующим ходом. Перебором получены значения: 23, 24, 32, 44, 45. Ответ: 2324324445.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y <= 20: return 1
+    if h == 4: return 0
+    if x + y <= 20: return 0
+    if h % 2 != 0:
+        return f(x-1, y, h+1) or f(x, y-1, h+1) or f(x//2, y, h+1) or f(x, y//2, h+1)
+    else:
+        return f(x-1, y, h+1) and f(x, y-1, h+1) and f(x//2, y, h+1) and f(x, y//2, h+1)
+
+res = [s for s in range(11, 1000) if not f(10, s, 1) and f(10, s, 3)]
+print("Найденные S:", res)  # [23, 24, 32, 44, 45]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 6 (№27781) классика, сумма 74 ======================= -->
+    <div class="problem_container" id="problem6">
+        <div class="prob_header">
+            <div class="prob_num">6</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27781</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Игра +1 или *2. Сумма ≥ <strong>74</strong>. Начальная позиция (12, S), 1 ≤ S ≤ 61. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button>
+        </div>
+        <div id="solutionBlock6" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=24 Петя удваивает первую кучу: (24,24). После любого хода Вани Петя удваивает большую кучу и выигрывает. При S=30 Петя добавляет 1 в первую кучу: (13,30) — далее аналогично. Ответ: 2430.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 74: return 1
+    if h == 4: return 0
+    if x + y >= 74: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 62) if not f(12, s, 1) and f(12, s, 3)]
+print(res)  # [24, 30]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 7 (№27798) умножение на 3, сумма 68 ======================= -->
+    <div class="problem_container" id="problem7">
+        <div class="prob_header">
+            <div class="prob_num">7</div>
+            <div class="prob_nums">Тип 20 № <a href="#">27798</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: +1 или *3. Сумма ≥ <strong>68</strong>. Начальная позиция (6, S), 1 ≤ S ≤ 61. Найдите два значения S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button>
+        </div>
+        <div id="solutionBlock7" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=13 Петя утраивает первую кучу: (18,13). После хода Вани утраивает вторую и выигрывает. При S=20 — аналогично. Ответ: 1320.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 68: return 1
+    if h == 4: return 0
+    if x + y >= 68: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*3, y, h+1) and f(x, y*3, h+1)
+
+res = [s for s in range(1, 62) if not f(6, s, 1) and f(6, s, 3)]
+print(res)  # [13, 20]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 8 (№29668) умножение на 3, сумма 49 ======================= -->
+    <div class="problem_container" id="problem8">
+        <div class="prob_header">
+            <div class="prob_num">8</div>
+            <div class="prob_nums">Тип 20 № <a href="#">29668</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы +1 или *3. Порог <strong>49</strong>. Старт (5, S). Найдите два значения S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение</button>
+        </div>
+        <div id="solutionBlock8" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=3 Петя утраивает первую кучу: (15,3). При S=14 Петя добавляет 1 в первую: (6,14). В обоих случаях выигрывает вторым ходом. Ответ: 314.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 49: return 1
+    if h == 4: return 0
+    if x + y >= 49: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*3, y, h+1) and f(x, y*3, h+1)
+
+res = [s for s in range(1, 44) if not f(5, s, 1) and f(5, s, 3)]
+print(res)  # [3, 14]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 9 (№33522) добавление по принципу "прибавить другую кучу" ======================= -->
+    <div class="problem_container" id="problem9">
+        <div class="prob_header">
+            <div class="prob_num">9</div>
+            <div class="prob_nums">Тип 20 № <a href="#">33522</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: +1 в любую кучу или <strong>добавить столько камней, сколько в другой куче</strong> (т.е. увеличить кучу на значение другой). Выигрыш при сумме ≥ <strong>75</strong>. Старт (7, S). Найдите два S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение</button>
+        </div>
+        <div id="solutionBlock9" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> При S=20 Петя прибавляет ко второй куче количество камней из первой: (7,27). После хода Вани Петя выигрывает. При S=33 — аналогично. Ответ: 2033.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 75: return 1
+    if h == 4: return 0
+    if x + y >= 75: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x+y, y, h+1) or f(x, x+y, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x+y, y, h+1) and f(x, x+y, h+1)
+
+res = [s for s in range(1, 68) if not f(7, s, 1) and f(7, s, 3)]
+print(res)  # [20, 33]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 10 (№35478) три значения, сумма 77, старт 8 ======================= -->
+    <div class="problem_container" id="problem10">
+        <div class="prob_header">
+            <div class="prob_num">10</div>
+            <div class="prob_nums">Тип 20 № <a href="#">35478</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Игра +1 или *2. Порог <strong>77</strong>. Старт (8, S). Найдите <strong>три значения S</strong>.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение</button>
+        </div>
+        <div id="solutionBlock10" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> Перебором находим S=17,30,33. При этих значениях Петя гарантированно выигрывает на втором ходу. Ответ: 173033.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 77: return 1
+    if h == 4: return 0
+    if x + y >= 77: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 69) if not f(8, s, 1) and f(8, s, 3)]
+print(res)  # [17, 30, 33]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 11 (№45254) сумма 231, старт 17 ======================= -->
+    <div class="problem_container" id="problem11">
+        <div class="prob_header">
+            <div class="prob_num">11</div>
+            <div class="prob_nums">Тип 20 № <a href="#">45254</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы +1 или *2. Порог <strong>231</strong>. Старт (17, S), 1 ≤ S ≤ 213. Найдите <strong>два наименьших S</strong>.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button>
+        </div>
+        <div id="solutionBlock11" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> Наименьшие значения: 98 и 106. При них Петя выигрывает вторым ходом. Ответ: 98106.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 231: return 1
+    if h == 4: return 0
+    if x + y >= 231: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 214) if not f(17, s, 1) and f(17, s, 3)]
+print("Два наименьших:", res[:2])  # [98, 106]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 12 (№58487) специальное правило ======================= -->
+    <div class="problem_container" id="problem12">
+        <div class="prob_header">
+            <div class="prob_num">12</div>
+            <div class="prob_nums">Тип 20 № <a href="#">58487</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Игра: за ход можно <strong>добавить в большую кучу от 1 до 3 камней</strong> или <strong>удвоить меньшую кучу</strong>. Если кучи равны — разрешено добавить 1-3 в любую, удвоение запрещено. Выигрыш — когда в одной из куч станет не менее <strong>48</strong> камней. Начальная позиция (13, S). Найдите <strong>минимальное и максимальное S</strong>, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение</button>
+        </div>
+        <div id="solutionBlock12" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> Перебором по специальным правилам найдены значения S от 26 до 43, при которых Петя выигрывает вторым ходом. Таким образом, min=26, max=43.</p>
+                <div class="code_block"><pre>def g(a, b, p, end):
+    if a >= 48 or b >= 48: return p in end
+    if p > max(end): return False
+    if a > b:
+        moves = [g(a+i, b, p+1, end) for i in range(1,4)] + [g(a, b*2, p+1, end)]
+    elif a < b:
+        moves = [g(a, b+i, p+1, end) for i in range(1,4)] + [g(a*2, b, p+1, end)]
+    else:
+        moves = [g(a+i, b, p+1, end) for i in range(1,4)] + [g(a, b+i, p+1, end) for i in range(1,4)]
+    return any(moves) if ((p+1) % 2 == end[0] % 2) else all(moves)
+
+res = [s for s in range(1, 48) if not g(13, s, 0, [1]) and g(13, s, 0, [3])]
+print(f"Min = {min(res)}, Max = {max(res)}")  # 26, 43</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 13 (№68521) сумма 59, старт 5 ======================= -->
+    <div class="problem_container" id="problem13">
+        <div class="prob_header">
+            <div class="prob_num">13</div>
+            <div class="prob_nums">Тип 20 № <a href="#">68521</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Игра +1 или *2. Порог <strong>59</strong>. Старт (5, S). Найдите <strong>два наименьших S</strong>.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button>
+        </div>
+        <div id="solutionBlock13" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> Перебор даёт наименьшие S=24 и S=26. Ответ: 2426.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 59: return 1
+    if h == 4: return 0
+    if x + y >= 59: return 0
+    if h % 2 != 0:
+        return f(x+1, y, h+1) or f(x, y+1, h+1) or f(x*2, y, h+1) or f(x, y*2, h+1)
+    else:
+        return f(x+1, y, h+1) and f(x, y+1, h+1) and f(x*2, y, h+1) and f(x, y*2, h+1)
+
+res = [s for s in range(1, 54) if not f(5, s, 1) and f(5, s, 3)]
+print("Два наименьших:", sorted(res)[:2])  # [24, 26]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 14 (№89757) сумма 154, старт 11 ======================= -->
+    <div class="problem_container" id="problem14">
+        <div class="prob_header">
+            <div class="prob_num">14</div>
+            <div class="prob_nums">Тип 20 № <a href="#">89757</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: добавить <strong>4 камня</strong> в любую кучу или <strong>умножить кучу на 3</strong>. Порог суммы ≥ <strong>154</strong>. Старт (11, S). Найдите два наименьших S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение</button>
+        </div>
+        <div id="solutionBlock14" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> По условию, Петя выигрывает вторым ходом. Перебором находятся значения 39 и 40. Ответ: 3940.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y >= 154: return 1
+    if h == 4: return 0
+    if x + y >= 154: return 0
+    if h % 2 != 0:
+        return f(x+4, y, h+1) or f(x, y+4, h+1) or f(x*3, y, h+1) or f(x, y*3, h+1)
+    else:
+        return f(x+4, y, h+1) and f(x, y+4, h+1) and f(x*3, y, h+1) and f(x, y*3, h+1)
+
+res = [s for s in range(1, 143) if not f(11, s, 1) and f(11, s, 3)]
+print("Найденные S:", res[:2])  # [39, 40]</pre></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ======================= ЗАДАНИЕ 15 (№78076) особое условие на сумму ≤165 ======================= -->
+    <div class="problem_container" id="problem15">
+        <div class="prob_header">
+            <div class="prob_num">15</div>
+            <div class="prob_nums">Тип 20 № <a href="#">78076</a></div>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Условие:</strong> Ходы: убрать 2 камня из любой кучи или уменьшить кучу в 3 раза (целочисленное деление). Выигрыш, когда сумма ≤ <strong>165</strong>. Начальная позиция (17, S). Найдите два наименьших S.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение</button>
+        </div>
+        <div id="solutionBlock15" class="solution">
+            <div class="solution_text">
+                <p><strong>Решение:</strong> В игре на уменьшение побеждает тот, кто первым получит сумму ≤165. Перебором найдены два наименьших S = 449 и 450. Ответ: 449450.</p>
+                <div class="code_block"><pre>def f(x, y, h):
+    if h == 4 and x + y <= 165: return 1
+    if h == 4: return 0
+    if x + y <= 165: return 0
+    if h % 2 != 0:
+        return f(x-2, y, h+1) or f(x, y-2, h+1) or f(x//3, y, h+1) or f(x, y//3, h+1)
+    else:
+        return f(x-2, y, h+1) and f(x, y-2, h+1) and f(x//3, y, h+1) and f(x, y//3, h+1)
+
+res = [s for s in range(10, 10000) if not f(17, s, 1) and f(17, s, 3)]
+print("Два наименьших:", res[:2])  # [449, 450]</pre></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleSolution(probNum) {
+        const sol = document.getElementById(`solutionBlock${probNum}`);
+        const btn = event.target;
+        if (sol.style.display === 'none' || sol.style.display === '') {
+            sol.style.display = 'block';
+            btn.textContent = 'Скрыть решение';
+        } else {
+            sol.style.display = 'none';
+            btn.textContent = 'Показать решение';
+        }
+    }
+    // Инициализация: скрыть все решения
+    for(let i=1;i<=15;i++) {
+        const solDiv = document.getElementById(`solutionBlock${i}`);
+        if(solDiv) solDiv.style.display = 'none';
+    }
+</script>
+</body>
+</html>

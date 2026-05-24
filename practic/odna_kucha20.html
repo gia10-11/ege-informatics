@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тип 20: Выигрышная стратегия (вторым ходом) — 15 заданий с полными условиями и подробными решениями</title>
+    <style>
+        /* ★ ОСНОВНЫЕ СТИЛИ В СТИЛЕ ИСХОДНОГО ФАЙЛА ★ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .problem_container {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        /* ★ ЗАГОЛОВОК ЗАДАНИЯ ★ */
+        .prob_header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prob_num {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #4a6baf;
+            color: white;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .prob_nums {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .prob_nums a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .prob_nums a:hover {
+            text-decoration: underline;
+        }
+
+        /* ★ ТЕКСТ ЗАДАНИЯ ★ */
+        .problem_text {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .left_margin {
+            margin-left: 0;
+            margin-bottom: 8px;
+        }
+
+        /* ★ БЛОК ОТВЕТА ★ */
+        .answer_block {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #e8f4fd;
+            border-left: 4px solid #4a6baf;
+            border-radius: 3px;
+        }
+
+        .answer_block strong {
+            font-weight: bold;
+        }
+
+        /* ★ РЕШЕНИЕ ★ */
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-left: 4px solid #4a6baf;
+            font-size: 14px;
+            display: none;
+        }
+
+        .solution_text {
+            line-height: 1.5;
+        }
+
+        .solution_text p {
+            margin-bottom: 8px;
+        }
+
+        .code_block {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 12px;
+            border-radius: 3px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+
+        .code_block pre {
+            margin: 0;
+            color: #ecf0f1;
+            white-space: pre-wrap;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: none;
+            border-top: 1px dashed #999;
+        }
+
+        /* ★ КНОПКИ УПРАВЛЕНИЯ ★ */
+        .task_controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .btn_show_solution {
+            padding: 8px 16px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn_show_solution:hover {
+            background-color: #e67e22;
+        }
+
+        /* ★ ИСТОЧНИК ★ */
+        .source_info {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        /* ★ АДАПТИВНОСТЬ ★ */
+        @media (max-width: 768px) {
+            .btn_show_solution {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="margin-bottom: 20px;">
+        <h2 style="color: #4a6baf;">Тип 20 — Выигрышная стратегия (вторым ходом)</h2>
+        <p style="font-size: 14px; color: #555;">Условие для всех задач: Петя не может выиграть первым ходом, но может выиграть своим вторым ходом независимо от того, как будет ходить Ваня.</p>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 1 (№27803) ================= -->
+    <div class="problem_container" id="problem_27803">
+        <div class="prob_header">
+            <span class="prob_num">1</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27803</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в кучу <strong>один или четыре камня</strong> либо увеличить количество камней в куче <strong>в пять раз</strong>. Например, имея кучу из 15 камней, за один ход можно получить кучу из 16, 19 или 75 камней. У каждого игрока, чтобы делать ходы, есть неограниченное количество камней. Игра завершается в тот момент, когда количество камней в куче становится <strong>не менее 68</strong>. Победителем считается игрок, сделавший последний ход, то есть первым получивший кучу, в которой будет 68 или больше камней. В начальный момент в куче было S камней; 1 ≤ S ≤ 67.</p>
+            <p class="left_margin">Найдите <strong>два значения S</strong>, при которых у Пети есть выигрышная стратегия, причём одновременно выполняются два условия:</p>
+            <p class="left_margin">— Петя не может выиграть за один ход;</p>
+            <p class="left_margin">— Петя может выиграть своим вторым ходом независимо от того, как будет ходить Ваня.</p>
+            <p class="left_margin">Найденные значения запишите в ответе в порядке возрастания без разделительных знаков.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol1')">Показать решение</button>
+        </div>
+        <div id="sol1" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Проверим, может ли Петя выиграть первым ходом. Для выигрыша за один ход нужно, чтобы после хода Пети в куче стало 68 или больше камней. Это возможно, если S ≥ 14 (прибавив 4), S ≥ 67 (прибавив 1) или S ≥ 14 (умножив на 5: 14×5=70). Таким образом, при S ≥ 14 Петя может выиграть первым ходом. Значит, искомые S должны быть меньше 14.</p>
+                <p>2) Рассмотрим S = 9. Петя не может выиграть первым ходом (9+4=13, 9×5=45, 9+1=10 — все меньше 68). Его стратегия: добавить 4 камня, получив кучу из 13 камней.</p>
+                <p>3) Теперь ходит Ваня. Из кучи в 13 камней он может сделать: 14 (+1), 17 (+4) или 65 (×5). Во всех случаях полученное число меньше 68, поэтому Ваня не выигрывает сразу.</p>
+                <p>4) После хода Вани Петя своим вторым ходом умножает количество камней на 5: 14×5=70, 17×5=85, 65×5=325. Во всех случаях получается число ≥ 68, и Петя выигрывает.</p>
+                <p>5) Аналогично для S = 12. Петя добавляет 1 камень, получая 13, и далее действует по той же схеме.</p>
+                <p>Таким образом, S = 9 и S = 12 удовлетворяют условию.</p>
+            </div>
+            <div class="code_block"><pre>def f(x, h):
+    if h == 4 and x >= 68: return 1
+    if h == 4: return 0
+    if x >= 68: return 0
+    if h % 2 != 0:  # Петин ход (ищет выигрышный вариант)
+        return f(x+1, h+1) or f(x+4, h+1) or f(x*5, h+1)
+    else:            # Ваня ходит (пытается помешать)
+        return f(x+1, h+1) and f(x+4, h+1) and f(x*5, h+1)
+
+for s in range(1, 68):
+    if not f(s, 1) and f(s, 3):  # не выигрывает за 1 ход, но выигрывает за 3 хода (вторым своим ходом)
+        print(s, end=' ')   # 9 12</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 2 (№27809) ================= -->
+    <div class="problem_container" id="problem_27809">
+        <div class="prob_header">
+            <span class="prob_num">2</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27809</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в кучу <strong>один или три камня</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Например, имея кучу из 15 камней, за один ход можно получить кучу из 16, 18 или 30 камней. У каждого игрока есть неограниченное количество камней. Игра завершается в тот момент, когда количество камней в куче становится <strong>не менее 42</strong>. Победителем считается игрок, сделавший последний ход. В начальный момент в куче было S камней; 1 ≤ S ≤ 41.</p>
+            <p class="left_margin">Найдите <strong>три значения S</strong>, при которых Петя не может выиграть за один ход, но может выиграть своим вторым ходом независимо от игры Вани. Ответ запишите в порядке возрастания без разделителей.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol2')">Показать решение</button>
+        </div>
+        <div id="sol2" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Для выигрыша первым ходом нужно получить 42 или больше. Это возможно при S ≥ 21 (×2: 21×2=42), S ≥ 41 (+1: 41+1=42), S ≥ 39 (+3: 39+3=42). Значит, S должны быть меньше 21.</p>
+                <p>2) Рассмотрим S = 10. Петя удваивает кучу, получая 20. Из 20 Ваня может получить: 21 (+1), 23 (+3) или 40 (×2). Все эти числа меньше 42.</p>
+                <p>3) После хода Вани Петя удваивает: 21×2=42, 23×2=46, 40×2=80. Во всех случаях Петя выигрывает вторым ходом.</p>
+                <p>4) S = 17: Петя добавляет 3, получая 20. Далее аналогично.</p>
+                <p>5) S = 19: Петя добавляет 1, получая 20. Далее аналогично.</p>
+                <p>Таким образом, S = 10, 17, 19 — искомые значения.</p>
+            </div>
+            <div class="code_block"><pre>def f(x, h):
+    if h == 4 and x >= 42: return 1
+    if h == 4: return 0
+    if x >= 42: return 0
+    if h % 2 != 0:
+        return f(x+1, h+1) or f(x+3, h+1) or f(x*2, h+1)
+    else:
+        return f(x+1, h+1) and f(x+3, h+1) and f(x*2, h+1)
+
+print([s for s in range(1,42) if not f(s,1) and f(s,3)])  # [10, 17, 19]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 3 (№27812) ================= -->
+    <div class="problem_container" id="problem_27812">
+        <div class="prob_header">
+            <span class="prob_num">3</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27812</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Петя. За один ход игрок может добавить в кучу <strong>один или четыре камня</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Например, имея кучу из 15 камней, за один ход можно получить кучу из 16, 19 или 30 камней. У каждого игрока есть неограниченное количество камней. Игра завершается в тот момент, когда количество камней в куче становится <strong>не менее 48</strong>. Победителем считается игрок, сделавший последний ход. В начальный момент в куче было S камней; 1 ≤ S ≤ 47. Найдите два значения S, при которых Петя выигрывает вторым ходом, но не может выиграть первым.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol3')">Показать решение</button>
+        </div>
+        <div id="sol3" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 24 (×2: 24×2=48), S ≥ 47 (+1), S ≥ 44 (+4). Поэтому S должны быть меньше 24.</p>
+                <p>2) Ключевая позиция — 23 камня. Из 23 Петя может выиграть вторым ходом, удвоив после хода Вани.</p>
+                <p>3) S = 19: Петя добавляет 4, получая 23. Из 23 Ваня может получить: 24 (+1), 27 (+4), 46 (×2). Петя удваивает: 48, 54, 92 — все ≥48, победа.</p>
+                <p>4) S = 22: Петя добавляет 1, получая 23. Далее аналогично.</p>
+                <p>Ответ: 19 и 22.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=48: return 1
+    if h==4: return 0
+    if x>=48: return 0
+    if h%2!=0:
+        return f(x+1,h+1) or f(x+4,h+1) or f(x*2,h+1)
+    else:
+        return f(x+1,h+1) and f(x+4,h+1) and f(x*2,h+1)
+print([s for s in range(1,48) if not f(s,1) and f(s,3)])  # [19,22]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 4 (№27818) ================= -->
+    <div class="problem_container" id="problem_27818">
+        <div class="prob_header">
+            <span class="prob_num">4</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27818</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Паша и Вася (аналогично Пете и Ване), играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или четыре камня</strong> либо увеличить количество камней в куче <strong>в пять раз</strong>. Игра завершается, когда количество камней становится <strong>не менее 69</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 68. Найдите два значения S, при которых Паша (Петя) не может выиграть первым ходом, но выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol4')">Показать решение</button>
+        </div>
+        <div id="sol4" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Аналогично задаче 1, но порог 69. Выигрыш первым ходом возможен при S ≥ 14 (14×5=70). Искомые S < 14.</p>
+                <p>2) Петя должен получить 13 камней (9+4 или 12+1). Затем после хода Васи (14, 17, 65) Петя умножает на 5: 70, 85, 325 ≥ 69.</p>
+                <p>Ответ: 9 и 12.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=69: return 1
+    if h==4: return 0
+    if x>=69: return 0
+    return (f(x+1,h+1) or f(x+4,h+1) or f(x*5,h+1)) if h%2 else (f(x+1,h+1) and f(x+4,h+1) and f(x*5,h+1))
+print([s for s in range(1,69) if not f(s,1) and f(s,3)])  # [9,12]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 5 (№27821) ================= -->
+    <div class="problem_container" id="problem_27821">
+        <div class="prob_header">
+            <span class="prob_num">5</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27821</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или два камня</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Игра завершается, когда количество камней в куче <strong>превышает 41</strong> (то есть становится 42 или больше). В начальный момент в куче было S камней; 1 ≤ S ≤ 41. Найдите три значения S, при которых Петя выигрывает вторым ходом, но не может выиграть первым.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol5')">Показать решение</button>
+        </div>
+        <div id="sol5" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 21 (×2: 21×2=42), S ≥ 41 (+1), S ≥ 40 (+2). Значит, S < 21.</p>
+                <p>2) Ключевая позиция — 20 камней. Петя получает 20 из S = 10 (×2), S = 18 (+2), S = 19 (+1).</p>
+                <p>3) Из 20 Ваня может получить: 21 (+1), 22 (+2), 40 (×2). Петя удваивает: 42, 44, 80 — все ≥42, победа.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=42: return 1
+    if h==4: return 0
+    if x>=42: return 0
+    if h%2!=0:
+        return f(x+1,h+1) or f(x+2,h+1) or f(x*2,h+1)
+    else:
+        return f(x+1,h+1) and f(x+2,h+1) and f(x*2,h+1)
+print([s for s in range(1,42) if not f(s,1) and f(s,3)])  # [10,18,19]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 6 (№27827) ================= -->
+    <div class="problem_container" id="problem_27827">
+        <div class="prob_header">
+            <span class="prob_num">6</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27827</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или два камня</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 65</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 64. Найдите три значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol6')">Показать решение</button>
+        </div>
+        <div id="sol6" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 22 (×3: 22×3=66), S ≥ 64 (+1), S ≥ 63 (+2). S < 22.</p>
+                <p>2) Ключевая позиция — 21 камень. Петя получает 21 из S = 7 (×3), S = 19 (+2), S = 20 (+1).</p>
+                <p>3) Из 21 Ваня может получить: 22 (+1), 23 (+2), 63 (×3). Петя утраивает: 66, 69, 189 ≥ 65.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=65: return 1
+    if h==4: return 0
+    if x>=65: return 0
+    if h%2!=0:
+        return f(x+1,h+1) or f(x+2,h+1) or f(x*3,h+1)
+    else:
+        return f(x+1,h+1) and f(x+2,h+1) and f(x*3,h+1)
+print([s for s in range(1,65) if not f(s,1) and f(s,3)])  # [7,19,20]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 7 (№27836) ================= -->
+    <div class="problem_container" id="problem_27836">
+        <div class="prob_header">
+            <span class="prob_num">7</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27836</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или два камня</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней в куче <strong>превышает 54</strong> (то есть становится 55 или больше). В начальный момент в куче было S камней; 1 ≤ S ≤ 54. Найдите три значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol7')">Показать решение</button>
+        </div>
+        <div id="sol7" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 19 (×3: 19×3=57), S ≥ 54 (+1), S ≥ 53 (+2). S < 19.</p>
+                <p>2) Ключевая позиция — 18 камней. Петя получает 18 из S = 6 (×3), S = 16 (+2), S = 17 (+1).</p>
+                <p>3) Из 18 Ваня может получить: 19 (+1), 20 (+2), 54 (×3). Петя утраивает: 57, 60, 162 ≥ 55.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=55: return 1
+    if h==4: return 0
+    if x>=55: return 0
+    return (f(x+1,h+1) or f(x+2,h+1) or f(x*3,h+1)) if h%2 else (f(x+1,h+1) and f(x+2,h+1) and f(x*3,h+1))
+print([s for s in range(1,55) if not f(s,1) and f(s,3)])  # [6,16,17]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 8 (№27845) ================= -->
+    <div class="problem_container" id="problem_27845">
+        <div class="prob_header">
+            <span class="prob_num">8</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27845</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или три камня</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Игра завершается, когда количество камней в куче <strong>превышает 49</strong> (то есть становится 50 или больше). В начальный момент в куче было S камней; 1 ≤ S ≤ 49. Найдите три значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol8')">Показать решение</button>
+        </div>
+        <div id="sol8" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 25 (×2: 25×2=50), S ≥ 49 (+1), S ≥ 47 (+3). S < 25.</p>
+                <p>2) Ключевая позиция — 24 камня. Петя получает 24 из S = 12 (×2), S = 21 (+3), S = 23 (+1).</p>
+                <p>3) Из 24 Ваня может получить: 25 (+1), 27 (+3), 48 (×2). Петя удваивает: 50, 54, 96 ≥ 50.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=50: return 1
+    if h==4: return 0
+    if x>=50: return 0
+    if h%2: return f(x+1,h+1) or f(x+3,h+1) or f(x*2,h+1)
+    else: return f(x+1,h+1) and f(x+3,h+1) and f(x*2,h+1)
+print([s for s in range(1,50) if not f(s,1) and f(s,3)])  # [12,21,23]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 9 (№27933) ================= -->
+    <div class="problem_container" id="problem_27933">
+        <div class="prob_header">
+            <span class="prob_num">9</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27933</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или два камня</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 76</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 75. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol9')">Показать решение</button>
+        </div>
+        <div id="sol9" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 26 (×3: 26×3=78), S ≥ 75 (+1), S ≥ 74 (+2). S < 26.</p>
+                <p>2) Ключевая позиция — 25 камней. Петя получает 25 из S = 23 (+2), S = 24 (+1).</p>
+                <p>3) Из 25 Ваня может получить: 26 (+1), 27 (+2), 75 (×3). Петя утраивает: 78, 81, 225 ≥ 76.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=76: return 1
+    if h==4: return 0
+    if x>=76: return 0
+    return (f(x+1,h+1) or f(x+2,h+1) or f(x*3,h+1)) if h%2 else (f(x+1,h+1) and f(x+2,h+1) and f(x*3,h+1))
+print([s for s in range(1,76) if not f(s,1) and f(s,3)])  # [23,24]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 10 (№27957) ================= -->
+    <div class="problem_container" id="problem_27957">
+        <div class="prob_header">
+            <span class="prob_num">10</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">27957</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или два камня</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 56</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 55. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol10')">Показать решение</button>
+        </div>
+        <div id="sol10" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 28 (×2: 28×2=56), S ≥ 55 (+1), S ≥ 54 (+2). S < 28.</p>
+                <p>2) Ключевая позиция — 27 камней. Петя получает 27 из S = 25 (+2), S = 26 (+1).</p>
+                <p>3) Из 27 Ваня может получить: 28 (+1), 29 (+2), 54 (×2). Петя удваивает: 56, 58, 108 ≥ 56.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=56: return 1
+    if h==4: return 0
+    if x>=56: return 0
+    if h%2: return f(x+1,h+1) or f(x+2,h+1) or f(x*2,h+1)
+    else: return f(x+1,h+1) and f(x+2,h+1) and f(x*2,h+1)
+print([s for s in range(1,56) if not f(s,1) and f(s,3)])  # [25,26]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 11 (№28039) ================= -->
+    <div class="problem_container" id="problem_28039">
+        <div class="prob_header">
+            <span class="prob_num">11</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">28039</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или четыре камня</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 41</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 40. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol11')">Показать решение</button>
+        </div>
+        <div id="sol11" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 14 (×3: 14×3=42), S ≥ 40 (+1), S ≥ 37 (+4). S < 14.</p>
+                <p>2) Петя получает 13 камней (9+4, 12+1). Из 13 Ваня может получить: 14 (+1), 17 (+4), 39 (×3). Петя утраивает: 42, 51, 117 ≥ 41.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=41: return 1
+    if h==4: return 0
+    if x>=41: return 0
+    if h%2: return f(x+1,h+1) or f(x+4,h+1) or f(x*3,h+1)
+    else: return f(x+1,h+1) and f(x+4,h+1) and f(x*3,h+1)
+print([s for s in range(1,41) if not f(s,1) and f(s,3)])  # [9,12]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 12 (№28042) ================= -->
+    <div class="problem_container" id="problem_28042">
+        <div class="prob_header">
+            <span class="prob_num">12</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">28042</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или пять камней</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 42</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 41. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol12')">Показать решение</button>
+        </div>
+        <div id="sol12" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 14 (×3: 14×3=42), S ≥ 41 (+1), S ≥ 37 (+5). S < 14.</p>
+                <p>2) Петя получает 13 камней (8+5, 12+1). Из 13 Ваня может получить: 14 (+1), 18 (+5), 39 (×3). Петя утраивает: 42, 54, 117 ≥ 42.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=42: return 1
+    if h==4: return 0
+    if x>=42: return 0
+    if h%2: return f(x+1,h+1) or f(x+5,h+1) or f(x*3,h+1)
+    else: return f(x+1,h+1) and f(x+5,h+1) and f(x*3,h+1)
+print([s for s in range(1,42) if not f(s,1) and f(s,3)])  # [8,12]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 13 (№28045) ================= -->
+    <div class="problem_container" id="problem_28045">
+        <div class="prob_header">
+            <span class="prob_num">13</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">28045</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один или пять камней</strong> либо увеличить количество камней в куче <strong>в три раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 41</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 40. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol13')">Показать решение</button>
+        </div>
+        <div id="sol13" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>Аналогично заданию 12, но порог 41. Петя также получает 13 камней, затем утраивает после хода Вани: 14×3=42, 18×3=54, 39×3=117 ≥ 41.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=41: return 1
+    if h==4: return 0
+    if x>=41: return 0
+    if h%2: return f(x+1,h+1) or f(x+5,h+1) or f(x*3,h+1)
+    else: return f(x+1,h+1) and f(x+5,h+1) and f(x*3,h+1)
+print([s for s in range(1,41) if not f(s,1) and f(s,3)])  # [8,12]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 14 (№28084) ================= -->
+    <div class="problem_container" id="problem_28084">
+        <div class="prob_header">
+            <span class="prob_num">14</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">28084</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один камень</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Игра завершается, когда количество камней становится <strong>не менее 26</strong>. В начальный момент в куче было S камней; 1 ≤ S ≤ 25. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol14')">Показать решение</button>
+        </div>
+        <div id="sol14" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 13 (×2: 13×2=26), S ≥ 25 (+1). S < 13.</p>
+                <p>2) Петя получает 12 камней (6×2, 11+1). Из 12 Ваня может получить: 13 (+1), 24 (×2). Петя удваивает: 26, 48 ≥ 26.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=26: return 1
+    if h==4: return 0
+    if x>=26: return 0
+    if h%2: return f(x+1,h+1) or f(x*2,h+1)
+    else: return f(x+1,h+1) and f(x*2,h+1)
+print([s for s in range(1,26) if not f(s,1) and f(s,3)])  # [6,11]</pre></div>
+        </div>
+    </div>
+
+    <!-- ================= ЗАДАНИЕ 15 (№28088) ================= -->
+    <div class="problem_container" id="problem_28088">
+        <div class="prob_header">
+            <span class="prob_num">15</span>
+            <span class="prob_nums">Тип 20 №&nbsp;<a href="#">28088</a></span>
+        </div>
+        <div class="problem_text">
+            <p class="left_margin"><strong>Полное условие:</strong> Два игрока, Петя и Ваня, играют в следующую игру. За один ход игрок может добавить в кучу <strong>один камень</strong> либо увеличить количество камней в куче <strong>в два раза</strong>. Игра завершается, когда количество камней в куче <strong>превышает 53</strong> (то есть становится 54 или больше). В начальный момент в куче было S камней; 1 ≤ S ≤ 53. Найдите два значения S, при которых Петя выигрывает вторым ходом.</p>
+        </div>
+
+        <div class="task_controls">
+            <button class="btn_show_solution" onclick="toggleSolution('sol15')">Показать решение</button>
+        </div>
+        <div id="sol15" class="solution">
+            <div class="solution_text">
+                <p><strong>Подробное решение:</strong></p>
+                <p>1) Выигрыш первым ходом возможен при S ≥ 27 (×2: 27×2=54), S ≥ 53 (+1). S < 27.</p>
+                <p>2) Петя получает 26 камней (13×2, 25+1). Из 26 Ваня может получить: 27 (+1), 52 (×2). Петя удваивает: 54, 104 ≥ 54.</p>
+            </div>
+            <div class="code_block"><pre>def f(x,h):
+    if h==4 and x>=54: return 1
+    if h==4: return 0
+    if x>=54: return 0
+    if h%2: return f(x+1,h+1) or f(x*2,h+1)
+    else: return f(x+1,h+1) and f(x*2,h+1)
+print([s for s in range(1,54) if not f(s,1) and f(s,3)])  # [13,25]</pre></div>
+        </div>
+    </div>
+
+    <div class="source_info">
+        <span>Источник: сборник заданий ЕГЭ по информатике — Тип 20 (выигрышная стратегия, одна куча, второй ход)</span>
+    </div>
+</div>
+
+<script>
+    function toggleSolution(id) {
+        var sol = document.getElementById(id);
+        var btn = event.target;
+        if (sol.style.display === 'none' || sol.style.display === '') {
+            sol.style.display = 'block';
+            btn.textContent = 'Скрыть решение';
+        } else {
+            sol.style.display = 'none';
+            btn.textContent = 'Показать решение';
+        }
+    }
+</script>
+</body>
+</html>
