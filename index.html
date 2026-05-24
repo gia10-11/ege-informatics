@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Информатика 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Пирамидальное расположение: 3 сверху, 2 снизу */
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* Верхние карточки (3 штуки) */
+        .row-top .menu-card {
+            width: 320px;
+        }
+        
+        /* Нижние карточки (2 штуки) - чуть больше */
+        .row-bottom .menu-card {
+            width: 370px;
+        }
+        
+        .menu-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .menu-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .menu-card i {
+            font-size: 2rem;
+            min-width: 40px;
+        }
+        
+        .menu-card p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        
+        .btn:hover {
+            background: #f8f9fa;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .row-top .menu-card,
+            .row-bottom .menu-card {
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .row {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .row-top .menu-card {
+                width: 280px;
+            }
+            
+            .row-bottom .menu-card {
+                width: 320px;
+            }
+            
+            .menu-card {
+                padding: 25px 20px;
+            }
+            
+            .menu-card h2 {
+                font-size: 1.5rem;
+            }
+            
+            .row {
+                gap: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 <span class="highlight">ЕГЭ Информатика 2026</span></h1>
+            <p class="subtitle">Бесплатная платформа для подготовки к ЕГЭ по информатике. Все задания соответствуют ФИПИ.</p>
+        </header>
+        
+        <div class="menu-grid">
+            <div class="row row-top">
+                <a href="/templates/theory.html" class="menu-card">
+                    <h2><i class="fas fa-book"></i> Теория</h2>
+                    <p>Все темы ЕГЭ с объяснениями и примерами. Системы счисления, логика, алгоритмы, базы данных.</p>
+                    <span class="btn">Изучить →</span>
+                </a>
+                
+                <a href="/templates/practice.html" class="menu-card">
+                    <h2><i class="fas fa-tasks"></i> Практика</h2>
+                    <p>Практические задания с проверкой. Тренируйтесь на реальных задачах из ЕГЭ.</p>
+                    <span class="btn">Тренироваться →</span>
+                </a>
+                
+                <a href="/templates/tasks.html" class="menu-card">
+                    <h2><i class="fas fa-list-ol"></i> Варианты</h2>
+                    <p>Все 27 заданий ЕГЭ по информатике. Решайте по номерам с проверкой ответов.</p>
+                    <span class="btn">Решать →</span>
+                </a>
+            </div>
+            
+            <div class="row row-bottom">
+                <a href="/templates/programming.html" class="menu-card">
+                    <h2><i class="fas fa-code"></i> Программирование</h2>
+                    <p>Онлайн-компилятор Python. Задания на программирование (8-27).</p>
+                    <span class="btn">Программировать →</span>
+                </a>
+                
+                <a href="/templates/login.html" class="menu-card">
+                    <h2><i class="fas fa-user"></i> Контактная информация</h2>
+                    <p>Информация о разработчике.</p>
+                    <span class="btn">Посмотреть →</span>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>📚 Для 10-11 классов | 🎯 Подготовка к ЕГЭ 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
