@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ЕГЭ Информатика - Полный тренажёр с решениями на Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fafafa;
+            padding: 20px 15px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 20px 25px;
+        }
+        h1 {
+            font-size: 1.9rem;
+            margin-bottom: 10px;
+            color: #1e3c72;
+            border-left: 5px solid #f39c12;
+            padding-left: 20px;
+        }
+        .sub {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+        .problem_container {
+            margin-bottom: 35px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            background: #ffffff;
+            border-radius: 12px;
+            transition: 0.1s;
+        }
+        .prob_header {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+        .prob_num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: #1e466e;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .prob-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: #f0f4fa;
+            padding: 5px 14px;
+            border-radius: 30px;
+            color: #1e3c72;
+        }
+        .problem_text {
+            background: #fefef7;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 14.5px;
+            line-height: 1.55;
+            border: 1px solid #eef2f5;
+            margin-bottom: 12px;
+        }
+        .left_margin {
+            margin-bottom: 10px;
+        }
+        .file-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 12px 0;
+            background: #eef3fc;
+            padding: 10px 15px;
+            border-radius: 14px;
+        }
+        .file_link {
+            background: white;
+            border-radius: 20px;
+            padding: 5px 15px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .file_link a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c6e9e;
+            font-family: monospace;
+        }
+        .answer-input-area {
+            margin: 12px 0 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .answer-input-area label {
+            font-weight: 600;
+            background: #eef2fa;
+            padding: 5px 12px;
+            border-radius: 30px;
+        }
+        .answer-field {
+            padding: 8px 14px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 24px;
+            font-size: 14px;
+            width: 220px;
+            font-family: monospace;
+        }
+        .check-btn {
+            background-color: #2c6e9e;
+            color: white;
+            border: none;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.1s;
+        }
+        .check-btn:hover {
+            background-color: #1f4e72;
+        }
+        .feedback {
+            margin-left: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .btn_show_solution {
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .solution {
+            background: #f9fafb;
+            border-left: 5px solid #f39c12;
+            padding: 16px 20px;
+            border-radius: 14px;
+            margin-top: 15px;
+            display: none;
+            font-size: 14px;
+        }
+        .code_block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 14px;
+            overflow-x: auto;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 10px auto;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 6px 12px;
+            text-align: center;
+        }
+        .wrap_scroll_table {
+            overflow-x: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #6c757d;
+            font-size: 13px;
+        }
+        @media (max-width: 700px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ЕГЭ–2026 Информатика</h1>
+    <center><div class="sub"><h2>Вариант №1</h2></div></center>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <div class="problem_container" id="task1">
+        <div class="prob_header"><span class="prob_num">1</span><span class="prob-title">Графы и таблицы</span></div>
+        <div class="problem_text">
+            <p>На рисунке слева изображена схема дорог Н-ского района, в таблице звёздочкой обозначено наличие дороги из одного населённого пункта в другой. Отсутствие звёздочки означает, что такой дороги нет. Определите, какие номера населённых пунктов в таблице могут соответствовать населённым пунктам <b>В</b> и <b>Е</b> на схеме. В ответе запишите эти два номера в возрастающем порядке без пробелов и знаков препинания.</p>
+            <div class="wrap_scroll_table"><table style="margin:auto"><tbody><tr><td style="text-align:center"></td><td style="text-align:center"><b>П1</b></td><td style="text-align:center"><b>П2</b></td><td style="text-align:center"><b>П3</b></td><td style="text-align:center"><b>П4</b></td><td style="text-align:center"><b>П5</b></td><td style="text-align:center"><b>П6</b></td><td style="text-align:center"><b>П7</b></td></tr>
+                <tr><td style="text-align:center"><b>П1</b></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center">*</td></tr>
+                <tr><td style="text-align:center"><b>П2</b></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center"></td></tr>
+                <tr><td style="text-align:center"><b>П3</b></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr>
+                <tr><td style="text-align:center"><b>П4</b></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center"></td></tr>
+                <tr><td style="text-align:center"><b>П5</b></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td></tr>
+                <tr><td style="text-align:center"><b>П6</b></td><td style="text-align:center">*</td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td></tr>
+                <tr><td style="text-align:center"><b>П7</b></td><td style="text-align:center">*</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">*</td><td style="text-align:center">*</td><td style="text-align:center"></td></tr>
+            </tbody></table></div>
+			            <div class="flex-img">
+                <img src="/ege-informatics/option/files/opt1/1.png" alt="Схема графа" style="margin:10px auto;max-width:100%;display:block">
+            </div>
+        </div>
+        <div class="answer-input-area"><label>Ваш ответ:</label><input type="text" id="ans1" class="answer-field"><button class="check-btn" onclick="checkAnswer(1,'26')">Проверить</button><span id="feed1" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(1)">Показать решение</button>
+        <div id="sol1" class="solution"><div class="solution_text"><b>Решение:</b>Решение. Заметим, что вершины А и Д  — единственные вершины степени 3, из которых идут дороги в две вершины степени 2. Значит, вершинам А и Д соответствуют пункты 4 и 7. Значит, вершинам В и Е соответствуют пункты 2 и 6. Ответ: 26.</div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 (Логика + Python) -->
+    <div class="problem_container" id="task2">
+        <div class="prob_header"><span class="prob_num">2</span><span class="prob-title">Таблица истинности</span></div>
+        <div class="problem_text">
+            <p>Логическая функция F задаётся выражением (x ≡ (w ∨ y)) ∨ ((w → z) ∧ (y → w)). Дан частично заполненный фрагмент, содержащий неповторяющиеся строки таблицы истинности. Определите порядок столбцов w,x,y,z.</p>
+            <div class="wrap_scroll_table"><table style="margin:auto"><tbody><tr><th>Перем1</th><th>Перем2</th><th>Перем3</th><th>Перем4</th><th>F</th></tr>
+                <tr><td style="text-align:center">1</td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">1</td><td style="text-align:center">0</td></tr>
+                <tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">1</td><td style="text-align:center">0</td></tr>
+                <tr><td style="text-align:center">1</td><td style="text-align:center"></td><td style="text-align:center">1</td><td style="text-align:center"></td><td style="text-align:center">0</td></tr>
+            </tbody></table></div>
+        </div>
+        <div class="answer-input-area"><label>Ответ:</label><input type="text" id="ans2" class="answer-field"><button class="check-btn" onclick="checkAnswer(2,'yxzw')">Проверить</button><span id="feed2" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(2)">Показать решение (Python)</button>
+        <div id="sol2" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>print("x y z w")
+for x in range(0, 2):
+    for y in range(0, 2):
+        for z in range(0, 2):
+            for w in range(0, 2):
+                if not((x == (w or y)) or ((w <= z) and (y <= w))):
+                    print(x, y, z, w)</pre>
+                </div>
+                Далее выпишем те наборы переменных, при которых данное выражение равно 0. В наборах переменные запишем в порядке х, y, z, w.
+
+Получим следующие наборы:
+
+(0, 0, 0, 1),
+
+(0, 1, 0, 0),
+
+(0, 1, 0, 1),
+
+(0, 1, 1, 0).
+
+Сопоставим эти наборы с приведенным в задании фрагментом таблицы истинности.
+
+Первая строка таблицы (как минимум две единицы) может соответствовать либо набору (0, 1, 0, 1), либо набору (0, 1, 1, 0).
+
+Третья строка таблицы также может соответствовать одному из этих двух наборов.
+
+Заметим, что в каждом из этих двух наборов переменная y принимает значение 1. Следовательно, ей соответствует первый столбец таблицы.
+
+В данных наборах единичные значения принимают также переменные z и w. Заметим, что переменная z принимает единичное значение в единственном наборе переменных. Следовательно, ей не может соответствовать четвертый столбец. Тогда переменной z соответствует третий столбец, а переменной w  — четвертый столбец.
+
+Следовательно, переменной х соответствует второй столбец.
+ Ответ: yxzw.
+            </div>
+        </div>
+    </div>
+	
+	
+<!-- ЗАДАНИЕ 3 Таблица Excel--!>
+  <div class="problem_container" id="task3">
+        <div class="prob_header"><span class="prob_num">3</span><span class="prob-title">Базы данных</span></div>
+        <div class="problem_text">
+            <p>В файле приведён фрагмент базы данных «Продукты» о поставках товаров в магазины районов города. База данных состоит из трёх таблиц.</p>
+            <p>Таблица «Движение товаров» содержит записи о поставках товаров в магазины в течение первой декады июня 2021 г., а также информацию о проданных товарах. Поле <i>Тип операции</i> содержит значение <i>Поступление</i> или <i>Продажа</i>, а в соответствующее поле <i>Количество упаковок, шт.</i> занесена информация о том, сколько упаковок товара поступило в магазин или было продано в течение дня.</p>
+            <p>Таблица «Товар» содержит информацию об основных характеристиках каждого товара.</p>
+            <p>Таблица «Магазин» содержит информацию о местонахождении магазинов.</p>
+            <p>Используя информацию из приведённой базы данных, определите, на сколько увеличилось количество упаковок яиц диетических, имеющихся в наличии в магазинах Заречного района за период с 1 по 10 июня.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/3.ods" onclick="alert('В реальном ЕГЭ прилагается файл базы данных.')">📎 Задание_3_файл.xlsx (демо)</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Ответ (число):</label><input type="text" id="ans3" class="answer-field"><button class="check-btn" onclick="checkAnswer(3,'966')">Проверить</button><span id="feed3" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(3)">Показать решение</button>
+        <div id="sol3" class="solution">
+            <b>Решение:</b>
+            <p>1. В таблице «Товар» находим артикул товара «Яйца диетические».</p>
+            <p>2. В таблице «Магазин» определяем ID всех магазинов Заречного района.</p>
+            <p>3. В таблице «Движение товаров» отбираем записи за период с 1 по 10 июня, с найденным артикулом и ID магазинов Заречного района.</p>
+            <p>4. Суммируем количество упаковок для типа операции «Поступление» и вычитаем сумму для типа операции «Продажа».</p>
+            <p>5. Полученная разница показывает увеличение количества упаковок в наличии.</p>
+            <b>Ответ: 966.</b>
+        </div>
+    </div>
+
+
+    <!-- ЗАДАНИЕ 4 Код Фано -->
+    <div class="problem_container" id="task4">
+        <div class="prob_header"><span class="prob_num">4</span><span class="prob-title">Условие Фано</span></div>
+        <div class="problem_text">
+            <p>По каналу связи передаются сообщения, содержащие только восемь букв: А, В, Е, З, И, Н, О, Р. Для передачи используется двоичный код, удовлетворяющий условию Фано. Кодовые слова для некоторых букв известны: А — 101, В — 010, И — 00. Какое наименьшее количество двоичных знаков потребуется для кодирования слова НЕВЕЗЕНИЕ?</p>
+        </div>
+        <div class="answer-input-area"><label>Кол-во бит:</label><input type="text" id="ans4" class="answer-field"><button class="check-btn" onclick="checkAnswer(4,'23')">Проверить</button><span id="feed4" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(4)">Показать решение</button>
+        <div id="sol4" class="solution"><div class="solution_text"><b>Решение:</b>  Буква Е повторяется в слове НЕВЕЗЕНИЕ чаще всего, поэтому закодируем её кодовым словом 11. Буква Н повторяется в слове НЕВЕЗЕНИЕ 2 раза, поэтому закодируем её кодовым словом 100. Букву З закодировать кодовым словом длины 3 нельзя, поскольку не останется кодовых слов для оставшихся букв, которые удовлетворяли бы условию Фано. Поэтому букву З закодируем кодовым словом 0110. Тогда количество двоичных знаков, которые потребуются для кодирования слова НЕВЕЗЕНИЕ, равно 4 · 1 + 2 · 5 + 3 · 3  =  23.
+		</p>Ответ: 23.</p></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 5 Алгоритм -->
+    <div class="problem_container" id="task5">
+        <div class="prob_header"><span class="prob_num">5</span><span class="prob-title">Двоичное преобразование</span></div>
+        <div class="problem_text">
+            <p>На вход алгоритма подаётся натуральное число N. Алгоритм строит по нему новое число R следующим образом: 1. Строится двоичная запись числа N. 2. Если число чётное, то к двоичной записи слева дописывается 1, а справа — 0. Если нечётное, то слева дописывается 11 и справа 11. Укажите минимальное число N, после обработки которого получается число, большее чем 52.</p>
+        </div>
+        <div class="answer-input-area"><label>N:</label><input type="text" id="ans5" class="answer-field"><button class="check-btn" onclick="checkAnswer(5,'3')">Проверить</button><span id="feed5" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(5)">Показать решение (Python)</button>
+        <div id="sol5" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>for n in range(1, 100):
+    s = bin(n)[2:]  # перевод в двоичную систему
+    s = str(s) 
+    if s[-1] == '0':
+        s = '1' + s + '0'
+    else:
+        s = '11' + s + '11'
+    r = int(s, 2)  # перевод в десятичную систему
+    if r > 52:
+        print(n)
+        break</pre>
+                </div>
+                Ответ: 3.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 6 Черепаха -->
+    <div class="problem_container" id="task6">
+        <div class="prob_header"><span class="prob_num">6</span><span class="prob-title">Черепаха</span></div>
+        <div class="problem_text">
+            <p>Исполнитель Черепаха действует на плоскости. В начальный момент Черепаха находится в начале координат, голова направлена вдоль положительного направления оси ординат. Алгоритм: Повтори 4 [Вперёд 10 Направо 90]. Определите, сколько точек с целочисленными координатами будут находиться внутри области, ограниченной линией, заданной данным алгоритмом. Точки на линии учитывать не следует.</p>
+        </div>
+        <div class="answer-input-area"><label>Кол-во точек:</label><input type="text" id="ans6" class="answer-field"><button class="check-btn" onclick="checkAnswer(6,'2')">Проверить</button><span id="feed6" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(6)">Показать решение</button>
+        <div id="sol6" class="solution"><div class="solution_text"><b>Решение:</b> Алгоритм рисует квадрат 10×10 с вершинами (0,0), (10,0), (10,10), (0,10). Внутри квадрата целые точки с x=1..9, y=1..9 → 9×9=81. Ответ: 81.</div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 7 Графика -->
+    <div class="problem_container" id="task7">
+        <div class="prob_header"><span class="prob_num">7</span><span class="prob-title">Изображения</span></div>
+        <div class="problem_text">
+            <p>Для хранения в информационной системе документы сканируются с разрешением 600 dpi и цветовой системой, содержащей 2^24 = 16 777 216 цветов. Средний размер отсканированного документа составляет 12 Мбайт. В целях экономии было решено перейти на разрешение 300 dpi и цветовую систему, содержащую 2^16 = 65 536 цветов. Сколько Мбайт будет составлять средний размер документа, отсканированного с изменёнными параметрами?</p>
+        </div>
+        <div class="answer-input-area"><label>Мбайт:</label><input type="text" id="ans7" class="answer-field"><button class="check-btn" onclick="checkAnswer(7,'2')">Проверить</button><span id="feed7" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(7)">Показать решение</button>
+        <div id="sol7" class="solution"><div class="solution_text"><b>Решение:</b> 
+		Площадь уменьшилась в 4 раза (300/600 по каждому измерению). Глубина цвета: 24→16 бит (коэффициент 2/3). 12 × (1/4) × (16/24) = 12 × 1/4 × 2/3 = 2 МБ.
+<p>Ответ: 2.</p></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 8 - ИСПРАВЛЕНО: полный перебор через itertools.product -->
+    <div class="problem_container" id="task8">
+        <div class="prob_header"><span class="prob_num">8</span><span class="prob-title">Коды из букв И, В, А, Н</span></div>
+        <div class="problem_text">
+            <p>Иван составляет 5-буквенные коды из букв И, В, А, Н. Буквы в коде могут повторяться, использовать все буквы не обязательно, но букву И нужно использовать хотя бы один раз. Сколько различных кодов может составить Иван?</p>
+        </div>
+        <div class="answer-input-area"><label>Количество:</label><input type="text" id="ans8" class="answer-field"><button class="check-btn" onclick="checkAnswer(8,'781')">Проверить</button><span id="feed8" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(8)">Показать решение (Python - полный перебор)</button>
+        <div id="sol8" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python (itertools.product):</b>
+                <div class="code_block">
+import itertools<br><br>
+alphabet = "ИВАН"<br>
+ar = itertools.product(alphabet, repeat=5)  # Размещение с повторением<br>
+arl = []<br>
+for i in ar:<br>
+    arl.append(list(i))<br>
+count = 0<br>
+for e in arl:<br>
+    if e.count("И") >= 1:<br>
+        count += 1<br>
+print(count)  # 781<br>
+                </div>
+                <b>Аналитически для проверки:</b> 4⁵ - 3⁵ = 1024 - 243 = 781.<br>
+                Ответ: 781.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 9 Таблица -->
+    <div class="problem_container" id="task9">
+        <div class="prob_header"><span class="prob_num">9</span><span class="prob-title">Электронные таблицы</span></div>
+        <div class="problem_text">
+            <p>В каждой строке электронной таблицы записаны шесть натуральных чисел. Определите, сколько в таблице строк, для которых выполнены условия: в строке есть как повторяющиеся, так и неповторяющиеся числа; среднее арифметическое всех неповторяющихся чисел строки больше, чем среднее арифметическое всех повторяющихся чисел этой строки.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/9.ods" onclick="alert('Файл с таблицей (демо).')">Файл задания 9</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Кол-во строк:</label><input type="text" id="ans9" class="answer-field"><button class="check-btn" onclick="checkAnswer(9,'2102')">Проверить</button><span id="feed9" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(9)">Показать решение (Python)</button>
+        <div id="sol9" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>count = 0
+for s in open('9.txt'):
+    M = [int(x) for x in s.split()]
+    A = [x for x in M if M.count(x) > 1]
+    B = [x for x in M if M.count(x) == 1]
+    if len(B) > 0 and len(A) > 0:
+        if (sum(B) / len(B)) > (sum(A) / len(A)):
+            count += 1
+print(count)</pre>
+                </div>
+                Для начала посчитаем, сколько раз встречается то или иное число в строк, для этого в ячейку G1 впишем =СЧЁТЕСЛИ($A1:$F1; A1) и растянем до ячейки L1 и вниз, до самого конца таблицы. Теперь найдем количество удовлетворяющих нас строк, впишем
+
+=ЕСЛИ(И(СУММ(G1:L1)>6; ИЛИ(G1=1; H1 = 1; I1 = 1; J1 = 1; K1 = 1; L1 = 1)); 1; 0)
+
+в ячейку M1.
+
+Найдем теперь среднее арифметическое повторяющихся и неповторяющихся чисел. В ячейку N1 вписываем:
+
+=ЕСЛИ(G1 = 1; A1; " ")
+
+и протягиваем до S1 и до конца таблицы. В ячейку T1 записываем:
+
+=ЕСЛИ(M1 = 1; СРЗНАЧ(N1:S1);" ").
+
+Аналогично находим среднее арифметическое для повторяющихся чисел (для них =ЕСЛИ(G1 > 1; A1; " ")).
+
+Окончательно находим количество искомых строк. Для этого в ячейку AB1 записываем следующее:
+
+=ЕСЛИ(T1 > AA1; 1; " ")
+
+и протягиваем до конца таблицы. Находим сумму с помощью формулы =СУММ(AB1:AB6400) и получаем ответ  — 2102.
+
+ 
+
+<p>Ответ: 2102.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 10 Поиск слова "ты" -->
+    <div class="problem_container" id="task10">
+        <div class="prob_header"><span class="prob_num">10</span><span class="prob-title">Поиск в тексте</span></div>
+        <div class="problem_text">
+            <p>С помощью текстового редактора определите, сколько раз, не считая сносок, встречается слово «ты» или «Ты» в тексте романа в стихах А.С. Пушкина «Евгений Онегин». Другие формы слова «ты», такие как «твой» и т.д., учитывать не следует. В ответе укажите только число.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/10.odt" onclick="alert('Текст романа прилагается.')">Файл задания 10</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Кол-во:</label><input type="text" id="ans10" class="answer-field"><button class="check-btn" onclick="checkAnswer(10,'2')">Проверить</button><span id="feed10" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(10)">Показать решение (Python)</button>
+        <div id="sol10" class="solution">
+            <div class="solution_text">Воспользуемся поисковыми средствами текстового редактора. В строке поиска введем сначала « ты», потом «Ты ». Подсчитав общее количество результатов и исключив лишние, получаем ответ  — 2.
+
+ 
+
+<p>Ответ: 2.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 11 - ИСПРАВЛЕНО: алфавит 71 символ (26+26+10+9) -->
+    <div class="problem_container" id="task11">
+        <div class="prob_header"><span class="prob_num">11</span><span class="prob-title">Кодирование паролей</span></div>
+        <div class="problem_text">
+            <p>Сотрудникам компании выдают электронную карту, на которой записаны их личный код, номер подразделения (целое число от 1 до 1200) и дополнительная информация. Личный код содержит 17 символов и может включать латинские буквы из 26-символьного латинского алфавита (заглавные и строчные буквы различаются), десятичные цифры и специальные знаки из набора @#$%^&amp;*(). <strong>Внимание: спецсимволов 9 (без точки с запятой и других), всего алфавит: 26+26+10+9 = 71 символ.</strong> Для хранения кода используется посимвольное кодирование, все символы кодируются одинаковым минимально возможным количеством битов, для записи кода отводится минимально возможное целое число байтов. Номер подразделения кодируется отдельно и занимает минимально возможное целое число байтов. Известно, что на карте хранится всего 48 байтов данных. Сколько байтов занимает дополнительная информация?</p>
+        </div>
+        <div class="answer-input-area"><label>Байт:</label><input type="text" id="ans11" class="answer-field"><button class="check-btn" onclick="checkAnswer(11,'31')">Проверить</button><span id="feed11" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(11)">Показать решение</button>
+        <div id="sol11" class="solution">
+            <div class="solution_text">Каждый символ в личном коде может быть заглавной или строчной латинской буквой, десятичной цифрой или специальным символом из заданного набора. Таким образом, алфавит составляет 26 + 26 + 10 + 9  =  71 символ.
+
+На кодирование одного символа из 71-⁠символьного алфавита требуется 7 бит. Тогда на один пароль необходимо  бит. Минимальное количество байт, вмещающее 119 бит,  — 15.
+
+Для кодирования номера подразделения требуется k битов, при этом должно выполняться условие 2k ≥ 1200. Следовательно, k  =  11. Номер подразделения занимает целое число байт. Следовательно, для его хранения необходимо выделить 2 байта. Следовательно, для хранения дополнительной информации об одном сотруднике отводится 48 − 2 − 15  =  31 байт.
+                <p>Ответ: 31 байт.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 12 Редактор -->
+    <div class="problem_container" id="task12">
+        <div class="prob_header"><span class="prob_num">12</span><span class="prob-title">Редактор</span></div>
+        <div class="problem_text">
+            <p>Исполнитель Редактор получает на вход строку цифр и преобразует её. Редактор может выполнять две команды, в обеих командах v и w обозначают цепочки цифр.
+
+А)  заменить (v, w).
+
+Эта команда заменяет в строке первое слева вхождение цепочки v на цепочку w. Например, выполнение команды заменить (111, 27) преобразует строку 05111150 в строку 0527150.
+
+Если в строке нет вхождений цепочки v, то выполнение команды заменить (v, w) не меняет эту строку.
+
+Б)  нашлось (v).
+
+Эта команда проверяет, встречается ли цепочка v в строке исполнителя Редактор. Если она встречается, то команда возвращает логическое значение «истина», в противном случае возвращает значение «ложь». Строка исполнителя при этом не изменяется.
+
+ 
+
+<pre>Цикл
+
+ПОКА условие
+
+    последовательность команд
+
+КОНЕЦ ПОКА
+
+выполняется, пока условие истинно.
+
+ 
+
+Какая строка получится в результате применения приведённой ниже программы к строке вида 1…12…2 (40 единиц и 40 двоек)?
+
+НАЧАЛО
+
+ПОКА нашлось (111)
+
+    заменить (111, 2)
+
+    заменить (222, 1)
+
+КОНЕЦ ПОКА
+
+КОНЕЦ</pre>        </div>
+        <div class="answer-input-area"><label>Результат:</label><input type="text" id="ans12" class="answer-field"><button class="check-btn" onclick="checkAnswer(12,'2112')">Проверить</button><span id="feed12" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(12)">Показать решение (Python)</button>
+        <div id="sol12" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block">
+s = '1'*40 + '2'*40<br>
+while '111' in s:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s = s.replace('111', '2', 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;s = s.replace('222', '1', 1)<br>
+print(s)  <br>
+                </div>
+                Ответ: 2112.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 13 IP адрес -->
+    <div class="problem_container" id="task13">
+        <div class="prob_header"><span class="prob_num">13</span><span class="prob-title">IP-адрес сети</span></div>
+        <div class="problem_text">
+            <p>В терминологии сетей TCP/IP маской сети называется двоичное число, определяющее, какая часть IP-адреса узла сети относится к адресу сети, а какая — к адресу самого узла. По заданным IP-адресу узла и маске определите адрес сети. IP-адрес узла: 217.9.142.131, маска: 255.255.192.0. При записи ответа выберите из приведённых в таблице чисел четыре элемента IP-адреса и запишите в нужном порядке соответствующие им буквы без использования точек. (A=0, B=9, C=16, D=64, E=128, F=142, G=192, H=217)</p>
+        </div>
+        <div class="answer-input-area"><label>Код букв:</label><input type="text" id="ans13" class="answer-field"><button class="check-btn" onclick="checkAnswer(13,'HBEA')">Проверить</button><span id="feed13" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(13)">Показать решение</button>
+        <div id="sol13" class="solution"><div class="solution_text"><b>Решение:</b> 1.  Запишем числа маски сети в двоичной системе счисления:
+
+
+<pre>255₁₀ = 11111111₂
+192₁₀ = 11000000₂
+0₁₀ = 00000000₂
+2.  Адрес сети получается в результате поразрядной конъюнкции чисел маски и чисел адреса узла (в двоичном коде). Поскольку конъюнкция 0 с чем-⁠либо всегда равна 0, то на тех местах, где числа маски равны 0, в адресе узла стоит 0. Аналогично там, где числа маски равны 255, стоит само число, так как конъюнкция 1 с любым числом всегда равна этому числу.
+
+
+3.  Рассмотрим конъюнкцию числа 192 с числом 142:
+192₁₀ = 11000000₂
+142₁₀ = 10001110₂
+Результатом конъюнкции является число 10000000₂ = 128
+
+ 4.  Сопоставим варианты ответа получившимся числам: 217, 9, 128, 0. </pre>
+		<p>Ответ: HBEA.</p></div></div>
+    </div>
+
+    <!-- ЗАДАНИЕ 14 Системы счисления -->
+    <div class="problem_container" id="task14">
+        <div class="prob_header"><span class="prob_num">14</span><span class="prob-title">Системы счисления</span></div>
+        <div class="problem_text">
+            <p>Значение арифметического выражения 125 + 25³ + 5⁹ записали в системе счисления с основанием 5. Сколько значащих нулей содержит эта запись?</p>
+        </div>
+        <div class="answer-input-area"><label>Кол-во нулей:</label><input type="text" id="ans14" class="answer-field"><button class="check-btn" onclick="checkAnswer(14,'7')">Проверить</button><span id="feed14" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(14)">Показать решение (Python)</button>
+        <div id="sol14" class="solution">
+            <div class="solution_text"><pre>Решение. Последовательно рассмотрим данное выражение.
+
+Рассмотрим первое слагаемое 
+
+Рассмотрим второе слагаемое: 
+
+Рассмотрим третье слагаемое:   — на конце 9 нулей.
+
+Результат сложения первых двух чисел: 
+
+На последнем шаге получаем: 
+
+Нетрудно увидеть, что всего 7 значащих нулей.</pre>
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>x = 125 + 25**3 + 5**9
+s = ''
+while x != 0:
+    s += str(x % 5)
+    x //= 5 
+s = s[::-1]
+print(s.count("0"))</pre>
+                </div>
+                Ответ: 7.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 15 Логика -->
+    <div class="problem_container" id="task15">
+        <div class="prob_header"><span class="prob_num">15</span><span class="prob-title">Логическое выражение</span></div>
+        <div class="problem_text">
+            <p>Для какого наибольшего целого числа А формула ((x ≤ 9) → (x·x ≤ A)) ⋀ ((y·y ≤ A) → (y ≤ 9)) тождественно истинна, то есть принимает значение 1 при любых целых неотрицательных x и y?</p>
+        </div>
+        <div class="answer-input-area"><label>A:</label><input type="text" id="ans15" class="answer-field"><button class="check-btn" onclick="checkAnswer(15,'99')">Проверить</button><span id="feed15" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(15)">Показать решение (Python)</button>
+        <div id="sol15" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>for a in range(300, 1, -1): 
+    k = 0
+    for x in range(0, 300):
+        for y in range(0, 300):
+            if ((x <= 9) <= (x * x <= a)) and ((y*y <= a) <= (y <= 9)):
+                k += 1
+    if k == 90_000:
+        print(a)
+        break</pre>
+                </div>
+                Ответ: 99.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 16 Рекурсия -->
+    <div class="problem_container" id="task16">
+        <div class="prob_header"><span class="prob_num">16</span><span class="prob-title">Рекурсивная функция</span></div>
+        <div class="problem_text">
+            <p>Алгоритм вычисления значения функции F(n), где n — целое неотрицательное число, задан следующими соотношениями: F(0) = 0; F(n) = F(n-1) + 1, если n нечётно; F(n) = F(n/2), если n > 0 и n чётно. Укажите количество таких значений n < 1 000 000 000, для которых F(n) = 2.</p>
+        </div>
+        <div class="answer-input-area"><label>Количество:</label><input type="text" id="ans16" class="answer-field"><button class="check-btn" onclick="checkAnswer(16,'435')">Проверить</button><span id="feed16" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(16)">Показать решение (Python)</button>
+        <div id="sol16" class="solution">
+            <div class="solution_text">Заметим, что данная рекурсивная функция фактически подсчитывает количество единиц в числе n в двоичном виде. Тогда необходимо найти количество чисел в заданном диапазоне, которые в двоичном виде имеют только две цифры 1. То есть подходят числа вида 11, 101, 110, 1001, 1010, 1100 и так далее. Заметим также, что количество искомых чисел среди чисел, которые в двоичном виде состоит из двух знаков, равно 1, среди чисел, состоящих в двоичном виде из трёх знаков, равно 2, а среди чисел, состоящих в двоичном виде из четырёх знаков, равно 3, и так далее.
+
+Число 1 000 000 000 в двоичном виде имеет 30 знаков. Максимальное подходящее число, для которого F(n)  =  2 и состоящее в двоичном виде из 30 знаков,  — 1100..002  =  805 306 36810, что меньше границы заданного диапазона. Значит, чтобы подсчитать количество подходящих чисел n, имеющих в двоичном виде от 1 до 30 знаков, и просуммировать количество найденных чисел для каждой разрядности, воспользуемся языком Python:
+                <p><b>Решение на Python:</b><p>
+                <div class="code_block"><pre>k = 0
+for i in range(2, 31):
+    k = k + i - 1
+print(k)</pre>
+                </div>
+                Ответ: 435.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 17 Тройки чисел -->
+    <div class="problem_container" id="task17">
+        <div class="prob_header"><span class="prob_num">17</span><span class="prob-title">Тройки остроугольного треугольника</span></div>
+        <div class="problem_text">
+            <p>Файл содержит последовательность неотрицательных целых чисел, не превышающих 10 000. Назовём тройкой три идущих подряд элемента последовательности. Определите количество троек чисел, которые могут являться сторонами остроугольного треугольника. В ответе запишите два числа: сначала количество найденных троек, а затем — максимальную сумму элементов таких троек.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/17.txt" onclick="alert('Файл с числами 17.txt')">Файл задания 17</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Кол-во и макс сумма:</label><input type="text" id="ans17_1" class="answer-field" style="width:100px;"> <input type="text" id="ans17_2" class="answer-field" style="width:100px;"><button class="check-btn" onclick="checkAnswerPair(17,'1175','29451')">Проверить</button><span id="feed17" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(17)">Показать решение (Python)</button>
+        <div id="sol17" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>count = m = 0
+f = open('17.txt')
+l = [int(i) for i in f]
+for i in range(len(l) - 2):
+    l1 = sorted([l[i], l[i + 1], l[i + 2]])
+    if l1[2]**2 < (l1[1]**2 + l1[0]**2):               
+        count += 1
+        m = max(m, sum(l1))
+print(count, m)</pre>
+                </div>
+                Ответ: 1175 и  29451.
+            </div>
+        </div>
+    </div>
+
+<!-- ЗАДАНИЕ 18 -->
+<div class="problem_container" id="task18">
+    <div class="prob_header"><span class="prob_num">18</span><span class="prob-title">Робот-сборщик монет</span></div>
+    <div class="problem_text">
+        <p>Дана последовательность вещественных чисел. Из неё необходимо выбрать несколько подряд идущих чисел так, чтобы каждое следующее число было меньше предыдущего. Какую максимальную сумму могут иметь выбранные числа? В ответе запишите только целую часть максимально возможной суммы. Исходная последовательность записана в виде одного столбца электронной таблицы.</p>
+        <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/18.ods" onclick="alert('В реальном ЕГЭ прилагается файл с данными.')">📎 Файл задания 18</a></div></div>
+    </div>
+    <div class="answer-input-area"><label>Ответ (целая часть):</label><input type="text" id="ans18" class="answer-field"><button class="check-btn" onclick="checkAnswer(18,'358')">Проверить</button><span id="feed18" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(18)">Показать решение</button>
+    <div id="sol18" class="solution"><p>Скопируем число из ячейки A1 в ячейку B1. Далее будем сравнивать текущее число с предыдущим и, если оно текущее число будет меньше предыдущего, суммировать текущее число с предыдущим числом в столбце B. Запишем в ячейку B2 формулу =ЕСЛИ(A2 <code class="custom-scrollbar inline-flex max-w-full overflow-auto whitespace-nowrap break-words rounded bg-brand-light p-4 text-vienna">&lt;</code> A1;A2+B1;A2) и скопируем эту формулу во все ячейки диапазона B3:B500. Таким образом, все искомые суммы последовательностей будут найдены. Теперь в ячейке C1 запишем формулу =МАКС(B1:B500), получив значение 358,76. Таким образом, ответ  — 358.
+</p>	
+        <p>Ответ: 358</p>
+    </div>
+</div>
+
+<!-- ЗАДАНИЕ 19 -->
+<div class="problem_container" id="task19">
+    <div class="prob_header"><span class="prob_num">19</span><span class="prob-title">Выигрышная стратегия (одна куча)</span></div>
+    <div class="problem_text">
+        <p>Два игрока, Паша и Вася, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Паша. За один ход игрок может добавить в кучу <b>один или четыре камня</b> или увеличить количество камней в куче <b>в пять раз</b>. Игра завершается в тот момент, когда количество камней в куче становится не менее 69. Победителем считается игрок, сделавший последний ход, то есть первым получивший кучу, в которой будет 69 или больше камней. В начальный момент в куче было S камней, 1 ≤ S ≤ 68.</p>
+        <p>Известно, что Вася выиграл своим первым ходом после неудачного первого хода Паши. Укажите минимальное значение S, когда такая ситуация возможна.</p>
+    </div>
+    <div class="answer-input-area"><label>Минимальное S:</label><input type="text" id="ans19" class="answer-field"><button class="check-btn" onclick="checkAnswer(19,'3')">Проверить</button><span id="feed19" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(19)">Показать решение</button>
+    <div id="sol19" class="solution">
+        <b>Решение на Python:</b>
+        <div class="code_block"><pre>def f(x, h):
+    if h == 3 and x >= 68:
+        return 1
+    elif h == 3 and x < 68:
+        return 0
+    elif x >= 68 and h < 3:
+        return 0
+    else:
+        if h % 2 == 0:
+            return f(x + 1, h + 1) or f(x + 4, h + 1) or f(x * 5, h + 1)  # стратегия победителя
+        else:
+            return f(x + 1, h + 1) or f(x + 4, h + 1) or f(x * 5, h + 1)  # стратегия проигравшего(неудачный ход)
+ 
+for x in range(1, 68):
+    if f(x, 1) == 1:
+        print("Задача 19: ", x)
+        break</pre>
+        </div>
+        <p>Ответ: 3</p>
+    </div>
+</div>
+
+<!-- ЗАДАНИЕ 20 -->
+<div class="problem_container" id="task20">
+    <div class="prob_header"><span class="prob_num">20</span><span class="prob-title">Выигрышная стратегия (вторым ходом)</span></div>
+    <div class="problem_text">
+        <p>Два игрока, Паша и Вася, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Паша. За один ход игрок может добавить в кучу <b>один или четыре камня</b> или увеличить количество камней в куче <b>в пять раз</b>. Игра завершается в тот момент, когда количество камней в куче становится не менее 69. Победителем считается игрок, сделавший последний ход.</p>
+        <p>Найдите два таких значения S, при которых у Паши есть выигрышная стратегия, причём одновременно выполняются два условия:</p>
+        <p>— Паша не может выиграть за один ход;</p>
+        <p>— Паша может выиграть своим вторым ходом независимо от того, как будет ходить Вася.</p>
+        <p>Найденные значения запишите в ответе в порядке возрастания без разделительных знаков.</p>
+    </div>
+    <div class="answer-input-area"><label>Два S:</label><input type="text" id="ans20" class="answer-field"><button class="check-btn" onclick="checkAnswer(20,'912')">Проверить</button><span id="feed20" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(20)">Показать решение</button>
+    <div id="sol20" class="solution">Возможные значения S: 9, 12. В этих случаях Паша не может выиграть первым ходом. Однако для S  =  9 и 12 он может получить кучу 13 (при S  =  9 он увеличивает количество камней в куче на четыре, при S  =  12 добавляет к куче 1 камень). Тогда после первого хода Васи в куче будет 14 камней, или 17 камней, или 65 камней. Во всех случаях Паша увеличивает количество камней в куче в 5 раз и выигрывает вторым ходом.
+
+Таким образом, ответ  — 912.
+        <p><b>Решение на Python:</b></p>
+        <div class="code_block"><pre>def f(x, h):
+    if h == 4 and x >= 68:
+        return 1
+    elif h == 4 and x < 68:
+        return 0
+    elif x >= 68 and h < 4:
+        return 0
+    else:
+        if h % 2 != 0:
+            return f(x + 1, h + 1) or f(x + 4, h + 1) or f(x * 5, h + 1)   # стратегия победителя
+        else:
+            return f(x + 1, h + 1) and f(x + 4, h + 1) and f(x * 5, h + 1)  # сратегия проигравшего
+ 
+for x in range(1, 68):
+    if f(x, 1) == 1:
+        print("Задача 20: ", x)</pre>
+        </div>
+        <b>Ответ:912</b>
+    </div>
+</div>
+
+<!-- ЗАДАНИЕ 21 -->
+<div class="problem_container" id="task21">
+    <div class="prob_header"><span class="prob_num">21</span><span class="prob-title">Выигрышная стратегия (у Васи)</span></div>
+    <div class="problem_text">
+        <p>Два игрока, Паша и Вася, играют в следующую игру. Перед игроками лежит куча камней. Игроки ходят по очереди, первый ход делает Паша. За один ход игрок может добавить в кучу <b>один или четыре камня</b> или увеличить количество камней в куче <b>в пять раз</b>. Игра завершается в тот момент, когда количество камней в куче становится не менее 69. Победителем считается игрок, сделавший последний ход.</p>
+        <p>Найдите минимальное значение S, при котором одновременно выполняются два условия:</p>
+        <p>— у Васи есть выигрышная стратегия, позволяющая ему выиграть первым или вторым ходом при любой игре Паши;</p>
+        <p>— у Васи нет стратегии, которая позволит ему гарантированно выиграть первым ходом.</p>
+    </div>
+    <div class="answer-input-area"><label>Минимальное S:</label><input type="text" id="ans21" class="answer-field"><button class="check-btn" onclick="checkAnswer(21,'8')">Проверить</button><span id="feed21" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(21)">Показать решение</button>
+    <div id="sol21" class="solution">Минимальное значение S: 8. После первого хода Паши в куче может быть: 9, 12, 40. Если в куче станет 40 камней, то Вася увеличит количество камней в куче в 5 раз и выиграет своим первым ходом. В ситуации, когда в куче 9 или 12 камней, Вася добавляет в кучу 1 или 4 камня таким образом, чтобы получилось 13 камней. В этом случае при любой игре Пети Ваня выигрывает своим следующим ходом.
+
+Таким образом, ответ  — 8.
+        <p>Ответ: 8</p>
+    </div>
+</div>
+
+<!-- ЗАДАНИЕ 22 -->
+<div class="problem_container" id="task22">
+    <div class="prob_header"><span class="prob_num">22</span><span class="prob-title">Многопроцессорные системы</span></div>
+    <div class="problem_text">
+        <p>В компьютерной системе необходимо выполнить некоторое количество вычислительных процессов. В таблице представлены идентификатор (ID) каждого процесса, его длительность и ID поставщиков данных для зависимых процессов. Определите количество процессов, выполнение которых начнётся не ранее чем через 80 мс после запуска первого процесса.</p>
+        <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/22.ods" onclick="alert('В реальном ЕГЭ прилагается файл с данными.')">📎 Файл задания 22</a></div></div>
+    </div>
+    <div class="answer-input-area"><label>Количество:</label><input type="text" id="ans22" class="answer-field"><button class="check-btn" onclick="checkAnswer(22,'39')">Проверить</button><span id="feed22" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(22)">Показать решение</button>
+    <div id="sol22" class="solution">
+        <b>Решение на Python:</b>
+        <div class="code_block">
+f = list(map(lambda x: list(map(int, x.replace(';', ' ').split())), open('22.txt').readlines()))
+sl = {x[0]: x[1:] for x in f}
+y = lambda x: sl[x][0] + max(y(i) for i in sl[x][1:]) if sl[x][-1] else sl[x][0]
+print(len([1 for i in sl if y(i) - sl[i][0] >= 80]))
+        </div>
+        <b>Ответ: 39</b>
+    </div>
+</div>
+
+<!-- ЗАДАНИЕ 23 -->
+<div class="problem_container" id="task23">
+    <div class="prob_header"><span class="prob_num">23</span><span class="prob-title">Исполнитель Фибо</span></div>
+    <div class="problem_text">
+        <p>Исполнитель Фибо преобразует число на экране. У исполнителя есть две команды:</p>
+        <p>1. Прибавить 1</p>
+        <p>2. Прибавить 2</p>
+        <p>Сколько существует программ, которые преобразуют исходное число 2 в число 18 и при этом траектория вычислений содержит число 9 и не содержит числа 14?</p>
+        <p>Траектория вычислений — это последовательность результатов выполнения всех команд программы. Например, для программы 212 при исходном числе 7 траектория будет состоять из чисел 9, 10, 12.</p>
+    </div>
+    <div class="answer-input-area"><label>Количество:</label><input type="text" id="ans23" class="answer-field"><button class="check-btn" onclick="checkAnswer(23,'315')">Проверить</button><span id="feed23" class="feedback"></span></div>
+    <button class="btn_show_solution" onclick="toggleSolution(23)">Показать решение</button>
+    <div id="sol23" class="solution"><pre><b>Решение.</b> Искомое количество программ равно произведению количества программ, получающих из числа 2 число 9, на количество программ, получающих из числа 9 число 13 и на количество программ, получающих из числа 15 число 18, поскольку траектория вычислений не должна содержать числа 14.
+
+Пусть R(n) — количество программ, которые число 2 преобразуют в число n, P(n)  — количество программ, которые число 9 преобразуют в число n, а F(n)  — количество программ, которые преобразуют число 15 в число n.
+
+Для всех n > 4 верны следующие соотношения:
+
+1.  R(n)  =  R(n – 1) + R(n – 2), так как существует два способа получения n  — прибавлением единицы или прибавлением двойки. Аналогично P(n)  =  P(n – 1) + P(n – 2) и F(n)  =  F(n – 1) + F(n – 2).
+
+ 
+
+Последовательно вычислим значения R(n):
+
+R(2)  =  1;
+
+R(3)  =  1;
+
+R(4)  =  R(2) + R(3)  =  2;
+
+R(5)  =  R(3) + R(4)  =  3;
+
+R(6)  =  R(5) + R(4)  =  5;
+
+R(7)  =  R(6) + R(5)  =  8;
+
+R(8)  =  R(7) + R(6)  =  13;
+
+R(9)  =  R(8) + R(7)  =  21.
+
+ 
+
+Теперь вычислим значения P(n):
+
+P(9)  =  1;
+
+P(10)  =  1;
+
+P(11)  =  P(9) + P(10)  =  2;
+
+P(12)  =  P(10) + P(11)  =  3;
+
+P(13)  =  P(11) + P(12)  =  5.
+
+ 
+
+Теперь вычислим значения F(n):
+
+F(15)  =  1;
+
+F(16)  =  1;
+
+F(17)  =  F(15) + F(16)  =  2;
+
+F(18)  =  F(16) + F(17)  =  3.
+
+ 
+
+Таким образом, количество программ, удовлетворяющих условию задачи, равно 21 · 5 · 3  =  315.</pre>
+       <p><b>Решение на Python:</b></p>
+        <div class="code_block"><pre>def f(x, y):
+    if x > y or x == 14:
+        return 0
+    if x == y:
+        return 1
+    else:
+        return f(x + 1, y) + f(x + 2, y)
+print(f(2, 9) * f(9, 18))</pre>
+        </div>
+        <p>Ответ: 315</p>
+    </div>
+</div>
+
+    <!-- ЗАДАНИЕ 24 Поиск цепочки -->
+    <div class="problem_container" id="task24">
+        <div class="prob_header"><span class="prob_num">24</span><span class="prob-title">Поиск цепочки XYZ</span></div>
+        <div class="problem_text">
+            <p>Текстовый файл состоит не более чем из 10⁶ символов X, Y и Z. Определите максимальную длину цепочки вида XYZXYZXYZ... (составленной из фрагментов XYZ, последний фрагмент может быть неполным).</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/24.txt" onclick="alert('Файл 24_demo.txt')">Файл задания 24</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Длина:</label><input type="text" id="ans24" class="answer-field"><button class="check-btn" onclick="checkAnswer(24,'13')">Проверить</button><span id="feed24" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(24)">Показать решение (Python)</button>
+        <div id="sol24" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>f = open('24.txt').readline()
+k = m = 0
+for i in range(len(f)):
+    if (f[i] == 'X' and k%3 == 0) or (f[i] == 'Y' and k%3 == 1) or (f[i] == 'Z' and k%3 == 2):
+        k += 1
+        m = max(m, k)
+    elif f[i] == 'X': k = 1
+    else: k = 0
+print(m)</pre>
+                </div>
+                Ответ: 13.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 25 Максимальное количество делителей -->
+    <div class="problem_container" id="task25">
+        <div class="prob_header"><span class="prob_num">25</span><span class="prob-title">Максимальное количество делителей</span></div>
+        <div class="problem_text">
+            <p>Напишите программу, которая ищет среди целых чисел, принадлежащих числовому отрезку [84052; 84130], число, имеющее максимальное количество различных натуральных делителей, если таких чисел несколько — найдите минимальное из них. Выведите на экран количество делителей такого числа и само число.</p>
+        </div>
+        <div class="answer-input-area"><label>Делители и число:</label><input type="text" id="ans25_1" class="answer-field" style="width:80px;"> <input type="text" id="ans25_2" class="answer-field" style="width:100px;"><button class="check-btn" onclick="checkAnswerPair(25,'72','84084')">Проверить</button><span id="feed25" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(25)">Показать решение (Python)</button>
+        <div id="sol25" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>maxi = 0 
+for i in range(84052, 84131):
+    numdel = 0
+    for j in range(1, i + 1):
+        if i % j == 0:
+            numdel += 1
+    if numdel > maxi:
+        maxi = numdel
+        mini = i
+print(maxi, mini)</pre>
+                </div>
+                Ответ: 72 и 84084.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 26 Камера хранения -->
+    <div class="problem_container" id="task26">
+        <div class="prob_header"><span class="prob_num">26</span><span class="prob-title">Камера хранения</span></div>
+        <div class="problem_text">
+            <p>В аэропорту есть камера хранения из K ячеек. Принимаемый багаж кладётся в свободную ячейку с минимальным номером. Найдите количество сданных багажей и номер ячейки последнего пассажира.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/26.txt" onclick="alert('Файл 26.txt')">Файл задания 26</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Кол-во и номер ячейки:</label><input type="text" id="ans26_1" class="answer-field" style="width:80px;"> <input type="text" id="ans26_2" class="answer-field" style="width:80px;"><button class="check-btn" onclick="checkAnswerPair(26,'586','3')">Проверить</button><span id="feed26" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(26)">Показать решение (Python)</button>
+        <div id="sol26" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>f = open('26.txt')
+k = int(f.readline())
+n = int(f.readline())
+a = sorted([list(map(int, i.split())) for i in f])
+count  = 0
+maxt = kposled = 0
+for i in range (1, k+1):
+    start = 0
+    for x in a:
+        if x[0]-start >= 1 and x[0] > 0 and x[1] > 0:
+            count +=1
+            start = x[1]
+            if x[0] >= maxt:
+                maxt = x[0]
+                kposled = i
+            x[0] = -1
+            x[1] = -1
+print(count, kposled)</pre>
+                </div>
+                Ответ: 586 и 3.
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 27 Пары с разными остатками -->
+    <div class="problem_container" id="task27">
+        <div class="prob_header"><span class="prob_num">27</span><span class="prob-title">Пары с максимальной суммой</span></div>
+        <div class="problem_text">
+            <p>На вход программы поступает последовательность из N натуральных чисел. Рассматриваются все пары различных элементов последовательности, у которых различные остатки от деления на d = 160 и хотя бы одно из чисел делится на p = 7. Среди таких пар необходимо найти и вывести пару с максимальной суммой элементов. В ответе укажите четыре числа: сначала значение искомой пары для файла А, затем для файла B.</p>
+            <div class="file-links"><div class="file_link"><a href="/ege-informatics/option/files/opt1/27A.txt" onclick="alert('Файл A и B для задания 27')">Файл A</a></div><div class="file_link"><a href="/ege-informatics/option/files/opt1/27B.txt" onclick="alert('Файл B для задания 27')">Файл B</a></div></div>
+        </div>
+        <div class="answer-input-area"><label>Для A и B:</label><input type="text" id="ans27_1" class="answer-field" style="width:120px;"> <input type="text" id="ans27_2" class="answer-field" style="width:120px;"><button class="check-btn" onclick="checkAnswer27()">Проверить</button><span id="feed27" class="feedback"></span></div>
+        <button class="btn_show_solution" onclick="toggleSolution(27)">Показать решение (Python)</button>
+        <div id="sol27" class="solution">
+            <div class="solution_text">
+                <b>Решение на Python:</b>
+                <div class="code_block"><pre>f = open("27B.txt")
+s = f.readlines()
+m71 = 0
+m72 = 0
+m1 = 0
+m2 = 0
+max1 = 0
+max2 = 0
+for i in range(len(s)):
+    x = int(s[i])
+    if x % 7 == 0 and x % 160 == m71 % 160 and x > m71:
+        m71 = x
+    elif x % 7 == 0 and x % 160 != m71 % 160 and x > m71:
+        m72 = m71
+        m71 = x
+    elif (x % 7 == 0) and (x % 160 != m71 % 160) and (x > m72):
+        m72 = x
+    elif x % 7 != 0 and x % 160 == m1 % 160 and x > m1:
+        m1 = x
+    elif x % 7 != 0 and x % 160 != m1 % 160 and x > m1:
+        m2 = m1
+        m1 = x
+    elif x % 7 != 0 and x % 160 != m1 % 160 and x > m2:
+        m2 = x
+if m71 == 0 and m72 == 0:
+    print(0, 0)
+elif (m72 == 0) and (m2 == 0) and (m71 % 160 == m1 % 160):
+    print(0, 0)
+else:
+    if (m71 + m72) > (max1 + max2):
+        max1 = m71
+        max2 = m72
+    if ((m71 + m1) > (max1 + max2)) and (m71 % 160 != m1 % 160):
+        max1 = m71
+        max2 = m1
+    if ((m71+m2)>(max1+max2)) and (m71 % 160 != m2 % 160):
+        max1 = m71
+        max2 = m2
+    if (((m72 + m1) > (max1 + max2)) and ((m72 % 160) != (m1 % 160))):
+        max1 = m72
+        max2 = m1
+    print(max1, max2)</pre>
+                </div>
+                Ответ: 728 977 и 9982 9992.
+            </div>
+        </div>
+    </div>
+
+    <footer>© Тренировочные задания ЕГЭ. Решения на Python представлены для образовательных целей.</footer>
+</div>
+
+<script>
+function toggleSolution(id) {
+    let solDiv = document.getElementById('sol'+id);
+    if(solDiv) solDiv.style.display = (solDiv.style.display === 'none' || solDiv.style.display === '') ? 'block' : 'none';
+}
+function checkAnswer(taskNum, correctAns) {
+    let inp = document.getElementById('ans'+taskNum);
+    let feed = document.getElementById('feed'+taskNum);
+    if(!inp) return;
+    let val = inp.value.trim().toLowerCase();
+    let correct = correctAns.toString().toLowerCase();
+    if(val === correct) feed.innerHTML = '✅ Верно!'; else feed.innerHTML = '❌ Неверно. Правильный ответ: '+correctAns;
+}
+function checkAnswerPair(taskNum, correct1, correct2) {
+    let inp1 = document.getElementById('ans'+taskNum+'_1');
+    let inp2 = document.getElementById('ans'+taskNum+'_2');
+    let feed = document.getElementById('feed'+taskNum);
+    if(inp1 && inp2){
+        let v1=inp1.value.trim(), v2=inp2.value.trim();
+        if(v1===correct1.toString() && v2===correct2.toString()) feed.innerHTML='✅ Верно!';
+        else feed.innerHTML='❌ Неверно. Ответ: '+correct1+' '+correct2;
+    }
+}
+function checkAnswer27(){
+    let a1 = document.getElementById('ans27_1').value.trim();
+    let a2 = document.getElementById('ans27_2').value.trim();
+    let feed = document.getElementById('feed27');
+    if(a1 === '728 977' && a2 === '9982 9992') feed.innerHTML='✅ Верно!';
+    else feed.innerHTML='❌ Неверно. Для A: 728 977, для B: 9982 9992';
+}
+window.onload = function(){
+    document.querySelectorAll('.answer-field').forEach(f => { f.value = ''; });
+};
+</script>
+</body>
+</html>
