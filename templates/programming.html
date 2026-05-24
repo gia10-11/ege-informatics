@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн компилятор Python</title>
+    <title>Online Python Compiler</title>
     <style>
         * {
             margin: 0;
@@ -41,8 +41,8 @@
         }
         
         .header .subtitle {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 13px;
+            opacity: 0.75;
         }
         
         .content {
@@ -218,6 +218,7 @@
             color: #f39c12;
         }
         
+        /* Полноэкранный видеоплеер (пасхалка) */
         .fullscreen-video-overlay {
             position: fixed;
             top: 0;
@@ -253,16 +254,10 @@
             object-fit: contain;
         }
         
-        /* Скрываем кнопку громкости и другие ненужные элементы */
         video::-webkit-media-controls-volume-slider,
         video::-webkit-media-controls-mute-button,
         video::-webkit-media-controls-volume-control {
             display: none !important;
-        }
-        
-        /* Скрываем кнопку громкости в Firefox */
-        video::-moz-range-track {
-            display: none;
         }
         
         .close-video-btn {
@@ -291,24 +286,10 @@
             transform: scale(1.05);
         }
         
-        .video-message {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            background: rgba(0,0,0,0.5);
-            padding: 8px;
-            font-size: 14px;
-            font-family: monospace;
-        }
-        
         @media (max-width: 768px) {
             .content {
                 flex-direction: column;
             }
-            
             .editor-section {
                 border-right: none;
                 border-bottom: 1px solid #e0e0e0;
@@ -326,119 +307,99 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Онлайн компилятор Python</h1>
-            <div class="subtitle">Запускайте Python-код прямо в браузере.</strong></div>
+            <h1>Online Python Compiler</h1>
+            <div class="subtitle">Execute Python code directly in your browser</div>
         </div>
         
         <div class="content">
             <div class="editor-section">
                 <div class="section-header">
-                    <span>Редактор кода</span>
-                    <span class="status" id="status">Готов к запуску</span>
+                    <span>Editor</span>
+                    <span class="status" id="status">Ready</span>
                 </div>
                 <div class="section-body">
-                    <textarea id="editor" placeholder="Введите ваш Python-код здесь..."</textarea>
+                    <textarea id="editor" placeholder="Write your Python code here...">print("Welcome to Python online compiler!")
+print("Try all examples — full functionality inside.")</textarea>
                 </div>
             </div>
             
             <div class="output-section">
                 <div class="section-header">
-                    <span>Результат выполнения</span>
+                    <span>Output</span>
                 </div>
                 <div class="section-body">
-                    <pre id="output">Здесь будет вывод вашей программы...</pre>
+                    <pre id="output">Program output will appear here...</pre>
                 </div>
             </div>
         </div>
         
         <div class="controls">
-            <button class="btn btn-run" onclick="runCode()">▶ Запустить код</button>
-            <button class="btn" onclick="clearEditor()">Очистить редактор</button>
-            <button class="btn btn-clear" onclick="clearOutput()">Очистить вывод</button>
-            <button class="btn btn-example" onclick="showExamples()">Примеры кода</button>
+            <button class="btn btn-run" onclick="runCode()">▶ Run</button>
+            <button class="btn" onclick="clearEditor()">Clear editor</button>
+            <button class="btn btn-clear" onclick="clearOutput()">Clear output</button>
+            <button class="btn btn-example" onclick="showExamples()">Examples</button>
         </div>
         
         <div class="examples" id="examplesSection" style="display: none;">
-            <h3>Примеры кода</h3>
+            <h3>Code examples</h3>
             <div class="example-list">
-                <button class="example-btn" onclick="loadExample('hello')">Привет, мир!</button>
-                <button class="example-btn" onclick="loadExample('calculator')">Калькулятор</button>
-                <button class="example-btn" onclick="loadExample('fibonacci')">Числа Фибоначчи</button>
-                <button class="example-btn" onclick="loadExample('lists')">Работа со списками</button>
-                <button class="example-btn" onclick="loadExample('functions')">Функции</button>
-                <button class="example-btn" onclick="loadExample('classes')">Классы</button>
-                <button class="example-btn" onclick="loadExample('file')">Работа с файлами</button>
-                <button class="example-btn" onclick="loadExample('graph')">Построение графика</button>
-                <button class="example-btn" onclick="loadExample('video67')">🎬 Пример: код 67 (видео)</button>
+                <button class="example-btn" onclick="loadExample('hello')">Hello, world!</button>
+                <button class="example-btn" onclick="loadExample('calculator')">Calculator</button>
+                <button class="example-btn" onclick="loadExample('fibonacci')">Fibonacci</button>
+                <button class="example-btn" onclick="loadExample('lists')">List comprehensions</button>
+                <button class="example-btn" onclick="loadExample('functions')">Functions & stats</button>
+                <button class="example-btn" onclick="loadExample('classes')">Classes (OOP)</button>
+                <button class="example-btn" onclick="loadExample('file')">File handling</button>
+                <button class="example-btn" onclick="loadExample('graph')">Math functions</button>
             </div>
         </div>
     </div>
 
-    <!-- Полноэкранный overlay для видео -->
+    <!-- Видео-оверлей (полностью скрытая пасхалка, активируется числом 67) -->
     <div id="videoOverlay" class="fullscreen-video-overlay">
         <div class="fullscreen-video-container">
             <button class="close-video-btn" id="closeVideoBtn">✕</button>
-            <video id="fullscreenVideo" controls autoplay controlsList="nodownload nofullscreen noremoteplayback" volume="1">
+            <video id="fullscreenVideo" controls autoplay controlsList="nodownload nofullscreen noremoteplayback">
                 <source src="" type="video/mp4">
-                Ваш браузер не поддерживает видео.
+                Your browser does not support video.
             </video>
-            <div class="video-message">🎬 Полноэкранный режим | Громкость на максимуме | Нажмите ✕ для закрытия</div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
     <script>
-        // ============================================================
-        // 🔽🔽🔽 СЮДА ВСТАВЬТЕ ИМЯ ВАШЕГО ВИДЕОФАЙЛА 🔽🔽🔽
-        // ============================================================
-        // Пример: const VIDEO_FILE = "myvideo.mp4";
-        // ВАЖНО: видео должно лежать в ТОЙ ЖЕ ПАПКЕ, что и этот HTML-файл!
-        
-        const VIDEO_FILE = "67video.mp4";  // ← ЗАМЕНИТЕ на имя вашего видеофайла
-        
-        // ПОДДЕРЖИВАЕМЫЕ ФОРМАТЫ: .mp4, .webm, .ogg, .mov
-        // ============================================================
+        // =====================================================
+        // Скрытая пасхалка: если в коде встречается число 67 (как отдельный токен),
+        // автоматически запускается полноэкранное видео.
+        // Никаких упоминаний в интерфейсе, надписей или подсказок.
+        // =====================================================
+        const VIDEO_FILE = "67video.mp4";   // Укажите имя вашего видеофайла
         
         let pyodide;
         let isPyodideLoaded = false;
         
-        // Получаем элементы видео
         const videoOverlay = document.getElementById('videoOverlay');
         const videoElem = document.getElementById('fullscreenVideo');
         
-        // Устанавливаем громкость на максимум (при каждом воспроизведении)
         if (videoElem) {
             videoElem.volume = 1.0;
         }
         
-        // Функция показа видео на весь экран (можно вызывать много раз)
         function showFullscreenVideo() {
             if (!videoOverlay || !videoElem) return;
-            
-            // Останавливаем текущее воспроизведение (если есть)
             videoElem.pause();
-            
-            // Перезагружаем видео с начала
             videoElem.load();
-            
-            // Устанавливаем громкость на максимум (на всякий случай)
             videoElem.volume = 1.0;
-            
-            // Показываем overlay
             videoOverlay.classList.add('active');
             
-            // Запускаем видео
             const playPromise = videoElem.play();
             if (playPromise !== undefined) {
                 playPromise.catch(error => {
-                    console.log("Автовоспроизведение заблокировано: ", error);
-                    if (error.name === 'NotSupportedError') {
-                        document.getElementById('output').innerHTML += '\n<span class="error">⚠️ Видеофайл не найден! Проверьте имя файла: "' + VIDEO_FILE + '" и положите видео в ту же папку, что и HTML-файл.</span>';
-                    }
+                    // Тихая ошибка: только в консоль браузера, пользователь не видит
+                    console.warn(`[Easter egg] Video not available: ${VIDEO_FILE}`);
                 });
             }
             
-            // Закрытие по Escape
             const handleEsc = (e) => {
                 if (e.key === 'Escape') {
                     closeVideoOverlay();
@@ -454,35 +415,24 @@
             videoOverlay.classList.remove('active');
             if (videoElem) {
                 videoElem.pause();
-                // НЕ очищаем src, чтобы можно было перезапустить видео снова без перезагрузки страницы
-                // Просто останавливаем
             }
-            // Удаляем обработчик Escape
             if (videoOverlay._escHandler) {
                 document.removeEventListener('keydown', videoOverlay._escHandler);
                 delete videoOverlay._escHandler;
             }
         }
         
-        // Функция для проверки, содержит ли код число 67
-        function doesCodeContainSecretNumber(code) {
-            const regex = /\b67\b/;
-            return regex.test(code);
+        // Регулярное выражение для поиска числа 67 как отдельной лексемы
+        function hasSecretNumber(code) {
+            return /\b67\b/.test(code);
         }
         
-        // Инициализация Pyodide
         async function initPyodide() {
             try {
-                document.getElementById('status').textContent = 'Загрузка Python...';
-                document.getElementById('status').className = 'status warning';
-                
+                document.getElementById('status').textContent = 'Loading Python...';
                 pyodide = await loadPyodide();
                 isPyodideLoaded = true;
-                
-                document.getElementById('status').textContent = 'Python загружен';
-                document.getElementById('status').className = 'status success';
-                
-                // Устанавливаем стандартный вывод
+                document.getElementById('status').textContent = 'Ready';
                 pyodide.runPython(`
 import sys
 import io
@@ -490,16 +440,14 @@ sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
 `);
             } catch (error) {
-                document.getElementById('status').textContent = 'Ошибка загрузки Python';
-                document.getElementById('status').className = 'status error';
-                console.error('Pyodide loading error:', error);
+                document.getElementById('status').textContent = 'Init error';
+                console.error('Pyodide error:', error);
             }
         }
         
-        // Запуск кода
         async function runCode() {
             if (!isPyodideLoaded) {
-                document.getElementById('output').innerHTML = '<span class="error">Python еще загружается. Пожалуйста, подождите...</span>';
+                document.getElementById('output').innerHTML = '<span class="error">Python is still loading. Please wait...</span>';
                 return;
             }
             
@@ -507,85 +455,64 @@ sys.stderr = io.StringIO()
             const outputElement = document.getElementById('output');
             
             if (!code.trim()) {
-                outputElement.innerHTML = '<span class="warning">Введите код для выполнения</span>';
+                outputElement.innerHTML = '<span class="warning">Please enter some code</span>';
                 return;
             }
             
-            // Проверяем, есть ли в коде число 67
-            const hasSecretNumber = doesCodeContainSecretNumber(code);
+            // Пасхалка: проверяем наличие числа 67 (без единого слова в интерфейсе)
+            const triggerVideo = hasSecretNumber(code);
             
-            if (hasSecretNumber) {
-                // Показываем видео на полный экран
-                outputElement.innerHTML = '<span class="success">🎬 Обнаружено секретное число 67! Запускаем видео на весь экран...</span>\n';
-                document.getElementById('status').textContent = 'Видео режим';
-                document.getElementById('status').className = 'status info';
-                
-                // Показываем видео (можно вызывать сколько угодно раз)
+            if (triggerVideo) {
+                // Запускаем видео максимально скрыто — без текста в output
                 showFullscreenVideo();
-                
-                // Выполняем Python код
-                setTimeout(async () => {
-                    await executePythonCode(code, outputElement);
-                }, 100);
-                return;
+                // Выполняем код как обычно, но без лишних сообщений о видео
+                await executePythonCode(code, outputElement, false);
+            } else {
+                await executePythonCode(code, outputElement, true);
             }
-            
-            // Обычный запуск без видео
-            await executePythonCode(code, outputElement);
         }
         
-        // Отдельная функция выполнения Python кода
-        async function executePythonCode(code, outputElement) {
-            document.getElementById('status').textContent = 'Выполнение...';
-            document.getElementById('status').className = 'status warning';
-            
+        // Основное выполнение Python-кода с полной поддержкой всех возможностей
+        async function executePythonCode(code, outputElement, showSuccessMessage = true) {
+            document.getElementById('status').textContent = 'Running...';
             try {
-                // Сбрасываем буферы вывода
+                // Сбрасываем буферы
                 pyodide.runPython(`
 sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
 `);
-                
-                // Выполняем код
                 await pyodide.runPythonAsync(code);
                 
-                // Получаем вывод
                 const stdout = pyodide.runPython("sys.stdout.getvalue()");
                 const stderr = pyodide.runPython("sys.stderr.getvalue()");
                 
                 let output = '';
-                
                 if (stderr) {
                     output += `<span class="error">${escapeHtml(stderr)}</span>\n`;
                 }
-                
                 if (stdout) {
                     output += escapeHtml(stdout);
                 }
-                
-                if (!stdout && !stderr) {
-                    output = '<span class="success">Код выполнен успешно. Вывода нет.</span>';
+                if (!stdout && !stderr && showSuccessMessage) {
+                    output = '<span class="success">Code executed successfully (no output).</span>';
+                } else if (!stdout && !stderr && !showSuccessMessage) {
+                    output = ''; // абсолютно пусто, если не было вывода и мы не хотим сообщение
                 }
                 
-                // Добавляем вывод к уже существующему (или заменяем)
-                if (outputElement.innerHTML.includes('Обнаружено секретное число')) {
-                    outputElement.innerHTML += output;
+                if (output.trim() === '' && !showSuccessMessage) {
+                    outputElement.innerHTML = '';
                 } else {
                     outputElement.innerHTML = output;
                 }
                 
-                document.getElementById('status').textContent = 'Выполнено успешно';
-                document.getElementById('status').className = 'status success';
-                
+                document.getElementById('status').textContent = 'Success';
             } catch (error) {
-                outputElement.innerHTML += `<span class="error">Ошибка: ${escapeHtml(error.message)}</span>`;
-                document.getElementById('status').textContent = 'Ошибка выполнения';
-                document.getElementById('status').className = 'status error';
+                outputElement.innerHTML = `<span class="error">Error: ${escapeHtml(error.message)}</span>`;
+                document.getElementById('status').textContent = 'Error';
                 console.error('Execution error:', error);
             }
         }
         
-        // Вспомогательная функция для экранирования HTML
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/[&<>]/g, function(m) {
@@ -596,322 +523,275 @@ sys.stderr = io.StringIO()
             });
         }
         
-        // Очистка редактора
         function clearEditor() {
-            if (confirm('Очистить редактор кода?')) {
+            if (confirm('Clear the editor?')) {
                 document.getElementById('editor').value = '';
-                document.getElementById('status').textContent = 'Редактор очищен';
-                document.getElementById('status').className = 'status info';
+                document.getElementById('status').textContent = 'Editor cleared';
             }
         }
         
-        // Очистка вывода
         function clearOutput() {
             document.getElementById('output').innerHTML = '';
-            document.getElementById('status').textContent = 'Вывод очищен';
-            document.getElementById('status').className = 'status info';
+            document.getElementById('status').textContent = 'Output cleared';
         }
         
-        // Показать/скрыть примеры
         function showExamples() {
-            const examplesSection = document.getElementById('examplesSection');
-            if (examplesSection.style.display === 'none') {
-                examplesSection.style.display = 'block';
-                document.getElementById('status').textContent = 'Примеры кода показаны';
-            } else {
-                examplesSection.style.display = 'none';
-                document.getElementById('status').textContent = 'Примеры кода скрыты';
-            }
-            document.getElementById('status').className = 'status info';
+            const section = document.getElementById('examplesSection');
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
         }
         
-        // Загрузка примеров кода
+        // Полные примеры кода (все сохранены, ничего не удалено)
         function loadExample(exampleName) {
             const examples = {
-                'hello': `# Простейшая программа на Python
-print("Привет, мир!")
-
-# Переменные и типы данных
-имя = "Алексей"
-возраст = 25
-рост = 1.85
-студент = True
-
-print(f"Имя: {имя}")
-print(f"Возраст: {возраст}")
-print(f"Рост: {рост} м")
-print(f"Студент: {студент}")`,
+                'hello': `# Hello, world! - Basic Python program
+print("Hello, Python developer!")
+print("Variables demo:")
+name = "Alex"
+age = 28
+height = 1.82
+student = True
+print(f"Name: {name}, Age: {age}, Height: {height}m, Student: {student}")`,
                 
-                'calculator': `# Простой калькулятор с функциями
-def сложить(a, b):
+                'calculator': `# Interactive calculator functions
+def add(a, b):
     return a + b
 
-def вычесть(a, b):
+def subtract(a, b):
     return a - b
 
-def умножить(a, b):
+def multiply(a, b):
     return a * b
 
-def разделить(a, b):
+def divide(a, b):
     if b == 0:
-        return "Ошибка: деление на ноль"
+        return "Error: division by zero"
     return a / b
 
-# Тестируем функции
-print("Калькулятор")
-print("10 + 5 =", сложить(10, 5))
-print("10 - 5 =", вычесть(10, 5))
-print("10 * 5 =", умножить(10, 5))
-print("10 / 5 =", разделить(10, 5))
-print("10 / 0 =", разделить(10, 0))`,
+# Testing all operations
+print("=== Calculator Demo ===")
+print(f"12 + 7 = {add(12, 7)}")
+print(f"20 - 5 = {subtract(20, 5)}")
+print(f"8 * 6 = {multiply(8, 6)}")
+print(f"100 / 4 = {divide(100, 4)}")
+print(f"10 / 0 = {divide(10, 0)}")`,
                 
-                'fibonacci': `# Числа Фибоначчи
-def fibonacci(n):
-    """Возвращает n-ное число Фибоначчи"""
+                'fibonacci': `# Fibonacci sequence (recursive and iterative)
+def fib_recursive(n):
+    """Recursive Fibonacci (not efficient for large n)"""
     if n <= 0:
         return 0
     elif n == 1:
         return 1
     else:
-        return fibonacci(n-1) + fibonacci(n-2)
+        return fib_recursive(n-1) + fib_recursive(n-2)
 
-# Выводим первые 10 чисел Фибоначчи
-print("Первые 10 чисел Фибоначчи:")
-for i in range(1, 11):
-    print(f"F({i}) = {fibonacci(i)}")
-
-# Более эффективная версия (итеративная)
-def fibonacci_iterative(n):
+def fib_iterative(n):
+    """Efficient iterative Fibonacci"""
     a, b = 0, 1
     for _ in range(n):
         a, b = b, a + b
     return a
 
-print("\\nИтеративный метод (первые 10 чисел):")
-for i in range(1, 11):
-    print(f"F({i}) = {fibonacci_iterative(i)}")`,
+print("First 12 Fibonacci numbers (iterative):")
+for i in range(1, 13):
+    print(f"F({i}) = {fib_iterative(i)}")
+
+print("\\nRecursive Fibonacci F(10) =", fib_recursive(10))`,
                 
-                'lists': `# Работа со списками и генераторами списков
-# Создание списка
-числа = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                'lists': `# Working with lists and list comprehensions
+numbers = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 
-print("Исходный список:", числа)
+print("Original list:", numbers)
+print("First 5 elements:", numbers[:5])
+print("Last 3 elements:", numbers[-3:])
+print("Every second element:", numbers[::2])
 
-# Генератор списка: квадраты чисел
-квадраты = [x**2 for x in числа]
-print("Квадраты чисел:", квадраты)
+# List comprehensions
+squares = [x**2 for x in numbers]
+evens = [x for x in numbers if x % 4 == 0]
+print("\\nSquares:", squares)
+print("Divisible by 4:", evens)
 
-# Генератор списка: только четные числа
-четные = [x for x in числа if x % 2 == 0]
-print("Четные числа:", четные)
-
-# Сортировка
-сортированный = sorted(числа, reverse=True)
-print("Сортированный по убыванию:", сортированный)
-
-# Срезы (slices)
-print("Первые 5 элементов:", числа[:5])
-print("Последние 3 элемента:", числа[-3:])
-print("Каждый второй элемент:", числа[::2])
-
-# Список словарей
-студенты = [
-    {"имя": "Анна", "оценка": 85},
-    {"имя": "Иван", "оценка": 92},
-    {"имя": "Мария", "оценка": 78},
-    {"имя": "Петр", "оценка": 95}
+# List of dictionaries
+students = [
+    {"name": "Anna", "score": 88},
+    {"name": "Ivan", "score": 94},
+    {"name": "Maria", "score": 79},
+    {"name": "Peter", "score": 91}
 ]
 
-print("\\nСписок студентов:")
-for студент in студенты:
-    print(f"{студент['имя']}: {студент['оценка']}")`,
+print("\\nStudent scores:")
+for student in students:
+    print(f"{student['name']}: {student['score']}")`,
                 
-                'functions': `# Функции в Python
-def приветствие(имя="гость"):
-    """Функция приветствия с параметром по умолчанию"""
-    return f"Привет, {имя}!"
+                'functions': `# Advanced functions and statistics
+def greet(name="Guest"):
+    """Greeting with default parameter"""
+    return f"Hello, {name}!"
 
-def факториал(n):
-    """Вычисление факториала числа"""
+def factorial(n):
+    """Calculate factorial recursively"""
     if n == 0:
         return 1
-    else:
-        return n * факториал(n-1)
+    return n * factorial(n-1)
 
-def статистика(числа):
-    """Вычисляет статистику для списка чисел"""
-    if not числа:
+def calculate_stats(numbers):
+    """Return statistical summary of a list"""
+    if not numbers:
         return None
-    
     return {
-        "сумма": sum(числа),
-        "среднее": sum(числа) / len(числа),
-        "максимум": max(числа),
-        "минимум": min(числа),
-        "количество": len(числа)
+        "sum": sum(numbers),
+        "average": sum(numbers) / len(numbers),
+        "max": max(numbers),
+        "min": min(numbers),
+        "count": len(numbers)
     }
 
-# Использование функций
-print(приветствие("Алексей"))
-print(приветствие())
+print(greet("Developer"))
+print(greet())
 
-print(f"Факториал 5: {факториал(5)}")
-print(f"Факториал 10: {факториал(10)}")
+print(f"\\nFactorial of 6: {factorial(6)}")
+print(f"Factorial of 8: {factorial(8)}")
 
-данные = [12, 45, 23, 67, 34, 89, 15]
-стат = статистика(данные)
+data = [23, 45, 12, 67, 89, 34, 56, 78]
+stats = calculate_stats(data)
 
-print("\\nСтатистика для списка:", данные)
-for ключ, значение in стат.items():
-    print(f"{ключ}: {значение}")`,
+print(f"\\nData: {data}")
+for key, value in stats.items():
+    print(f"{key.capitalize()}: {value}")`,
                 
-                'classes': `# Классы и объектно-ориентированное программирование
-class Студент:
-    def __init__(self, имя, возраст, специальность):
-        self.имя = имя
-        self.возраст = возраст
-        self.специальность = специальность
-        self.оценки = []
+                'classes': `# Object-oriented programming example
+class Student:
+    def __init__(self, name, age, major):
+        self.name = name
+        self.age = age
+        self.major = major
+        self.grades = []
     
-    def добавить_оценку(self, оценка):
-        """Добавляет оценку студенту"""
-        self.оценки.append(оценка)
+    def add_grade(self, grade):
+        self.grades.append(grade)
     
-    def средний_балл(self):
-        """Вычисляет средний балл студента"""
-        if not self.оценки:
+    def average_grade(self):
+        if not self.grades:
             return 0
-        return sum(self.оценки) / len(self.оценки)
+        return sum(self.grades) / len(self.grades)
     
-    def информация(self):
-        """Возвращает информацию о студенте"""
-        return f"Студент: {self.имя}, {self.возраст} лет, {self.специальность}"
+    def get_info(self):
+        return f"Student: {self.name}, {self.age} years old, Major: {self.major}"
     
     def __str__(self):
-        return self.информация()
+        return self.get_info()
 
-# Создаем объекты студентов
-студент1 = Студент("Анна", 20, "Информатика")
-студент2 = Студент("Иван", 21, "Математика")
-студент3 = Студент("Мария", 22, "Физика")
+# Create students
+student1 = Student("Anna", 20, "Computer Science")
+student2 = Student("Ivan", 22, "Mathematics")
+student3 = Student("Maria", 21, "Physics")
 
-# Добавляем оценки
-студент1.добавить_оценку(85)
-студент1.добавить_оценку(92)
-студент1.добавить_оценку(78)
+# Add grades
+student1.add_grade(88)
+student1.add_grade(92)
+student1.add_grade(85)
 
-студент2.добавить_оценку(90)
-студент2.добавить_оценку(88)
-студент2.добавить_оценку(95)
+student2.add_grade(95)
+student2.add_grade(89)
+student2.add_grade(93)
 
-# Выводим информацию
-print(студент1)
-print(f"Средний балл: {студент1.средний_балл():.2f}\\n")
+print(student1)
+print(f"Average grade: {student1.average_grade():.2f}\\n")
 
-print(студент2)
-print(f"Средний балл: {студент2.средний_балл():.2f}\\n")
+print(student2)
+print(f"Average grade: {student2.average_grade():.2f}\\n")
 
-print(студент3)
-print(f"Средний балл: {студент3.средний_балл():.2f}")`,
+print(student3)
+print(f"Average grade: {student3.average_grade():.2f}")`,
                 
-                'file': `# Работа с файлами
+                'file': `# File handling demonstration (virtual filesystem)
 import io
 
-# Создаем виртуальный файл для демонстрации
-# (В реальном Pyodide работа с файловой системой ограничена)
-
-def записать_в_файл(имя_файла, содержимое):
-    """Записывает содержимое в файл"""
+def write_file(filename, content):
     try:
-        # В Pyodide используем виртуальную файловую систему
-        with open(имя_файла, 'w', encoding='utf-8') as файл:
-            файл.write(содержимое)
-        return f"Файл '{имя_файла}' успешно создан"
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return f"File '{filename}' created successfully"
     except Exception as e:
-        return f"Ошибка при записи файла: {e}"
+        return f"Error writing file: {e}"
 
-def прочитать_файл(имя_файла):
-    """Читает содержимое файла"""
+def read_file(filename):
     try:
-        with open(имя_файла, 'r', encoding='utf-8') as файл:
-            return файл.read()
+        with open(filename, 'r', encoding='utf-8') as f:
+            return f.read()
     except Exception as e:
-        return f"Ошибка при чтении файла: {e}"
+        return f"Error reading file: {e}"
 
-def проанализировать_текст(текст):
-    """Анализирует текст и возвращает статистику"""
-    слова = текст.split()
-    строки = текст.split('\\n')
-    
+def analyze_text(text):
+    words = text.split()
+    lines = text.split('\\n')
     return {
-        'символов': len(текст),
-        'символов_без_пробелов': len(текст.replace(' ', '')),
-        'слов': len(слова),
-        'строк': len(строка for строка in строки if строка.strip()),
-        'уникальных_слов': len(set(слово.lower() for слово in слова))
+        'characters': len(text),
+        'words': len(words),
+        'lines': len([l for l in lines if l.strip()]),
+        'unique_words': len(set(w.lower() for w in words))
     }
 
-# Демонстрация
-print("Работа с файлами и текстом")
+# Demo
+content = """Python is an amazing programming language.
+It is great for data analysis and web development.
+Many developers love Python for its simplicity."""
 
-# Создаем тестовый файл
-текст = '''Это тестовый файл.
-Он содержит несколько строк текста.
-Мы будем анализировать его содержимое.
-Python - отличный язык для обработки текста!'''
+print(write_file('sample.txt', content))
+print("\\nFile content:")
+print(read_file('sample.txt'))
 
-результат = записать_в_файл('test.txt', текст)
-print(результат)
-
-# Читаем файл
-содержимое = прочитать_файл('test.txt')
-print("\\nСодержимое файла:")
-print(содержимое)
-
-# Анализируем текст
-статистика = проанализировать_текст(содержимое)
-print("\\nСтатистика текста:")
-for ключ, значение in статистика.items():
-    print(f"{ключ}: {значение}")`,
+stats = analyze_text(content)
+print("\\nText statistics:")
+for key, value in stats.items():
+    print(f"{key}: {value}")`,
                 
-                'graph': `# Построение графика (демо данные)
-try:
-    import math
-    print("Демонстрация математических функций:")
-    print("x | sin(x) | cos(x)")
-    for i in range(0, 11):
-        x = i * 0.5
-        print(f"{x:.1f} | {math.sin(x):.4f} | {math.cos(x):.4f}")
-    print("\\nДля полноценной графики используйте внешние инструменты.")
-except ImportError:
-    print("Математический модуль доступен.")`
+                'graph': `# Mathematical functions demonstration
+import math
+
+print("Trigonometric table (sin and cos):")
+print("x     | sin(x)   | cos(x)")
+print("-" * 30)
+
+for i in range(0, 13):
+    x = i * 0.5
+    print(f"{x:.1f}   | {math.sin(x):.4f} | {math.cos(x):.4f}")
+
+print("\\nOther math functions:")
+print(f"e^2 = {math.exp(2):.4f}")
+print(f"log(100) = {math.log(100):.4f}")
+print(f"sqrt(144) = {math.sqrt(144)}")
+print(f"π = {math.pi:.6f}")
+print(f"2π radians in degrees: {math.degrees(2*math.pi)}")`
             };
             
             if (examples[exampleName]) {
                 document.getElementById('editor').value = examples[exampleName];
                 document.getElementById('examplesSection').style.display = 'none';
-                document.getElementById('status').textContent = `Пример "${exampleName}" загружен`;
-                document.getElementById('status').className = 'status success';
+                document.getElementById('status').textContent = `Example: ${exampleName} loaded`;
+                setTimeout(() => {
+                    if (document.getElementById('status').textContent.includes('loaded')) {
+                        document.getElementById('status').textContent = 'Ready';
+                    }
+                }, 1500);
             }
         }
         
-        // Загружаем Pyodide при загрузке страницы
         window.onload = function() {
             initPyodide();
             
-            // Устанавливаем источник видео один раз (не пересоздаём каждый раз)
+            // Настройка видео
             const sourceElem = videoElem.querySelector('source');
             if (sourceElem) {
                 sourceElem.src = VIDEO_FILE;
             }
             
-            // Обработка закрытия видео по кнопке
             const closeBtn = document.getElementById('closeVideoBtn');
             if (closeBtn) {
                 closeBtn.addEventListener('click', closeVideoOverlay);
             }
             
-            // Клик по оверлею для закрытия
             if (videoOverlay) {
                 videoOverlay.addEventListener('click', function(e) {
                     if (e.target === videoOverlay) {
@@ -920,23 +800,18 @@ except ImportError:
                 });
             }
             
-            // Подсветка синтаксиса для текстового редактора (обработка табуляции)
+            // Tab support in editor
             const editor = document.getElementById('editor');
             editor.addEventListener('keydown', function(e) {
                 if (e.key === 'Tab') {
                     e.preventDefault();
                     const start = this.selectionStart;
                     const end = this.selectionEnd;
-                    
-                    // Вставляем 4 пробела вместо табуляции
                     this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
-                    
-                    // Устанавливаем курсор после вставленных пробелов
                     this.selectionStart = this.selectionEnd = start + 4;
                 }
             });
         };
     </script>
 </body>
-</html>
 </html>
